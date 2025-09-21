@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CarSeeder::class);
         $this->call(BlogSeeder::class);
         $this->call(LocationSeeder::class);
-        $this->call(LocationSeederType::class);
         $this->call(OptionSeeder::class);
         $this->call(PricePackageSeeder::class);
         
