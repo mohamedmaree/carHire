@@ -1,0 +1,3234 @@
+openapi: 3.0.3
+info:
+  title: 'My API Documentation'
+  description: 'API documentation for my Laravel application'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/settings:
+    get:
+      summary: ''
+      operationId: getApiSettings
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    is_production: '0'
+                    name_ar: توكان
+                    name_en: Tocaan
+                    email: tocaan@gmail.com
+                    country_code: '965'
+                    phone: '55085102'
+                    whatsapp_country_code: '965'
+                    whatsapp: '94971095'
+                    logo: /storage/images/settings/logo.png
+                    fav_icon: /storage/images/settings/fav_icon.png
+                    no_data_icon: fav.png
+                    default_user: /storage/images/users/default.png
+                    profile_cover: /storage/images/settings/cover_image.png
+                    login_background: /storage/images/settings/login_background.png
+                    intro_logo: /storage/images/settings/intro_logo.png
+                    intro_loader: /storage/images/settings/intro_loader.png
+                    intro_name: توكان
+                    intro_name_ar: توكان
+                    intro_name_en: Tocaan
+                    intro_about: 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة'
+                    intro_about_ar: 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة'
+                    intro_about_en: 'This text is an example of text that can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts. This text is an example of text that can be replaced in the same space. This text is an example of text It can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts. This text is an example of a text that can be replaced in the same space.'
+                    about_image_2: /storage/images/settings/about_image_2.png
+                    about_image_1: /storage/images/settings/about_image_1.png
+                    services_text_ar: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    services_text_en: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                    services_text: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    how_work_text_ar: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    how_work_text_en: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                    how_work_text: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    fqs_text_ar: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    fqs_text_en: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                    fqs_text: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    parteners_text_ar: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    parteners_text_en: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                    parteners_text: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    contact_text_ar: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    contact_text_en: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                    contact_text: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                    intro_email: tocaan@gmail.com
+                    intro_phone: '+96555085102'
+                    intro_address: 'الكويت – شرق – برج كيبكو'
+                    color: '#10163a'
+                    buttons_color: '#7367F0'
+                    hover_color: '#262c49'
+                    intro_meta_description: 'موقع تعريفي خاص توكان'
+                    intro_meta_keywords: 'موقع تعريفي خاص توكان'
+                    smtp_user_name: smtp_user_name
+                    smtp_password: smtp_password
+                    smtp_mail_from: smtp_mail_from
+                    smtp_sender_name: smtp_sender_name
+                    smtp_port: '80'
+                    smtp_host: send.smtp.com
+                    smtp_encryption: LTS
+                    firebase_key: ''
+                    firebase_sender_id: ''
+                    google_places: ''
+                    google_analytics: ''
+                    live_chat: ''
+                    default_locale: ar
+                    locales: '["ar","en"]'
+                    rtl_locales: '["ar"]'
+                    default_country: '117'
+                    countries: '["117"]'
+                    default_currency: KWD
+                    currencies: '["KWD"]'
+                    about_ar: 'من نحن'
+                    terms_ar: 'الشروط والاحكام'
+                    privacy_ar: 'سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>'
+                    about_en: about
+                    terms_en: terms
+                    privacy_en: 'Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: object
+                    properties:
+                      is_production:
+                        type: string
+                        example: '0'
+                      name_ar:
+                        type: string
+                        example: توكان
+                      name_en:
+                        type: string
+                        example: Tocaan
+                      email:
+                        type: string
+                        example: tocaan@gmail.com
+                      country_code:
+                        type: string
+                        example: '965'
+                      phone:
+                        type: string
+                        example: '55085102'
+                      whatsapp_country_code:
+                        type: string
+                        example: '965'
+                      whatsapp:
+                        type: string
+                        example: '94971095'
+                      logo:
+                        type: string
+                        example: /storage/images/settings/logo.png
+                      fav_icon:
+                        type: string
+                        example: /storage/images/settings/fav_icon.png
+                      no_data_icon:
+                        type: string
+                        example: fav.png
+                      default_user:
+                        type: string
+                        example: /storage/images/users/default.png
+                      profile_cover:
+                        type: string
+                        example: /storage/images/settings/cover_image.png
+                      login_background:
+                        type: string
+                        example: /storage/images/settings/login_background.png
+                      intro_logo:
+                        type: string
+                        example: /storage/images/settings/intro_logo.png
+                      intro_loader:
+                        type: string
+                        example: /storage/images/settings/intro_loader.png
+                      intro_name:
+                        type: string
+                        example: توكان
+                      intro_name_ar:
+                        type: string
+                        example: توكان
+                      intro_name_en:
+                        type: string
+                        example: Tocaan
+                      intro_about:
+                        type: string
+                        example: 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة'
+                      intro_about_ar:
+                        type: string
+                        example: 'هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة'
+                      intro_about_en:
+                        type: string
+                        example: 'This text is an example of text that can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts. This text is an example of text that can be replaced in the same space. This text is an example of text It can be replaced in the same space. This text was generated from the Arabic text generator, where you can generate such text or many other texts. This text is an example of a text that can be replaced in the same space.'
+                      about_image_2:
+                        type: string
+                        example: /storage/images/settings/about_image_2.png
+                      about_image_1:
+                        type: string
+                        example: /storage/images/settings/about_image_1.png
+                      services_text_ar:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      services_text_en:
+                        type: string
+                        example: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                      services_text:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      how_work_text_ar:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      how_work_text_en:
+                        type: string
+                        example: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                      how_work_text:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      fqs_text_ar:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      fqs_text_en:
+                        type: string
+                        example: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                      fqs_text:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      parteners_text_ar:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      parteners_text_en:
+                        type: string
+                        example: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                      parteners_text:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      contact_text_ar:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      contact_text_en:
+                        type: string
+                        example: 'By building an intuitive product that simulates and facilitates the implementation of public service, the simple answer has been to provide users with three things'
+                      contact_text:
+                        type: string
+                        example: 'من خلال بناء منتج بديهي يحاكي ويسهل تنفيذ الخدمة العامة ، كان الجواب البسيط هو تزويد المستخدمين بثلاثة أشياء'
+                      intro_email:
+                        type: string
+                        example: tocaan@gmail.com
+                      intro_phone:
+                        type: string
+                        example: '+96555085102'
+                      intro_address:
+                        type: string
+                        example: 'الكويت – شرق – برج كيبكو'
+                      color:
+                        type: string
+                        example: '#10163a'
+                      buttons_color:
+                        type: string
+                        example: '#7367F0'
+                      hover_color:
+                        type: string
+                        example: '#262c49'
+                      intro_meta_description:
+                        type: string
+                        example: 'موقع تعريفي خاص توكان'
+                      intro_meta_keywords:
+                        type: string
+                        example: 'موقع تعريفي خاص توكان'
+                      smtp_user_name:
+                        type: string
+                        example: smtp_user_name
+                      smtp_password:
+                        type: string
+                        example: smtp_password
+                      smtp_mail_from:
+                        type: string
+                        example: smtp_mail_from
+                      smtp_sender_name:
+                        type: string
+                        example: smtp_sender_name
+                      smtp_port:
+                        type: string
+                        example: '80'
+                      smtp_host:
+                        type: string
+                        example: send.smtp.com
+                      smtp_encryption:
+                        type: string
+                        example: LTS
+                      firebase_key:
+                        type: string
+                        example: ''
+                      firebase_sender_id:
+                        type: string
+                        example: ''
+                      google_places:
+                        type: string
+                        example: ''
+                      google_analytics:
+                        type: string
+                        example: ''
+                      live_chat:
+                        type: string
+                        example: ''
+                      default_locale:
+                        type: string
+                        example: ar
+                      locales:
+                        type: string
+                        example: '["ar","en"]'
+                      rtl_locales:
+                        type: string
+                        example: '["ar"]'
+                      default_country:
+                        type: string
+                        example: '117'
+                      countries:
+                        type: string
+                        example: '["117"]'
+                      default_currency:
+                        type: string
+                        example: KWD
+                      currencies:
+                        type: string
+                        example: '["KWD"]'
+                      about_ar:
+                        type: string
+                        example: 'من نحن'
+                      terms_ar:
+                        type: string
+                        example: 'الشروط والاحكام'
+                      privacy_ar:
+                        type: string
+                        example: 'سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>'
+                      about_en:
+                        type: string
+                        example: about
+                      terms_en:
+                        type: string
+                        example: terms
+                      privacy_en:
+                        type: string
+                        example: 'Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>Privacy in english<br>'
+      tags:
+        - Endpoints
+      security: []
+  /api/about:
+    get:
+      summary: ''
+      operationId: getApiAbout
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: 'من نحن'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: string
+                    example: 'من نحن'
+      tags:
+        - Endpoints
+      security: []
+  /api/terms:
+    get:
+      summary: ''
+      operationId: getApiTerms
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: 'الشروط والاحكام'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: string
+                    example: 'الشروط والاحكام'
+      tags:
+        - Endpoints
+      security: []
+  /api/privacy:
+    get:
+      summary: ''
+      operationId: getApiPrivacy
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: 'سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: string
+                    example: 'سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>سياسة الخصوصية باللغه العربية<br>'
+      tags:
+        - Endpoints
+      security: []
+  /api/intros:
+    get:
+      summary: ''
+      operationId: getApiIntros
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 1
+                      title: 'مرحبا بك في تطبيقنا'
+                      description: 'يحتوي التطبيق علي العديد من المميزات التي تسهل تجربة المستخدم'
+                      image: 'http://localhost/storage/images/intros/1.png'
+                    -
+                      id: 2
+                      title: 'طريقة الاستخدام'
+                      description: 'يوجد نوعين من المستخدمين في التطبيق يجب الاختيار بينهم'
+                      image: 'http://localhost/storage/images/intros/2.png'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: 'مرحبا بك في تطبيقنا'
+                        description: 'يحتوي التطبيق علي العديد من المميزات التي تسهل تجربة المستخدم'
+                        image: 'http://localhost/storage/images/intros/1.png'
+                      -
+                        id: 2
+                        title: 'طريقة الاستخدام'
+                        description: 'يوجد نوعين من المستخدمين في التطبيق يجب الاختيار بينهم'
+                        image: 'http://localhost/storage/images/intros/2.png'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: 'مرحبا بك في تطبيقنا'
+                        description:
+                          type: string
+                          example: 'يحتوي التطبيق علي العديد من المميزات التي تسهل تجربة المستخدم'
+                        image:
+                          type: string
+                          example: 'http://localhost/storage/images/intros/1.png'
+      tags:
+        - Endpoints
+      security: []
+  /api/fqss:
+    get:
+      summary: ''
+      operationId: getApiFqss
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 1
+                      question: 'تقديم تجربة ذات طابع شخصي لك:'
+                      answer: 'تختلف تجربتك على فيسبوك عن تجربة أي شخص آخر: بدءًا من المنشورات والقصص والمناسبات والإعلانات وغيرها من أنواع المحتوى الأخرى التي تظهر لك في آخر الأخبار أو منصة الفيديو التي نوفرها، إلى الصفحات التي تتابعها والميزات الأخرى التي قد تستخدمها، مثل الموضوعات الرائجة وMarketplace والبحث. ونستخدم البيانات المتوفرة لدينا، مثل تلك المتعلقة بعمليات التواصل التي تقوم بها والاختيارات والإعدادات التي تحددها والعناصر التي تقوم بمشاركتها والإجراءات التي تتخذها داخل منتجاتنا وخارجها، لإضفاء طابع شخصي على تجربتك.'
+                    -
+                      id: 2
+                      question: 'توفير إمكانية التواصل مع الأشخاص والمؤسسات التي تهتم بها'
+                      answer: 'نساعدك في العثور على الأشخاص والمجموعات والأنشطة التجارية والمؤسسات وغيرها مما يقع ضمن دائرة اهتماماتك والتواصل معها عبر منتجات فيسبوك التي تستخدمها. ونستخدم البيانات التي نحصل عليها لتقديم اقتراحات لك وللآخرين، على سبيل المثال، مجموعات للانضمام إليها، ومناسبات لحضورها، وصفحات لمتابعتها أو مراسلتها، وعروض لمشاهدتها، وأشخاص قد ترغب في أن تصبح صديقًا لهم. وتُعد الروابط القوية أساسًا مهمًا لبناء مجتمعات أفضل، ونحن على يقين أن خدماتنا تصبح أكثر فائدة عندما يتواصل الأشخاص معًا ومع المجموعات والمؤسسات التي يهتمون بها.'
+                    -
+                      id: 3
+                      question: 'تشجيعك على التعبير عن نفسك والتواصل بشأن ما يهمّك:'
+                      answer: 'نوفر لك العديد من الطرق للتعبير عن نفسك على فيسبوك والتواصل مع الأصدقاء وأفراد العائلة والأشخاص الآخرين بخصوص الأمور التي تهتم بها، على سبيل المثال، مشاركة تحديثات الحالة والصور ومقاطع الفيديو والقصص عبر منتجات فيسبوك التي تستخدمها، أو إرسال الرسائل إلى صديق أو عدة أشخاص، أو إنشاء مناسبات أو مجموعات، أو إضافة محتوى إلى ملفك الشخصي. ولقد قمنا أيضًا بتطوير، ولا نزال نكتشف، وسائل جديدة تتيح للأشخاص إمكانية استخدام التكنولوجيا، مثل الواقع المعزَّز والفيديو بتقنية 360 درجة لإنشاء المزيد من عناصر المحتوى الجاذبة للانتباه والتي تشجع على التفاعل ومشاركتها على فيسبوك'
+                    -
+                      id: 4
+                      question: 'مساعدتك في اكتشاف المحتوى والمنتجات والخدمات التي قد تهتم بها:'
+                      answer: 'نعرض عليك الإعلانات والعروض وغيرها من أنواع المحتوى المُموَّل لمساعدتك في التعرف على عناصر المحتوى والمنتجات والخدمات التي تقدمها العديد من الأنشطة التجارية والمؤسسات التي تستخدم فيسبوك ومنتجات فيسبوك الأخرى. يشرح القسم 2 أدناه هذا الأمر بمزيد من التفصيل.'
+                    -
+                      id: 5
+                      question: 'مواجهة السلوكيات الضارة وحماية ودعم مجتمعنا:'
+                      answer: 'لن يتمكن الأشخاص من بناء مجتمع على فيسبوك إلا عند الشعور بالأمان. ولذا نحرص على توظيف فرق عمل مخصصة من جميع أنحاء العالم بالإضافة إلى تطوير أنظمة تقنية متقدمة لاكتشاف حالات إساءة استخدام منتجاتنا والسلوكيات الضارة تجاه الآخرين والمواقف التي يمكننا تقديم المساعدة خلالها تجاه دعم وحماية مجتمعنا. فإذا نما إلى علمنا وجود مثل هذا المحتوى أو السلوك، فسنتخذ الإجراء المناسب، على سبيل المثال، عرض تقديم مساعدة، أو إزالة المحتوى، أو إزالة أو حجب الوصول إلى ميزات محددة، أو تعطيل الحساب، أو التواصل مع جهات تنفيذ القانون.'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        question: 'تقديم تجربة ذات طابع شخصي لك:'
+                        answer: 'تختلف تجربتك على فيسبوك عن تجربة أي شخص آخر: بدءًا من المنشورات والقصص والمناسبات والإعلانات وغيرها من أنواع المحتوى الأخرى التي تظهر لك في آخر الأخبار أو منصة الفيديو التي نوفرها، إلى الصفحات التي تتابعها والميزات الأخرى التي قد تستخدمها، مثل الموضوعات الرائجة وMarketplace والبحث. ونستخدم البيانات المتوفرة لدينا، مثل تلك المتعلقة بعمليات التواصل التي تقوم بها والاختيارات والإعدادات التي تحددها والعناصر التي تقوم بمشاركتها والإجراءات التي تتخذها داخل منتجاتنا وخارجها، لإضفاء طابع شخصي على تجربتك.'
+                      -
+                        id: 2
+                        question: 'توفير إمكانية التواصل مع الأشخاص والمؤسسات التي تهتم بها'
+                        answer: 'نساعدك في العثور على الأشخاص والمجموعات والأنشطة التجارية والمؤسسات وغيرها مما يقع ضمن دائرة اهتماماتك والتواصل معها عبر منتجات فيسبوك التي تستخدمها. ونستخدم البيانات التي نحصل عليها لتقديم اقتراحات لك وللآخرين، على سبيل المثال، مجموعات للانضمام إليها، ومناسبات لحضورها، وصفحات لمتابعتها أو مراسلتها، وعروض لمشاهدتها، وأشخاص قد ترغب في أن تصبح صديقًا لهم. وتُعد الروابط القوية أساسًا مهمًا لبناء مجتمعات أفضل، ونحن على يقين أن خدماتنا تصبح أكثر فائدة عندما يتواصل الأشخاص معًا ومع المجموعات والمؤسسات التي يهتمون بها.'
+                      -
+                        id: 3
+                        question: 'تشجيعك على التعبير عن نفسك والتواصل بشأن ما يهمّك:'
+                        answer: 'نوفر لك العديد من الطرق للتعبير عن نفسك على فيسبوك والتواصل مع الأصدقاء وأفراد العائلة والأشخاص الآخرين بخصوص الأمور التي تهتم بها، على سبيل المثال، مشاركة تحديثات الحالة والصور ومقاطع الفيديو والقصص عبر منتجات فيسبوك التي تستخدمها، أو إرسال الرسائل إلى صديق أو عدة أشخاص، أو إنشاء مناسبات أو مجموعات، أو إضافة محتوى إلى ملفك الشخصي. ولقد قمنا أيضًا بتطوير، ولا نزال نكتشف، وسائل جديدة تتيح للأشخاص إمكانية استخدام التكنولوجيا، مثل الواقع المعزَّز والفيديو بتقنية 360 درجة لإنشاء المزيد من عناصر المحتوى الجاذبة للانتباه والتي تشجع على التفاعل ومشاركتها على فيسبوك'
+                      -
+                        id: 4
+                        question: 'مساعدتك في اكتشاف المحتوى والمنتجات والخدمات التي قد تهتم بها:'
+                        answer: 'نعرض عليك الإعلانات والعروض وغيرها من أنواع المحتوى المُموَّل لمساعدتك في التعرف على عناصر المحتوى والمنتجات والخدمات التي تقدمها العديد من الأنشطة التجارية والمؤسسات التي تستخدم فيسبوك ومنتجات فيسبوك الأخرى. يشرح القسم 2 أدناه هذا الأمر بمزيد من التفصيل.'
+                      -
+                        id: 5
+                        question: 'مواجهة السلوكيات الضارة وحماية ودعم مجتمعنا:'
+                        answer: 'لن يتمكن الأشخاص من بناء مجتمع على فيسبوك إلا عند الشعور بالأمان. ولذا نحرص على توظيف فرق عمل مخصصة من جميع أنحاء العالم بالإضافة إلى تطوير أنظمة تقنية متقدمة لاكتشاف حالات إساءة استخدام منتجاتنا والسلوكيات الضارة تجاه الآخرين والمواقف التي يمكننا تقديم المساعدة خلالها تجاه دعم وحماية مجتمعنا. فإذا نما إلى علمنا وجود مثل هذا المحتوى أو السلوك، فسنتخذ الإجراء المناسب، على سبيل المثال، عرض تقديم مساعدة، أو إزالة المحتوى، أو إزالة أو حجب الوصول إلى ميزات محددة، أو تعطيل الحساب، أو التواصل مع جهات تنفيذ القانون.'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        question:
+                          type: string
+                          example: 'تقديم تجربة ذات طابع شخصي لك:'
+                        answer:
+                          type: string
+                          example: 'تختلف تجربتك على فيسبوك عن تجربة أي شخص آخر: بدءًا من المنشورات والقصص والمناسبات والإعلانات وغيرها من أنواع المحتوى الأخرى التي تظهر لك في آخر الأخبار أو منصة الفيديو التي نوفرها، إلى الصفحات التي تتابعها والميزات الأخرى التي قد تستخدمها، مثل الموضوعات الرائجة وMarketplace والبحث. ونستخدم البيانات المتوفرة لدينا، مثل تلك المتعلقة بعمليات التواصل التي تقوم بها والاختيارات والإعدادات التي تحددها والعناصر التي تقوم بمشاركتها والإجراءات التي تتخذها داخل منتجاتنا وخارجها، لإضفاء طابع شخصي على تجربتك.'
+      tags:
+        - Endpoints
+      security: []
+  /api/socials:
+    get:
+      summary: ''
+      operationId: getApiSocials
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      link: 'https://www.facebook.com'
+                      name: facebook
+                      icon: 'http://localhost/storage/images/socials/facebook.png'
+                    -
+                      link: 'https://www.instgram.com'
+                      name: instgram
+                      icon: 'http://localhost/storage/images/socials/Instagram.png'
+                    -
+                      link: 'https://www.twitter.com'
+                      name: twitter
+                      icon: 'http://localhost/storage/images/socials/twitter.png'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        link: 'https://www.facebook.com'
+                        name: facebook
+                        icon: 'http://localhost/storage/images/socials/facebook.png'
+                      -
+                        link: 'https://www.instgram.com'
+                        name: instgram
+                        icon: 'http://localhost/storage/images/socials/Instagram.png'
+                      -
+                        link: 'https://www.twitter.com'
+                        name: twitter
+                        icon: 'http://localhost/storage/images/socials/twitter.png'
+                    items:
+                      type: object
+                      properties:
+                        link:
+                          type: string
+                          example: 'https://www.facebook.com'
+                        name:
+                          type: string
+                          example: facebook
+                        icon:
+                          type: string
+                          example: 'http://localhost/storage/images/socials/facebook.png'
+      tags:
+        - Endpoints
+      security: []
+  /api/images:
+    get:
+      summary: ''
+      operationId: getApiImages
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: []
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      security: []
+  '/api/categories/{id}':
+    get:
+      summary: ''
+      operationId: getApiCategoriesId
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: []
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Optional parameter. The ID of the .'
+        required: true
+        schema:
+          type: string
+        examples:
+          omitted:
+            summary: 'When the value is omitted'
+            value: ''
+          present:
+            summary: 'When the value is present'
+            value: aut
+  /api/countries:
+    get:
+      summary: ''
+      operationId: getApiCountries
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 117
+                      name: الكويت
+                      key: '965'
+                      flag: 🇰🇼
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 117
+                        name: الكويت
+                        key: '965'
+                        flag: 🇰🇼
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 117
+                        name:
+                          type: string
+                          example: الكويت
+                        key:
+                          type: string
+                          example: '965'
+                        flag:
+                          type: string
+                          example: 🇰🇼
+      tags:
+        - Endpoints
+      security: []
+  /api/countries-with-cities:
+    get:
+      summary: ''
+      operationId: getApiCountriesWithCities
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 117
+                      name: الكويت
+                      key: '965'
+                      cities:
+                        -
+                          id: 76
+                          name: 'مدينة الكويت'
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 77
+                          name: الدسمة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 78
+                          name: قرطبة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 79
+                          name: الفنطاس
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 80
+                          name: الفحيحيل
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 81
+                          name: العقيلة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 82
+                          name: العيون
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 83
+                          name: السالمي
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 84
+                          name: أمغرة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 85
+                          name: 'أبرق خيطان'
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 86
+                          name: العارضية
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 87
+                          name: الرابية
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 88
+                          name: حولي
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 89
+                          name: بيان
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 90
+                          name: 'جنوب السرة'
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 91
+                          name: العدان
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 92
+                          name: المسيلة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 93
+                          name: صبحان
+                          country: الكويت
+                          country_id: 117
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 117
+                        name: الكويت
+                        key: '965'
+                        cities:
+                          -
+                            id: 76
+                            name: 'مدينة الكويت'
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 77
+                            name: الدسمة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 78
+                            name: قرطبة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 79
+                            name: الفنطاس
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 80
+                            name: الفحيحيل
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 81
+                            name: العقيلة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 82
+                            name: العيون
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 83
+                            name: السالمي
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 84
+                            name: أمغرة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 85
+                            name: 'أبرق خيطان'
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 86
+                            name: العارضية
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 87
+                            name: الرابية
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 88
+                            name: حولي
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 89
+                            name: بيان
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 90
+                            name: 'جنوب السرة'
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 91
+                            name: العدان
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 92
+                            name: المسيلة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 93
+                            name: صبحان
+                            country: الكويت
+                            country_id: 117
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 117
+                        name:
+                          type: string
+                          example: الكويت
+                        key:
+                          type: string
+                          example: '965'
+                        cities:
+                          type: array
+                          example:
+                            -
+                              id: 76
+                              name: 'مدينة الكويت'
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 77
+                              name: الدسمة
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 78
+                              name: قرطبة
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 79
+                              name: الفنطاس
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 80
+                              name: الفحيحيل
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 81
+                              name: العقيلة
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 82
+                              name: العيون
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 83
+                              name: السالمي
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 84
+                              name: أمغرة
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 85
+                              name: 'أبرق خيطان'
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 86
+                              name: العارضية
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 87
+                              name: الرابية
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 88
+                              name: حولي
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 89
+                              name: بيان
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 90
+                              name: 'جنوب السرة'
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 91
+                              name: العدان
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 92
+                              name: المسيلة
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 93
+                              name: صبحان
+                              country: الكويت
+                              country_id: 117
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 76
+                              name:
+                                type: string
+                                example: 'مدينة الكويت'
+                              country:
+                                type: string
+                                example: الكويت
+                              country_id:
+                                type: integer
+                                example: 117
+      tags:
+        - Endpoints
+      security: []
+  /api/countries-with-regions:
+    get:
+      summary: ''
+      operationId: getApiCountriesWithRegions
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 117
+                      name: الكويت
+                      key: '965'
+                      regions:
+                        -
+                          id: 10
+                          name: ' العاصمة (الكويت)'
+                        -
+                          id: 11
+                          name: ' الأحمدي'
+                        -
+                          id: 12
+                          name: الجهراء
+                        -
+                          id: 13
+                          name: الفروانية
+                        -
+                          id: 14
+                          name: حولي
+                        -
+                          id: 15
+                          name: 'مبارك الكبير'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 117
+                        name: الكويت
+                        key: '965'
+                        regions:
+                          -
+                            id: 10
+                            name: ' العاصمة (الكويت)'
+                          -
+                            id: 11
+                            name: ' الأحمدي'
+                          -
+                            id: 12
+                            name: الجهراء
+                          -
+                            id: 13
+                            name: الفروانية
+                          -
+                            id: 14
+                            name: حولي
+                          -
+                            id: 15
+                            name: 'مبارك الكبير'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 117
+                        name:
+                          type: string
+                          example: الكويت
+                        key:
+                          type: string
+                          example: '965'
+                        regions:
+                          type: array
+                          example:
+                            -
+                              id: 10
+                              name: ' العاصمة (الكويت)'
+                            -
+                              id: 11
+                              name: ' الأحمدي'
+                            -
+                              id: 12
+                              name: الجهراء
+                            -
+                              id: 13
+                              name: الفروانية
+                            -
+                              id: 14
+                              name: حولي
+                            -
+                              id: 15
+                              name: 'مبارك الكبير'
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 10
+                              name:
+                                type: string
+                                example: ' العاصمة (الكويت)'
+      tags:
+        - Endpoints
+      security: []
+  /api/regions:
+    get:
+      summary: ''
+      operationId: getApiRegions
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 10
+                      name: ' العاصمة (الكويت)'
+                    -
+                      id: 11
+                      name: ' الأحمدي'
+                    -
+                      id: 15
+                      name: 'مبارك الكبير'
+                    -
+                      id: 14
+                      name: حولي
+                    -
+                      id: 13
+                      name: الفروانية
+                    -
+                      id: 12
+                      name: الجهراء
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 10
+                        name: ' العاصمة (الكويت)'
+                      -
+                        id: 11
+                        name: ' الأحمدي'
+                      -
+                        id: 15
+                        name: 'مبارك الكبير'
+                      -
+                        id: 14
+                        name: حولي
+                      -
+                        id: 13
+                        name: الفروانية
+                      -
+                        id: 12
+                        name: الجهراء
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 10
+                        name:
+                          type: string
+                          example: ' العاصمة (الكويت)'
+      tags:
+        - Endpoints
+      security: []
+  /api/cities:
+    get:
+      summary: ''
+      operationId: getApiCities
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 80
+                      name: الفحيحيل
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 82
+                      name: العيون
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 78
+                      name: قرطبة
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 83
+                      name: السالمي
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 84
+                      name: أمغرة
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 76
+                      name: 'مدينة الكويت'
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 85
+                      name: 'أبرق خيطان'
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 91
+                      name: العدان
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 89
+                      name: بيان
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 90
+                      name: 'جنوب السرة'
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 93
+                      name: صبحان
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 77
+                      name: الدسمة
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 81
+                      name: العقيلة
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 86
+                      name: العارضية
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 88
+                      name: حولي
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 92
+                      name: المسيلة
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 79
+                      name: الفنطاس
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 87
+                      name: الرابية
+                      country: الكويت
+                      country_id: 117
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 80
+                        name: الفحيحيل
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 82
+                        name: العيون
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 78
+                        name: قرطبة
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 83
+                        name: السالمي
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 84
+                        name: أمغرة
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 76
+                        name: 'مدينة الكويت'
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 85
+                        name: 'أبرق خيطان'
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 91
+                        name: العدان
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 89
+                        name: بيان
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 90
+                        name: 'جنوب السرة'
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 93
+                        name: صبحان
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 77
+                        name: الدسمة
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 81
+                        name: العقيلة
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 86
+                        name: العارضية
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 88
+                        name: حولي
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 92
+                        name: المسيلة
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 79
+                        name: الفنطاس
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 87
+                        name: الرابية
+                        country: الكويت
+                        country_id: 117
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 80
+                        name:
+                          type: string
+                          example: الفحيحيل
+                        country:
+                          type: string
+                          example: الكويت
+                        country_id:
+                          type: integer
+                          example: 117
+      tags:
+        - Endpoints
+      security: []
+  '/api/region/{region_id}/cities':
+    get:
+      summary: ''
+      operationId: getApiRegionRegion_idCities
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 78
+                      name: قرطبة
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 76
+                      name: 'مدينة الكويت'
+                      country: الكويت
+                      country_id: 117
+                    -
+                      id: 77
+                      name: الدسمة
+                      country: الكويت
+                      country_id: 117
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 78
+                        name: قرطبة
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 76
+                        name: 'مدينة الكويت'
+                        country: الكويت
+                        country_id: 117
+                      -
+                        id: 77
+                        name: الدسمة
+                        country: الكويت
+                        country_id: 117
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 78
+                        name:
+                          type: string
+                          example: قرطبة
+                        country:
+                          type: string
+                          example: الكويت
+                        country_id:
+                          type: integer
+                          example: 117
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: region_id
+        description: 'The ID of the region.'
+        example: 10
+        required: true
+        schema:
+          type: integer
+  /api/regions-with-cities:
+    get:
+      summary: ''
+      operationId: getApiRegionsWithCities
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 10
+                      name: ' العاصمة (الكويت)'
+                      cities:
+                        -
+                          id: 76
+                          name: 'مدينة الكويت'
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 77
+                          name: الدسمة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 78
+                          name: قرطبة
+                          country: الكويت
+                          country_id: 117
+                    -
+                      id: 11
+                      name: ' الأحمدي'
+                      cities:
+                        -
+                          id: 79
+                          name: الفنطاس
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 80
+                          name: الفحيحيل
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 81
+                          name: العقيلة
+                          country: الكويت
+                          country_id: 117
+                    -
+                      id: 15
+                      name: 'مبارك الكبير'
+                      cities:
+                        -
+                          id: 91
+                          name: العدان
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 92
+                          name: المسيلة
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 93
+                          name: صبحان
+                          country: الكويت
+                          country_id: 117
+                    -
+                      id: 14
+                      name: حولي
+                      cities:
+                        -
+                          id: 88
+                          name: حولي
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 89
+                          name: بيان
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 90
+                          name: 'جنوب السرة'
+                          country: الكويت
+                          country_id: 117
+                    -
+                      id: 13
+                      name: الفروانية
+                      cities:
+                        -
+                          id: 85
+                          name: 'أبرق خيطان'
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 86
+                          name: العارضية
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 87
+                          name: الرابية
+                          country: الكويت
+                          country_id: 117
+                    -
+                      id: 12
+                      name: الجهراء
+                      cities:
+                        -
+                          id: 82
+                          name: العيون
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 83
+                          name: السالمي
+                          country: الكويت
+                          country_id: 117
+                        -
+                          id: 84
+                          name: أمغرة
+                          country: الكويت
+                          country_id: 117
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 10
+                        name: ' العاصمة (الكويت)'
+                        cities:
+                          -
+                            id: 76
+                            name: 'مدينة الكويت'
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 77
+                            name: الدسمة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 78
+                            name: قرطبة
+                            country: الكويت
+                            country_id: 117
+                      -
+                        id: 11
+                        name: ' الأحمدي'
+                        cities:
+                          -
+                            id: 79
+                            name: الفنطاس
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 80
+                            name: الفحيحيل
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 81
+                            name: العقيلة
+                            country: الكويت
+                            country_id: 117
+                      -
+                        id: 15
+                        name: 'مبارك الكبير'
+                        cities:
+                          -
+                            id: 91
+                            name: العدان
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 92
+                            name: المسيلة
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 93
+                            name: صبحان
+                            country: الكويت
+                            country_id: 117
+                      -
+                        id: 14
+                        name: حولي
+                        cities:
+                          -
+                            id: 88
+                            name: حولي
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 89
+                            name: بيان
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 90
+                            name: 'جنوب السرة'
+                            country: الكويت
+                            country_id: 117
+                      -
+                        id: 13
+                        name: الفروانية
+                        cities:
+                          -
+                            id: 85
+                            name: 'أبرق خيطان'
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 86
+                            name: العارضية
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 87
+                            name: الرابية
+                            country: الكويت
+                            country_id: 117
+                      -
+                        id: 12
+                        name: الجهراء
+                        cities:
+                          -
+                            id: 82
+                            name: العيون
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 83
+                            name: السالمي
+                            country: الكويت
+                            country_id: 117
+                          -
+                            id: 84
+                            name: أمغرة
+                            country: الكويت
+                            country_id: 117
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 10
+                        name:
+                          type: string
+                          example: ' العاصمة (الكويت)'
+                        cities:
+                          type: array
+                          example:
+                            -
+                              id: 76
+                              name: 'مدينة الكويت'
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 77
+                              name: الدسمة
+                              country: الكويت
+                              country_id: 117
+                            -
+                              id: 78
+                              name: قرطبة
+                              country: الكويت
+                              country_id: 117
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 76
+                              name:
+                                type: string
+                                example: 'مدينة الكويت'
+                              country:
+                                type: string
+                                example: الكويت
+                              country_id:
+                                type: integer
+                                example: 117
+      tags:
+        - Endpoints
+      security: []
+  '/api/country/{country_id}/cities':
+    get:
+      summary: ''
+      operationId: getApiCountryCountry_idCities
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: []
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: country_id
+        description: 'The ID of the country.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/country/{country_id}/regions':
+    get:
+      summary: ''
+      operationId: getApiCountryCountry_idRegions
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: []
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example: []
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: country_id
+        description: 'The ID of the country.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/check-coupon:
+    post:
+      summary: ''
+      operationId: postApiCheckCoupon
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coupon_num:
+                  type: string
+                  description: 'The <code>coupon_num</code> of an existing record in the coupons table.'
+                  example: dolorem
+                  nullable: false
+                total_price:
+                  type: number
+                  description: ''
+                  example: 8907.885
+                  nullable: false
+              required:
+                - coupon_num
+                - total_price
+      security: []
+  /api/is-production:
+    get:
+      summary: ''
+      operationId: getApiIsProduction
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data: '0'
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: string
+                    example: '0'
+      tags:
+        - Endpoints
+      security: []
+  /api/home:
+    get:
+      summary: ''
+      operationId: getApiHome
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: success
+                  msg: 'تم الارسال بنجاح'
+                  data:
+                    -
+                      id: 1
+                      title: اعلانات
+                      description: اعلانات
+                      type: ads
+                      records:
+                        -
+                          id: 1
+                          is_active: 1
+                          start_date: null
+                          end_date: null
+                          link: null
+                          image: 'http://localhost/storage/images/images/1.png'
+                        -
+                          id: 2
+                          is_active: 1
+                          start_date: null
+                          end_date: null
+                          link: null
+                          image: 'http://localhost/storage/images/images/2.png'
+                      display_type: carousel
+                      grid_columns_count: null
+                    -
+                      id: 2
+                      title: اقسام
+                      description: اقسام
+                      type: categories
+                      records:
+                        -
+                          id: 1
+                          name: سيارات
+                          image: 'http://localhost/storage/images/categories/category.png'
+                          is_active: 1
+                        -
+                          id: 2
+                          name: منازل
+                          image: 'http://localhost/storage/images/categories/category.png'
+                          is_active: 1
+                      display_type: carousel
+                      grid_columns_count: null
+                    -
+                      id: 3
+                      title: وصف
+                      description: وصف
+                      type: description
+                      records: null
+                      display_type: carousel
+                      grid_columns_count: null
+                properties:
+                  key:
+                    type: string
+                    example: success
+                  msg:
+                    type: string
+                    example: 'تم الارسال بنجاح'
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: اعلانات
+                        description: اعلانات
+                        type: ads
+                        records:
+                          -
+                            id: 1
+                            is_active: 1
+                            start_date: null
+                            end_date: null
+                            link: null
+                            image: 'http://localhost/storage/images/images/1.png'
+                          -
+                            id: 2
+                            is_active: 1
+                            start_date: null
+                            end_date: null
+                            link: null
+                            image: 'http://localhost/storage/images/images/2.png'
+                        display_type: carousel
+                        grid_columns_count: null
+                      -
+                        id: 2
+                        title: اقسام
+                        description: اقسام
+                        type: categories
+                        records:
+                          -
+                            id: 1
+                            name: سيارات
+                            image: 'http://localhost/storage/images/categories/category.png'
+                            is_active: 1
+                          -
+                            id: 2
+                            name: منازل
+                            image: 'http://localhost/storage/images/categories/category.png'
+                            is_active: 1
+                        display_type: carousel
+                        grid_columns_count: null
+                      -
+                        id: 3
+                        title: وصف
+                        description: وصف
+                        type: description
+                        records: null
+                        display_type: carousel
+                        grid_columns_count: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: اعلانات
+                        description:
+                          type: string
+                          example: اعلانات
+                        type:
+                          type: string
+                          example: ads
+                        records:
+                          type: array
+                          example:
+                            -
+                              id: 1
+                              is_active: 1
+                              start_date: null
+                              end_date: null
+                              link: null
+                              image: 'http://localhost/storage/images/images/1.png'
+                            -
+                              id: 2
+                              is_active: 1
+                              start_date: null
+                              end_date: null
+                              link: null
+                              image: 'http://localhost/storage/images/images/2.png'
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              is_active:
+                                type: integer
+                                example: 1
+                              start_date:
+                                type: string
+                                example: null
+                              end_date:
+                                type: string
+                                example: null
+                              link:
+                                type: string
+                                example: null
+                              image:
+                                type: string
+                                example: 'http://localhost/storage/images/images/1.png'
+                        display_type:
+                          type: string
+                          example: carousel
+                        grid_columns_count:
+                          type: string
+                          example: null
+      tags:
+        - Endpoints
+      security: []
+  /api/update-devices:
+    post:
+      summary: ''
+      operationId: postApiUpdateDevices
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 250 حروفٍ/حرفًا.'
+                  example: xbydtaxxdusciejhhwovap
+                  nullable: false
+                device_type:
+                  type: string
+                  description: ''
+                  example: web
+                  nullable: false
+                  enum:
+                    - ios
+                    - android
+                    - web
+              required:
+                - device_id
+                - device_type
+      security: []
+  /api/sign-up:
+    post:
+      summary: ''
+      operationId: postApiSignUp
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 50 حروفٍ/حرفًا.'
+                  example: smqayu
+                  nullable: false
+                country_code:
+                  type: string
+                  description: 'يجب أن يحتوي value بين 2 و 5 رقمًا/أرقام.'
+                  example: '407'
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'يجب أن يحتوي value بين 8 و 10 رقمًا/أرقام.'
+                  example: '6974314377'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'يجب أن يكون value عنوان بريد إلكتروني صحيح البُنية يجب أن لا يتجاوز طول النّص value 50 حروفٍ/حرفًا.'
+                  example: zena.maggio@example.net
+                  nullable: true
+                password:
+                  type: string
+                  description: 'يجب أن يكون طول النص value على الأقل 6 ارقام يجب أن لا يتجاوز طول النّص value 100 حروفٍ/حرفًا.'
+                  example: t=e\^!
+                  nullable: false
+                image:
+                  type: string
+                  description: ''
+                  example: null
+                  nullable: true
+              required:
+                - name
+                - country_code
+                - phone
+                - password
+      security: []
+  /api/activate:
+    patch:
+      summary: ''
+      operationId: patchApiActivate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 10 حروفٍ/حرفًا.'
+                  example: jotn
+                  nullable: false
+                country_code:
+                  type: string
+                  description: 'The <code>country_code</code> of an existing record in the users table.'
+                  example: voluptatibus
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'The <code>phone</code> of an existing record in the users table.'
+                  example: assumenda
+                  nullable: false
+                device_id:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 250 حروفٍ/حرفًا.'
+                  example: xomxmdbajkpnfbrfbagqu
+                  nullable: false
+                device_type:
+                  type: string
+                  description: ''
+                  example: ios
+                  nullable: false
+                  enum:
+                    - ios
+                    - android
+                    - web
+              required:
+                - code
+                - country_code
+                - phone
+                - device_id
+      security: []
+  /api/resend-code:
+    get:
+      summary: ''
+      operationId: getApiResendCode
+      description: ''
+      parameters: []
+      responses:
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: fail
+                  msg: 'كود الدولة غير موجود'
+                properties:
+                  key:
+                    type: string
+                    example: fail
+                  msg:
+                    type: string
+                    example: 'كود الدولة غير موجود'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country_code:
+                  type: string
+                  description: 'The <code>country_code</code> of an existing record in the users table.'
+                  example: qui
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'The <code>phone</code> of an existing record in the users table.'
+                  example: aut
+                  nullable: false
+              required:
+                - country_code
+                - phone
+      security: []
+  /api/sign-in:
+    post:
+      summary: ''
+      operationId: postApiSignIn
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country_code:
+                  type: string
+                  description: 'يجب أن يحتوي value بين 2 و 5 رقمًا/أرقام.'
+                  example: '4343'
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'يجب أن يحتوي value بين 8 و 10 رقمًا/أرقام  The <code>phone</code> of an existing record in the users table.'
+                  example: '4313187787'
+                  nullable: false
+                password:
+                  type: string
+                  description: 'يجب أن يكون طول النص value على الأقل 6 ارقام يجب أن لا يتجاوز طول النّص value 100 حروفٍ/حرفًا.'
+                  example: 'aEQO[ySxLKnatiTK'
+                  nullable: false
+                device_id:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 250 حروفٍ/حرفًا.'
+                  example: epqlk
+                  nullable: false
+                device_type:
+                  type: string
+                  description: ''
+                  example: ios
+                  nullable: false
+                  enum:
+                    - ios
+                    - android
+                    - web
+              required:
+                - country_code
+                - phone
+                - password
+                - device_id
+                - device_type
+      security: []
+  /api/sign-out:
+    delete:
+      summary: ''
+      operationId: deleteApiSignOut
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/forget-password-send-code:
+    post:
+      summary: ''
+      operationId: postApiForgetPasswordSendCode
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country_code:
+                  type: string
+                  description: 'The <code>country_code</code> of an existing record in the users table.'
+                  example: illo
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'The <code>phone</code> of an existing record in the users table.'
+                  example: eos
+                  nullable: false
+              required:
+                - country_code
+                - phone
+      security: []
+  /api/reset-password:
+    post:
+      summary: ''
+      operationId: postApiResetPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 10 حروفٍ/حرفًا.'
+                  example: xyerabh
+                  nullable: false
+                country_code:
+                  type: string
+                  description: 'The <code>country_code</code> of an existing record in the users table.'
+                  example: facilis
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'The <code>phone</code> of an existing record in the users table.'
+                  example: dolore
+                  nullable: false
+                password:
+                  type: string
+                  description: 'يجب أن يكون طول النص value على الأقل 6 ارقام يجب أن لا يتجاوز طول النّص value 100 حروفٍ/حرفًا.'
+                  example: 'qr3b,i+Z'
+                  nullable: false
+              required:
+                - code
+                - country_code
+                - phone
+                - password
+      security: []
+  /api/profile:
+    get:
+      summary: ''
+      operationId: getApiProfile
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+  /api/update-profile:
+    put:
+      summary: ''
+      operationId: putApiUpdateProfile
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country_code:
+                  type: string
+                  description: 'يجب أن يحتوي value بين 2 و 5 رقمًا/أرقام.'
+                  example: '36150'
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'يجب أن يحتوي value بين 7 و 9 رقمًا/أرقام.'
+                  example: '87223380'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'يجب أن يكون value عنوان بريد إلكتروني صحيح البُنية يجب أن لا يتجاوز طول النّص value 50 حروفٍ/حرفًا.'
+                  example: delbert.little@example.net
+                  nullable: false
+                image:
+                  type: string
+                  description: ''
+                  example: null
+                  nullable: true
+              required:
+                - country_code
+                - phone
+                - email
+      security: []
+  /api/update-passward:
+    patch:
+      summary: ''
+      operationId: patchApiUpdatePassward
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 'يجب أن يكون طول النص value على الأقل 6 ارقام يجب أن لا يتجاوز طول النّص value 100 حروفٍ/حرفًا.'
+                  example: '<F8u2R_p&x;O/i>p;M#'
+                  nullable: false
+                old_password:
+                  type: string
+                  description: 'يجب أن يكون طول النص value على الأقل 6 ارقام يجب أن لا يتجاوز طول النّص value 100 حروفٍ/حرفًا.'
+                  example: ofovegmqbajog
+                  nullable: false
+              required:
+                - password
+                - old_password
+      security: []
+  /api/change-lang:
+    patch:
+      summary: ''
+      operationId: patchApiChangeLang
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/switch-notify:
+    patch:
+      summary: ''
+      operationId: patchApiSwitchNotify
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/change-phone-send-code:
+    post:
+      summary: ''
+      operationId: postApiChangePhoneSendCode
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country_code:
+                  type: string
+                  description: 'The <code>country_code</code> of an existing record in the users table.'
+                  example: qui
+                  nullable: false
+                phone:
+                  type: string
+                  description: ''
+                  example: velit
+                  nullable: false
+              required:
+                - country_code
+                - phone
+      security: []
+  /api/change-phone-check-code:
+    post:
+      summary: ''
+      operationId: postApiChangePhoneCheckCode
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: ''
+                  example: officiis
+                  nullable: false
+              required:
+                - code
+      security: []
+  /api/change-email-send-code:
+    post:
+      summary: ''
+      operationId: postApiChangeEmailSendCode
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: ''
+                  example: officiis
+                  nullable: false
+              required:
+                - email
+      security: []
+  /api/change-email-check-code:
+    post:
+      summary: ''
+      operationId: postApiChangeEmailCheckCode
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: ''
+                  example: aut
+                  nullable: false
+              required:
+                - code
+      security: []
+  /api/notifications:
+    get:
+      summary: ''
+      operationId: getApiNotifications
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+  /api/count-notifications:
+    get:
+      summary: ''
+      operationId: getApiCountNotifications
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+  '/api/delete-notification/{notification_id}':
+    delete:
+      summary: ''
+      operationId: deleteApiDeleteNotificationNotification_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: notification_id
+        description: 'The ID of the notification.'
+        example: quisquam
+        required: true
+        schema:
+          type: string
+  /api/delete-notifications:
+    delete:
+      summary: ''
+      operationId: deleteApiDeleteNotifications
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/new-complaint:
+    post:
+      summary: ''
+      operationId: postApiNewComplaint
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_name:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 50 حروفٍ/حرفًا.'
+                  example: zubys
+                  nullable: false
+                phone:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 20 حروفٍ/حرفًا.'
+                  example: vnvdumomkchhh
+                  nullable: false
+                complaint:
+                  type: string
+                  description: 'يجب أن لا يتجاوز طول النّص value 500 حروفٍ/حرفًا.'
+                  example: wxgsv
+                  nullable: false
+              required:
+                - user_name
+                - phone
+                - complaint
+      security: []
+  /api/delete-account:
+    delete:
+      summary: ''
+      operationId: deleteApiDeleteAccount
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/settlement-request:
+    post:
+      summary: ''
+      operationId: postApiSettlementRequest
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: ''
+                  example: 94605.33332
+                  nullable: true
+      security: []
+  /api/create-room:
+    get:
+      summary: ''
+      operationId: getApiCreateRoom
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+  /api/create-private-room:
+    post:
+      summary: ''
+      operationId: postApiCreatePrivateRoom
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                memberable_id:
+                  type: number
+                  description: ''
+                  example: 19361634.587479
+                  nullable: false
+                memberable_type:
+                  type: string
+                  description: ''
+                  example: Delegate
+                  nullable: false
+                  enum:
+                    - User
+                    - Admin
+                    - Provider
+                    - Merchant
+                    - Delegate
+              required:
+                - memberable_id
+                - memberable_type
+      security: []
+  '/api/room-members/{room_id}':
+    get:
+      summary: ''
+      operationId: getApiRoomMembersRoom_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  '/api/join-room/{room_id}':
+    get:
+      summary: ''
+      operationId: getApiJoinRoomRoom_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 12
+        required: true
+        schema:
+          type: integer
+  '/api/leave-room/{room_id}':
+    get:
+      summary: ''
+      operationId: getApiLeaveRoomRoom_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 19
+        required: true
+        schema:
+          type: integer
+  '/api/get-room-messages/{room_id}':
+    get:
+      summary: ''
+      operationId: getApiGetRoomMessagesRoom_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 18
+        required: true
+        schema:
+          type: integer
+  '/api/get-room-unseen-messages/{room_id}':
+    get:
+      summary: ''
+      operationId: getApiGetRoomUnseenMessagesRoom_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/get-rooms:
+    get:
+      summary: ''
+      operationId: getApiGetRooms
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  key: unauthenticated
+                  msg: 'يرجى اعادة تسجيل الدخول'
+                properties:
+                  key:
+                    type: string
+                    example: unauthenticated
+                  msg:
+                    type: string
+                    example: 'يرجى اعادة تسجيل الدخول'
+      tags:
+        - Endpoints
+      security: []
+  '/api/delete-message-copy/{message_id}':
+    delete:
+      summary: ''
+      operationId: deleteApiDeleteMessageCopyMessage_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: message_id
+        description: 'The ID of the message.'
+        example: 9
+        required: true
+        schema:
+          type: integer
+  '/api/send-message/{room_id}':
+    post:
+      summary: ''
+      operationId: postApiSendMessageRoom_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 15
+        required: true
+        schema:
+          type: integer
+  '/api/upload-room-file/{room_id}':
+    post:
+      summary: ''
+      operationId: postApiUploadRoomFileRoom_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: room_id
+        description: 'The ID of the room.'
+        example: 4
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Endpoints
+    description: ''
