@@ -13,8 +13,10 @@ class ExcelController extends Controller
 {
     public function __construct()
     {
-        ob_end_clean(); // this
-        ob_start(); // and this
+        if (ob_get_level()) {
+            ob_end_clean();
+        }
+        ob_start();
     }
 
     public function master($export, Request $request)
