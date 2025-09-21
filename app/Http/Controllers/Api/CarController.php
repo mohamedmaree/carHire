@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\PricePackageResource;
 use App\Models\Car;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Get all active cars with their price packages
      */
@@ -20,11 +23,7 @@ class CarController extends Controller
             ->ordered()
             ->get();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Cars retrieved successfully',
-            'data' => CarResource::collection($cars)
-        ]);
+        return $this->successData(CarResource::collection($cars));
     }
 
     /**
@@ -36,11 +35,7 @@ class CarController extends Controller
             ->with(['pricePackages'])
             ->findOrFail($id);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Car details retrieved successfully',
-            'data' => new CarResource($car)
-        ]);
+        return $this->successData(new CarResource($car));
     }
 
     /**
@@ -74,10 +69,6 @@ class CarController extends Controller
 
         $cars = $query->ordered()->get();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Filtered cars retrieved successfully',
-            'data' => CarResource::collection($cars)
-        ]);
+        return $this->successData(CarResource::collection($cars));
     }
 }

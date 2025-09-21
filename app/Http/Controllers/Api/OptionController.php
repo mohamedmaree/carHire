@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OptionResource;
 use App\Models\Option;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Get all active options
      */
@@ -16,11 +19,7 @@ class OptionController extends Controller
     {
         $options = Option::active()->ordered()->get();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Options retrieved successfully',
-            'data' => OptionResource::collection($options)
-        ]);
+        return $this->successData(OptionResource::collection($options));
     }
 
     /**
@@ -30,11 +29,7 @@ class OptionController extends Controller
     {
         $option = Option::active()->findOrFail($id);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Option details retrieved successfully',
-            'data' => new OptionResource($option)
-        ]);
+        return $this->successData(new OptionResource($option));
     }
 
     /**
@@ -50,10 +45,6 @@ class OptionController extends Controller
 
         $options = $query->ordered()->get();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Options retrieved successfully',
-            'data' => OptionResource::collection($options)
-        ]);
+        return $this->successData(OptionResource::collection($options));
     }
 }

@@ -14,9 +14,9 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:191',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required',
+            'description' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'seats' => 'required|integer|min:1|max:50',
             'bags' => 'required|integer|min:1|max:20',
             'transmission' => 'required|in:auto,manual',
@@ -24,12 +24,12 @@ class Store extends FormRequest
             'model' => 'nullable|string|max:191',
             'year' => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
             'fuel_type' => 'nullable|string|max:191',
-            'engine_size' => 'nullable|numeric|min:0.1|max:10.0',
+            'engine_size' => 'nullable',
             'is_active' => 'boolean',
             'sort_order' => 'integer|min:0',
             'price_packages' => 'nullable|array',
-            'price_packages.*.name' => 'required_with:price_packages|string|max:191',
-            'price_packages.*.description' => 'nullable|string',
+            'price_packages.*.name' => 'required_with:price_packages|max:191',
+            'price_packages.*.description' => 'nullable',
             'price_packages.*.price' => 'required_with:price_packages|numeric|min:0',
             'price_packages.*.kilometer_limit' => 'nullable|integer|min:1',
             'price_packages.*.is_unlimited' => 'boolean',

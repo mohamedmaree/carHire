@@ -36,6 +36,8 @@ use App\Http\Controllers\Admin\{AdminReportsController,
     CarController,
     PricePackageController,
     OptionController,
+    LocationController,
+    BlogController,
     #new_namespace_here
 };
 
@@ -173,6 +175,12 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         /*------------ options ----------*/
         Route::post('delete-all-options', [ OptionController::class, 'destroyAll' ])->name('options.deleteAll');
         Route::resource('options', OptionController::class);
+        /*------------ locations ----------*/
+        Route::post('delete-all-locations', [ LocationController::class, 'destroyAll' ])->name('locations.deleteAll');
+        Route::resource('locations', LocationController::class);
+        /*------------ blogs ----------*/
+        Route::post('delete-all-blogs', [ BlogController::class, 'destroyAll' ])->name('blogs.deleteAll');
+        Route::resource('blogs', BlogController::class);
 
         #new_routes_here
 

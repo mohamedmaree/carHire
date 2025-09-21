@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SettlementController;
 use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\OptionController;
+use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -50,6 +52,22 @@ Route::group([
             Route::get('options/{id}'                 ,[OptionController::class, 'show']);
             Route::get('options-by-price-type'       ,[OptionController::class, 'byPriceType']);
         /***************************** OptionController End *****************************/
+
+        /***************************** LocationController start *****************************/
+            Route::get('locations'                   ,[LocationController::class, 'index']);
+            Route::get('locations/{id}'               ,[LocationController::class, 'show']);
+            Route::get('locations-by-type'            ,[LocationController::class, 'byType']);
+            Route::get('airports'                     ,[LocationController::class, 'airports']);
+            Route::get('locations-list'               ,[LocationController::class, 'locations']);
+            Route::get('nearby-locations'             ,[LocationController::class, 'nearby']);
+        /***************************** LocationController End *****************************/
+
+        /***************************** BlogController start *****************************/
+            Route::get('blogs'                         ,[BlogController::class, 'index']);
+            Route::get('blogs/{id}'                    ,[BlogController::class, 'show']);
+            Route::get('blogs-latest'                  ,[BlogController::class, 'latest']);
+            Route::get('blogs-search'                  ,[BlogController::class, 'search']);
+        /***************************** BlogController End *****************************/
     });
 
     

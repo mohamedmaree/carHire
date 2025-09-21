@@ -81,6 +81,46 @@
                         </li>
                     @endcan
 
+                    @can('read-all-car')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.cars.index') active @endif " >
+                            <a href="{{route('admin.cars.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.cars.index')
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('read-all-price-package')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.price-packages.index') active @endif " >
+                            <a href="{{route('admin.price-packages.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.price-packages.index')
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('read-all-option')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.options.index') active @endif " >
+                            <a href="{{route('admin.options.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.options.index')
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('read-all-location')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.locations.index') active @endif " >
+                            <a href="{{route('admin.locations.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.locations.index')
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('read-all-blog')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.blogs.index') active @endif " >
+                            <a href="{{route('admin.blogs.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.blogs.index')
+                            </a>
+                        </li>
+                    @endcan
+
                     {{--#new_comand_side_bar_element_here--}}
                 </ul>
 

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
+use App\Traits\UploadTrait;
 
 class Option extends BaseModel
 {
-    use SoftDeletes, HasTranslations;
+    use SoftDeletes, HasTranslations,UploadTrait;
     
     const PERMISSIONS_NOT_APPLIED = false;
     const IMAGEPATH = 'options';
@@ -66,5 +67,22 @@ class Option extends BaseModel
     public function getPriceTypeTextAttribute()
     {
         return $this->price_type === 'per_day' ? 'Per Day' : 'Flat Fee';
+    }
+
+    public function getIconAttribute()
+    {
+        if ($this->attributes['icon']) {
+            $image = $this->getImage($this->attributes['icon'], static::IMAGEPATH);
+        } else {
+            $image = '';
+        }
+        return $image;
+    } 
+
+    public function setIconAttribute($value) {
+        if (null != $value && is_file($value) ) {
+            isset($this->attributes['icon']) ? $this->deleteFile($this->attributes['icon'] , static::IMAGEPATH) : '';
+            $this->attributes['icon'] = $this->uploadAllTyps($value, static::IMAGEPATH);
+        }
     }
 }

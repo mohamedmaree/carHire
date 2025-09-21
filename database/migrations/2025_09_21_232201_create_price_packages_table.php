@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('price_packages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('car_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // Package name like "Limited Kilometers" or "Unlimited Kilometers"
+            $table->text('name'); // Package name like "Limited Kilometers" or "Unlimited Kilometers"
             $table->text('description')->nullable(); // Description like "Best for City Use"
             $table->decimal('price', 10, 2); // Price per day
             $table->integer('kilometer_limit')->nullable(); // NULL for unlimited, number for limited

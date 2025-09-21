@@ -30,7 +30,8 @@ class PricePackageController extends Controller
             return response()->json(['html' => $html]);
         }
 
-        return view('admin.price_packages.index');
+        $cars = Car::active()->ordered()->get();
+        return view('admin.price_packages.index', compact('cars'));
     }
 
     public function create()

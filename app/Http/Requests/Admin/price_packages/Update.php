@@ -15,8 +15,8 @@ class Update extends FormRequest
     {
         return [
             'car_id' => 'required|exists:cars,id',
-            'name' => 'required|string|max:191',
-            'description' => 'nullable|string',
+            'name' => 'required',
+            'description' => 'nullable',
             'price' => 'required|numeric|min:0',
             'kilometer_limit' => 'nullable|integer|min:1',
             'is_unlimited' => 'boolean',

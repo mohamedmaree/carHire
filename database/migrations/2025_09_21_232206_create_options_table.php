@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Option name like "Snow Cover", "Child Seat", "Damage Waiver"
+            $table->text('name'); // Option name like "Snow Cover", "Child Seat", "Damage Waiver"
             $table->text('description'); // Detailed description
             $table->string('icon')->nullable(); // Icon for the option
             $table->decimal('price', 10, 2); // Price for the option

@@ -14,8 +14,8 @@ class Update extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:191',
-            'description' => 'required|string',
+            'name' => 'required',
+            'description' => 'required',
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric|min:0',
             'price_type' => 'required|in:per_day,flat_fee',

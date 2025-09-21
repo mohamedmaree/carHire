@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Car type like "5 Seat SUV"
+            $table->text('name'); // Car type like "5 Seat SUV"
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->integer('seats'); // Number of seats
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('model')->nullable(); // Car model
             $table->year('year')->nullable(); // Manufacturing year
             $table->string('fuel_type')->nullable(); // Fuel type
-            $table->decimal('engine_size', 3, 1)->nullable(); // Engine size in liters
+            $table->string('engine_size')->nullable(); // Engine size in liters
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
