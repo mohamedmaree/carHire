@@ -40,7 +40,7 @@ class OrderController extends Controller
         $locations = Location::active()->ordered()->get();
         $pricePackages = PricePackage::active()->ordered()->get();
         $options = Option::active()->ordered()->get();
-        $coupons = Coupon::where('status', 'active')->get();
+        $coupons = Coupon::where('status', 'available')->get();
         
         return view('admin.orders.index', compact('cars', 'locations', 'pricePackages', 'options', 'coupons'));
     }
@@ -51,7 +51,7 @@ class OrderController extends Controller
         $locations = Location::active()->ordered()->get();
         $pricePackages = PricePackage::active()->ordered()->get();
         $options = Option::active()->ordered()->get();
-        $coupons = Coupon::where('status', 'active')->get();
+        $coupons = Coupon::where('status', 'available')->get();
         $countries = Country::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
         
@@ -174,7 +174,7 @@ class OrderController extends Controller
         $locations = Location::active()->ordered()->get();
         $pricePackages = PricePackage::active()->ordered()->get();
         $options = Option::active()->ordered()->get();
-        $coupons = Coupon::where('status', 'active')->get();
+        $coupons = Coupon::where('status', 'available')->get();
         $countries = Country::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
         

@@ -713,21 +713,13 @@ return [
         'edit'   => 'Update Notification',
         'show'   => 'Show Notification',
     ],
-    'coupon'             => [
-        'index'    => 'Coupons',
-        'create'   => 'Create Coupon',
-        'edit'     => 'Update Coupon',
-        'update'   => 'Update Coupon',
-        'read'     => 'View Coupon',
-        'read-all' => 'View Table Coupons',
-        'delete'   => 'Delete Coupon',
-    ],
     'coupons'            => [
         'index'  => 'Coupons',
         'create' => 'Create Coupon',
         'edit'   => 'Update Coupon',
         'show'   => 'Show Coupon',
     ],
+    'coupon' => 'Discount Coupon',
     'image'              => [
         'index'    => 'Sliders',
         'create'   => 'Create Slider',
@@ -1096,6 +1088,19 @@ return [
         'show'   => 'View Location',
     ],
 
+    'offers' => [
+        'index'    => 'Offers',
+        'create'   => 'Add Offer',
+        'edit'     => 'Edit Offer',
+        'update'   => 'Update Offer',
+        'read'     => 'View Offer',
+        'read-all' => 'View all Offers',
+        'delete'   => 'Delete Offer',
+        'read-all-intro-settings' => 'View Offers',
+        'read-all-dashboard-settings' => 'View Offers',
+        'show'   => 'View Offer',
+    ],
+
     'blogs' => [
         'index'    => 'Blogs',
         'create'   => 'Add Blog',
@@ -1142,6 +1147,12 @@ return [
 
     // Additional translations for blog system
     'blog' => 'Blog',
+    'offer' => 'Offer',
+    'discount_amount' => 'Discount Amount',
+        'formatted_discount' => 'Formatted Discount',
+        'no_coupon' => 'No Coupon',
+        'start_date' => 'Start Date',
+        'end_date' => 'End Date',
     'title' => 'Title',
     'description' => 'Description',
     'author' => 'Author',

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\OptionController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OfferController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -69,6 +70,12 @@ Route::group([
             Route::get('blogs-latest'                  ,[BlogController::class, 'latest']);
             Route::get('blogs-search'                  ,[BlogController::class, 'search']);
         /***************************** BlogController End *****************************/
+
+        /***************************** OfferController start *****************************/
+            Route::get('offers'                           ,[OfferController::class, 'index']);
+            Route::get('offers/{id}'                      ,[OfferController::class, 'show']);
+            Route::get('offers-latest'                    ,[OfferController::class, 'latest']);
+        /***************************** OfferController End *****************************/
 
         /***************************** OrderController start *****************************/
             Route::get('orders'                         ,[OrderController::class, 'index']);

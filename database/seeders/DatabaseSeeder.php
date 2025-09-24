@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LocationSeeder::class);
         $this->call(OptionSeeder::class);
         $this->call(CarRentalOrderSeeder::class);
+        $this->call(OfferSeeder::class);
         
     }
 }

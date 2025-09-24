@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\{AdminReportsController,
     ComplaintController,
     CountryController,
     CouponController,
+    OfferController,
     ExcelController,
     FqsController,
     HomeController,
@@ -112,6 +113,9 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         Route::post('renew-coupons', [ CouponController::class, 'renew' ])->name('coupons.renew');
         Route::post('delete-all-coupons', [ CouponController::class, 'destroyAll' ])->name('coupons.deleteAll');
         Route::resource('coupons', CouponController::class);
+        /*------------ offers ----------*/
+        Route::post('delete-all-offers', [ OfferController::class, 'destroyAll' ])->name('offers.deleteAll');
+        Route::resource('offers', OfferController::class);
         /*------------ cities ----------*/
         Route::post('delete-all-cities', [ CityController::class, 'destroyAll' ])->name('cities.deleteAll');
         Route::get('get-country-regions', [ CityController::class, 'getCountryRegions' ])->name('cities.get-country-regions');

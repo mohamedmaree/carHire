@@ -725,15 +725,6 @@ return [
         'edit'   => 'تعديل اشعار',
         'show'   => 'مراجعه اشعار',
     ],
-    'coupon'             => [
-        'index'    => 'كوبونات الخصم',
-        'create'   => 'اضافة كوبون خصم',
-        'edit'     => 'تعديل كوبون خصم',
-        'update'   => 'تعديل كوبون خصم',
-        'read'     => 'عرض كوبون خصم',
-        'read-all' => 'عرض جدول كوبونات الخصم',
-        'delete'   => 'حذف كوبون خصم',
-    ],
     'coupons'            => [
         'index'  => 'كوبونات الخصم',
         'create' => 'اضافة كوبون خصم',
@@ -1126,6 +1117,19 @@ return [
         'show'   => 'عرض موقع',
     ],
 
+    'offers' => [
+        'index'    => 'العروض',
+        'create'   => 'اضافة عرض',
+        'edit'     => 'تعديل عرض',
+        'update'   => 'تعديل عرض',
+        'read'     => 'عرض عرض',
+        'read-all' => 'عرض جميع العروض',
+        'delete'   => 'حذف عرض',
+        'read-all-intro-settings' => 'عرض العروض',
+        'read-all-dashboard-settings' => 'عرض العروض',
+        'show'   => 'عرض عرض',
+    ],
+
     'blogs' => [
         'index'    => 'المدونات',
         'create'   => 'اضافة مدونة',
@@ -1170,6 +1174,13 @@ return [
 
     // Additional translations for blog system
     'blog' => 'مدونة',
+    'offer' => 'عرض',
+    'discount_amount' => 'مبلغ الخصم',
+        'formatted_discount' => 'الخصم المنسق',
+        'no_coupon' => 'لا يوجد كوبون',
+        'start_date' => 'تاريخ البداية',
+        'end_date' => 'تاريخ النهاية',
+    'coupon' => 'كوبون الخصم',
     'title' => 'العنوان',
     'description' => 'الوصف',
     'author' => 'المؤلف',

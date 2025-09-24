@@ -25,7 +25,8 @@ class CityTableSeeder extends Seeder
                 'name'          =>  json_encode(['ar' => $city->name_ar , 'en' => $city->name_en ] , JSON_UNESCAPED_UNICODE),
                 'country_id'    =>  $city->country_id,
                 'region_id'     =>  $city->region_id,
-                'created_at'    => \Carbon\Carbon::now()->subMonth(rand(0,8)),
+                'created_at'    => now()->subDays(rand(1, 30)),
+                'updated_at'    => now()->subDays(rand(1, 30)),
             ];
         }, $citiesJson );
         

@@ -121,6 +121,14 @@
                         </li>
                     @endcan
 
+                    @can('read-all-offer')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.offers.index') active @endif " >
+                            <a href="{{route('admin.offers.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.offers.index')
+                            </a>
+                        </li>
+                    @endcan
+
                     @can('read-all-order')
                          <li  class="nav-item  @if(Route::currentRouteName() == 'admin.orders.index') active @endif " >
                             <a href="{{route('admin.orders.index')}}">

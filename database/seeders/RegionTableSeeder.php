@@ -26,7 +26,8 @@ class RegionTableSeeder extends Seeder
             return [
                 'name'          =>  json_encode(['ar' => $region->name_ar , 'en' => $region->name_en ] , JSON_UNESCAPED_UNICODE),
                 'country_id'    =>  $region->country_id,
-                'created_at'    => \Carbon\Carbon::now()->subMonth(rand(0,8)),
+                'created_at'    => now()->subDays(rand(1, 30)),
+                'updated_at'    => now()->subDays(rand(1, 30)),
             ];
         }, $regionsJson );
         

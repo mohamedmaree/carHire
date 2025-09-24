@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Requests\Admin\offers;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class Store extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'title.*' => 'required|string|max:255',
+            'description.*' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'discount_amount' => 'required|numeric|min:0|max:100',
+            'coupon_id' => 'nullable|exists:coupons,id',
+            'start_date' => 'nullable|date|after_or_equal:today',
+            'end_date' => 'nullable|date|after:start_date',
+            'is_active' => 'boolean',
+            'sort_order' => 'integer|min:0',
+        ];
+    }
+}

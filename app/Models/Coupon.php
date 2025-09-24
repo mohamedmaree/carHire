@@ -13,4 +13,9 @@ class Coupon extends BaseModel
     {
         return $this->hasMany(Order::class, 'coupon_code', 'coupon_num');
     }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 }
