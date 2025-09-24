@@ -6,14 +6,14 @@
         <p class="clearfix blue-grey lighten-2 mb-0">
             <span class="float-md-left d-block d-md-inline-block mt-25">
                 {{__('admin.Copyrights')}} &copy; {{\Carbon\Carbon::now()->year}}
-                <a class="text-bold-800 grey darken-2" href="https://www.tocaan.com/" target="_blank">,</a>
-                {{__('admin.all_rights_reserved')}}
+                <a class="text-bold-800 grey darken-2" href="#" target="_blank">,</a>
+                {{-- {{__('admin.all_rights_reserved')}} --}}
             </span>
             <span class="float-md-right d-none d-md-block"> 
-                {{ __('admin.programming_design') }}
-                <a href="https://www.tocaan.com/" rel="follow" target="_blank"> {{__('admin.tocaan')}}</a>
-                <a href="mailto:support@tocaan.com" ><i class="feather icon-mail pink"></i></a> 
-                <a href="tel:+96594971095" ><i class="feather icon-phone pink"></i></a> 
+                {{-- {{ __('admin.programming_design') }} --}}
+                <a href="#" rel="follow" target="_blank"></a>
+                <a href="mailto:m7mdmaree26@gmail.com" ><i class="feather icon-mail pink"></i></a> 
+                <a href="tel:+21002700084" ><i class="feather icon-phone pink"></i></a> 
             </span>
         </p>
     </footer>
