@@ -50,6 +50,11 @@ class Car extends BaseModel
         return $this->hasMany(PricePackage::class)->where('is_active', true)->orderBy('sort_order');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     // Scopes
     public function scopeActive($query)
     {

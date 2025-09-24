@@ -27,6 +27,17 @@ class Location extends BaseModel
         'sort_order' => 'integer'
     ];
 
+    // Relationships
+    public function pickupOrders()
+    {
+        return $this->hasMany(Order::class, 'pickup_location_id');
+    }
+
+    public function returnOrders()
+    {
+        return $this->hasMany(Order::class, 'return_location_id');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);

@@ -31,6 +31,12 @@ class Option extends BaseModel
         'sort_order' => 'integer'
     ];
 
+    // Relationships
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'car_rental_order_options')->withPivot('quantity', 'price', 'total_price');
+    }
+
     // Scopes
     public function scopeActive($query)
     {

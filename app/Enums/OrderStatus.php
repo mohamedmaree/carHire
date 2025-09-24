@@ -2,27 +2,40 @@
 
 namespace App\Enums;
 
-enum OrderStatus: int
+enum OrderStatus: string
 {
-    case new = 1;
-    case accepted = 2;
-    case refused = 3;
-    case cancel = 4;
-    case finished = 5;
+    case PENDING = 'pending';
+    case CONFIRMED = 'confirmed';
+    case IN_PROGRESS = 'in_progress';
+    case COMPLETED = 'completed';
+    case CANCELLED = 'cancelled';
 
-    public static function toArray(): array
+    public function getLabel(): string
     {
-        return array_column(self::cases(), 'name', 'value');
+        return match($this) {
+            self::PENDING => __('admin.pending'),
+            self::CONFIRMED => __('admin.confirmed'),
+            self::IN_PROGRESS => __('admin.in_progress'),
+            self::COMPLETED => __('admin.completed'),
+            self::CANCELLED => __('admin.cancelled'),
+        };
     }
 
-    public static function nameFor(int $value): ?string
+    public function getBadgeClass(): string
     {
-        foreach (self::cases() as $case) {
-            if ($case->value === $value) {
-                return $case->name;
-            }
-        }
+        return match($this) {
+            self::PENDING => 'badge-warning',
+            self::CONFIRMED => 'badge-info',
+            self::IN_PROGRESS => 'badge-primary',
+            self::COMPLETED => 'badge-success',
+            self::CANCELLED => 'badge-danger',
+        };
+    }
 
-        return null;
+    public static function getOptions(): array
+    {
+        return collect(self::cases())->mapWithKeys(function ($case) {
+            return [$case->value => $case->getLabel()];
+        })->toArray();
     }
 }

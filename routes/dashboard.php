@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\{AdminReportsController,
     OptionController,
     LocationController,
     BlogController,
+    OrderController,
     #new_namespace_here
 };
 
@@ -181,6 +182,8 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         /*------------ blogs ----------*/
         Route::post('delete-all-blogs', [ BlogController::class, 'destroyAll' ])->name('blogs.deleteAll');
         Route::resource('blogs', BlogController::class);
+        Route::post('delete-all-orders', [ OrderController::class, 'destroyAll' ])->name('orders.deleteAll');
+        Route::resource('orders', OrderController::class);
 
         #new_routes_here
 

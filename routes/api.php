@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\OptionController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -68,6 +69,12 @@ Route::group([
             Route::get('blogs-latest'                  ,[BlogController::class, 'latest']);
             Route::get('blogs-search'                  ,[BlogController::class, 'search']);
         /***************************** BlogController End *****************************/
+
+        /***************************** OrderController start *****************************/
+            Route::get('orders'                         ,[OrderController::class, 'index']);
+            Route::get('orders/{id}'                    ,[OrderController::class, 'show']);
+            Route::post('orders'                        ,[OrderController::class, 'store']);
+        /***************************** OrderController End *****************************/
     });
 
     

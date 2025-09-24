@@ -121,6 +121,14 @@
                         </li>
                     @endcan
 
+                    @can('read-all-order')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.orders.index') active @endif " >
+                            <a href="{{route('admin.orders.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.orders.index')
+                            </a>
+                        </li>
+                    @endcan
+
                     {{--#new_comand_side_bar_element_here--}}
                 </ul>
 
