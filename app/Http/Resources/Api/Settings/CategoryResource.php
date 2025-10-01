@@ -13,7 +13,7 @@ class CategoryResource extends JsonResource
             'name'        => $this->name,
             'image'       => $this->image,
             'is_active'   => $this->is_active,
-            'parent_id'   => $this->when($this->parent_id, $this->parent_id),
+            'parent_id'   => $this->when($this->parent_id, (int) $this->parent_id),
             'parent_name' => $this->when($this->parent_id, $this->parent->name ?? ''),
         ];
     }

@@ -72,6 +72,15 @@ class Order extends BaseModel
         'sort_order' => 'integer',
         'order_status' => OrderStatus::class,
         'payment_status' => PaymentStatus::class,
+        // ID fields cast to integers
+        'pickup_location_id' => 'integer',
+        'return_location_id' => 'integer',
+        'customer_country_id' => 'integer',
+        'car_id' => 'integer',
+        'city_id' => 'integer',
+        'country_id' => 'integer',
+        'user_id' => 'integer',
+        'price_package_id' => 'integer',
     ];
 
     // Relationships

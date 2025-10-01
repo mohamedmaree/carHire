@@ -16,7 +16,7 @@ class PricePackageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'car_id' => $this->car_id,
+            'car_id' => (int) $this->car_id,
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,

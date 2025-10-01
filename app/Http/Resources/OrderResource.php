@@ -18,7 +18,7 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             
             // Location Information
-            'pickup_location_id' => $this->pickup_location_id,
+            'pickup_location_id' => (int) $this->pickup_location_id,
             'pickup_location' => $this->whenLoaded('pickupLocation', function () {
                 return [
                     'id' => $this->pickupLocation->id,
@@ -30,7 +30,7 @@ class OrderResource extends JsonResource
                 ];
             }),
             'pickup_address' => $this->pickup_address,
-            'return_location_id' => $this->return_location_id,
+            'return_location_id' => (int) $this->return_location_id,
             'return_location' => $this->whenLoaded('returnLocation', function () {
                 return [
                     'id' => $this->returnLocation->id,
@@ -70,7 +70,7 @@ class OrderResource extends JsonResource
             
             // Customer Demographics
             'customer_age' => $this->customer_age,
-            'customer_country_id' => $this->customer_country_id,
+            'customer_country_id' => (int) $this->customer_country_id,
             'customer_country' => $this->whenLoaded('customerCountry', function () {
                 return [
                     'id' => $this->customerCountry->id,
@@ -84,7 +84,7 @@ class OrderResource extends JsonResource
             }),
             
             // Car Information
-            'car_id' => $this->car_id,
+            'car_id' => (int) $this->car_id,
             'car' => $this->whenLoaded('car', function () {
                 return [
                     'id' => $this->car->id,
@@ -102,7 +102,7 @@ class OrderResource extends JsonResource
             }),
             
             // Price Package Information
-            'price_package_id' => $this->price_package_id,
+            'price_package_id' => (int) $this->price_package_id,
             'price_package' => $this->whenLoaded('pricePackage', function () {
                 return [
                     'id' => $this->pricePackage->id,
@@ -153,16 +153,16 @@ class OrderResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'address' => $this->address,
-            'city_id' => $this->city_id,
+            'city_id' => (int) $this->city_id,
             'city' => $this->whenLoaded('city', function () {
                 return [
                     'id' => $this->city->id,
                     'name' => $this->city->name,
-                    'region_id' => $this->city->region_id,
-                    'country_id' => $this->city->country_id,
+                    'region_id' => (int) $this->city->region_id,
+                    'country_id' => (int) $this->city->country_id,
                 ];
             }),
-            'country_id' => $this->country_id,
+            'country_id' => (int) $this->country_id,
             'country' => $this->whenLoaded('country', function () {
                 return [
                     'id' => $this->country->id,
@@ -210,7 +210,7 @@ class OrderResource extends JsonResource
             'admin_notes' => $this->admin_notes,
             
             // User Information
-            'user_id' => $this->user_id,
+            'user_id' => (int) $this->user_id,
             'user' => $this->whenLoaded('user', function () {
                 return [
                     'id' => $this->user->id,
