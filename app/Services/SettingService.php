@@ -81,6 +81,12 @@ class SettingService
             'default_currency' => $app_info['default_currency'],
             'currencies'       => $app_info['currencies'],
             'socials'          => json_decode($app_info['socials']),
+            
+            // Contact Information
+            'contact_address_ar' => $app_info['contact_address_ar'] ?? '',
+            'contact_address_en' => $app_info['contact_address_en'] ?? '',
+            'contact_address'    => $app_info['contact_address_' . lang()] ?? '',
+            'brochure_file'      => $app_info['brochure_file'] ? ('/storage/images/settings/' . $app_info['brochure_file']) : '',
         ];
         foreach (languages() as $lang) {
             $data['about_' . $lang] = $app_info['about_' . $lang] ?? '';

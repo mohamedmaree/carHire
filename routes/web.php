@@ -1745,3 +1745,14 @@
 //    Route::get('{model}/toggle-boolean/{id}/{action}', 'AdminController@toggleBoolean')->name('model.active');
 //
 //});
+
+// Route to serve brochure files
+Route::get('brochures/{filename}', function ($filename) {
+    $path = storage_path('app/public/images/settings/' . $filename);
+    
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    
+    return response()->file($path);
+})->name('brochure.download');

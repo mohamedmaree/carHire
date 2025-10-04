@@ -65,6 +65,13 @@
                             </a>
                         </li>
                         <li class="nav-item " style="margin-top: 3px">
+                            <a class="nav-link d-flex py-75" id="account-pill-contact" data-toggle="pill"
+                               href="#account-vertical-contact" aria-expanded="false">
+                                <i class="feather icon-map-pin mr-50 font-medium-3"></i>
+                                {{__('admin.contact_information')}}
+                            </a>
+                        </li>
+                        <li class="nav-item " style="margin-top: 3px">
                             <a class="nav-link d-flex py-75" id="account-pill-smtp" data-toggle="pill"
                                href="#account-vertical-smtp" aria-expanded="false">
                                 <i class="feather icon-mail mr-50 font-medium-3"></i>
@@ -735,6 +742,85 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
+                                                </div>
+
+                                                <div class="col-12 d-flex justify-content-center mt-3">
+                                                    <button type="submit"
+                                                            class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
+                                                    <a href="{{ url()->previous() }}" type="reset"
+                                                       class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="account-vertical-contact"
+                                         aria-labelledby="account-pill-contact" aria-expanded="false">
+                                        <form action="{{route('admin.settings.update')}}" method="post"
+                                              enctype="multipart/form-data">
+                                            @method('put')
+                                            @csrf
+                                            <div class="row">
+
+                                                <div class="col-12">
+                                                    <ul class="nav nav-tabs mb-3">
+                                                        @foreach (languages() as $lang)
+                                                            <li class="nav-item">
+                                                                <a class="nav-link @if($loop->first) active @endif"
+                                                                   data-toggle="pill" href="#contact_address_{{$lang}}"
+                                                                   aria-expanded="true">{{  __('admin.address') }} {{ $lang }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+
+                                                <div class="tab-content">
+                                                    @foreach (languages() as $lang)
+                                                        <div role="tabpanel"
+                                                             class="tab-pane fade @if($loop->first) show active @endif "
+                                                             id="contact_address_{{$lang}}" aria-labelledby="contact_address_{{$lang}}"
+                                                             aria-expanded="true">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <div class="controls">
+                                                                        <label for="contact_address_{{ $lang }}">{{__('admin.contact_address')}} {{ $lang }}</label>
+                                                                        <textarea class="form-control"
+                                                                                  name="contact_address_{{ $lang }}"
+                                                                                  id="contact_address_{{ $lang }}"
+                                                                                  cols="30" rows="4"
+                                                                                  placeholder="{{__('admin.contact_address')}} {{ $lang }}">{{$data['contact_address_'.$lang]??''}}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.brochure_file')}}</label>
+                                                        <div class="imgMontg col-12 text-center">
+                                                            <div class="dropBox">
+                                                                <div class="textCenter">
+                                                                    <div class="imagesUploadBlock">
+                                                                        <label class="uploadImg">
+                                                                            <span><i class="feather icon-file-text"></i></span>
+                                                                            <input type="file"
+                                                                                   name="brochure_file"
+                                                                                   class="imageUploader">
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @if(isset($data['brochure_file']) && $data['brochure_file'])
+                                                                <div class="mt-2">
+                                                                    <a href="{{$data['brochure_file']}}" target="_blank" class="btn btn-info btn-sm">
+                                                                        <i class="feather icon-download"></i> {{__('admin.view_current_file')}}
+                                                                    </a>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-12 d-flex justify-content-center mt-3">

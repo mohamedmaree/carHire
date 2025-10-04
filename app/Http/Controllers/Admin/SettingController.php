@@ -32,8 +32,14 @@ class SettingController extends Controller
         $request_array = $request->all();
         Cache::forget('settings');
         foreach ($request_array as $key => $val) {
-            if (in_array($key, [ 'logo', 'side_logo', 'fav_icon', 'default_user', 'intro_loader', 'intro_logo', 'about_image_2', 'about_image_1', 'login_background', 'profile_cover' ])) {
-                if ($val->getClientOriginalExtension() == 'svg' || !in_array($val->getClientmimeType(), [ 'image/jpeg', 'image/jpg', 'image/png' ])) {
+            if (in_array($key, [ 'logo', 'side_logo', 'fav_icon', 'default_user', 'intro_loader', 'intro_logo', 'about_image_2', 'about_image_1', 'login_background', 'profile_cover', 'brochure_file' ])) {
+                if ($key == 'brochure_file') {
+                    // Handle brochure file upload to images/settings folder
+                    $thumbsPath = 'storage/images/settings/';
+                    $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
+                    SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
+                    $val->storeAs($thumbsPath, $name);
+                } elseif ($val->getClientOriginalExtension() == 'svg' || !in_array($val->getClientmimeType(), [ 'image/jpeg', 'image/jpg', 'image/png' ])) {
                     if ($key == 'default_user') {
                         $thumbsPath = 'images/users/';
                         $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();

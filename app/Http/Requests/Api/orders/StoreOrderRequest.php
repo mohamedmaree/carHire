@@ -24,9 +24,9 @@ class StoreOrderRequest extends FormRequest
         return [
             // Location Information
             'pickup_location_id' => 'nullable|exists:locations,id',
-            'pickup_address' => 'required_without:pickup_location_id|string|max:500',
+            'pickup_address' => 'nullable|string|max:500',
             'return_location_id' => 'nullable|exists:locations,id',
-            'return_address' => 'required_without:return_location_id|string|max:500',
+            'return_address' => 'nullable|string|max:500',
             'same_return_location' => 'boolean',
             
             // Date and Time Information
