@@ -418,6 +418,23 @@
                                 </div>
                                 @endif
 
+                                <!-- Client Signature -->
+                                @if($order->client_signature)
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>@lang('admin.client_signature')</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img src="{{$order->client_signature}}" alt="Client Signature" class="img-thumbnail" style="max-width: 400px; border: 2px solid #007bff;">
+                                                <p class="mt-2 text-muted"><small>@lang('admin.digital_signature_captured')</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+
                                 <!-- Payment Information -->
                                 @if($order->payment_method || $order->payment_reference)
                                 <div class="col-md-6">

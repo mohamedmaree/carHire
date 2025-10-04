@@ -46,6 +46,9 @@ class Order extends BaseModel
         // International Customer Information
         'current_country_address', 'passport_expiration_date', 'passport_image',
         
+        // Client Signature
+        'client_signature',
+        
         // Order Status and Management
         'order_status', 'payment_status', 'payment_method', 'payment_reference',
         'notes', 'admin_notes', 'is_active', 'sort_order'
@@ -295,6 +298,62 @@ class Order extends BaseModel
         }
     }
 
+    public function getClientSignatureAttribute()
+    {
+        if (isset($this->attributes['client_signature'])) {
+            return $this->getImage($this->attributes['client_signature'], static::IMAGEPATH);
+        }
+        return $this->defaultImage(static::IMAGEPATH);
+    }
+
+    public function setClientSignatureAttribute($value)
+    {
+        if (null != $value && is_file($value)) {
+            isset($this->attributes['client_signature']) ? $this->deleteFile($this->attributes['client_signature'], static::IMAGEPATH) : '';
+            $this->attributes['client_signature'] = $this->uploadAllTyps($value, static::IMAGEPATH);
+        } elseif (null != $value && $this->isBase64Image($value)) {
+            // Handle base64 signature data from mobile apps
+            isset($this->attributes['client_signature']) ? $this->deleteFile($this->attributes['client_signature'], static::IMAGEPATH) : '';
+            $this->attributes['client_signature'] = $this->uploadBase64Image($value, static::IMAGEPATH);
+        }
+    }
+
+    /**
+     * Check if the value is a base64 encoded image
+     */
+    private function isBase64Image($value)
+    {
+        if (strpos($value, 'data:image/') === 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Upload base64 image data
+     */
+    private function uploadBase64Image($base64Data, $path)
+    {
+        // Extract the image data from base64 string
+        $imageData = explode(',', $base64Data);
+        $imageData = base64_decode($imageData[1]);
+        
+        // Generate unique filename
+        $filename = 'signature_' . time() . '_' . uniqid() . '.png';
+        
+        // Create directory if it doesn't exist
+        $fullPath = public_path('uploads/' . $path);
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0755, true);
+        }
+        
+        // Save the image
+        $filePath = $fullPath . '/' . $filename;
+        file_put_contents($filePath, $imageData);
+        
+        return $filename;
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -305,6 +364,9 @@ class Order extends BaseModel
             }
             if (isset($model->attributes['passport_image'])) {
                 $model->deleteFile($model->attributes['passport_image'], static::IMAGEPATH);
+            }
+            if (isset($model->attributes['client_signature'])) {
+                $model->deleteFile($model->attributes['client_signature'], static::IMAGEPATH);
             }
         });
     }

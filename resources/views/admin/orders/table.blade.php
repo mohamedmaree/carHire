@@ -26,6 +26,7 @@
             <th>{{ __('admin.total_amount')}}</th>
             <th>{{ __('admin.order_status')}}</th>
             <th>{{ __('admin.payment_status')}}</th>
+            <th>{{ __('admin.client_signature')}}</th>
             <th>{{ __('admin.status')}}</th>
             <th>{{ __('admin.control')}}</th>
         </tr>
@@ -86,6 +87,17 @@
                 </td>
                 <td>
                     <span class="badge {{$order->payment_status?->getBadgeClass()}}">{{$order->payment_status?->getLabel()}}</span>
+                </td>
+                <td>
+                    @if($order->client_signature)
+                        <span class="badge badge-success">
+                            <i class="feather icon-check"></i> @lang('admin.has_signature')
+                        </span>
+                    @else
+                        <span class="badge badge-secondary">
+                            <i class="feather icon-x"></i> @lang('admin.no_signature')
+                        </span>
+                    @endif
                 </td>
                 <td>
                     @if ($order->is_active)

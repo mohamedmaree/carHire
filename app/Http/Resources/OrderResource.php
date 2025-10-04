@@ -187,6 +187,9 @@ class OrderResource extends JsonResource
             'passport_expiration_date' => $this->passport_expiration_date?->format('Y-m-d'),
             'passport_image' => $this->passport_image,
             
+            // Client Signature
+            'client_signature' => $this->client_signature,
+            
             // Order Status and Management
             'order_status' => $this->order_status,
             'order_status_text' => $this->order_status_text,

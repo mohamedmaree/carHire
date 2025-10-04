@@ -644,6 +644,32 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                            <div class="col-12">
+                                                                                <div class="form-group">
+                                                                                    <label>@lang('admin.client_signature')</label>
+                                                                                    <div class="imgMontg col-12 text-center">
+                                                                                        <div class="dropBox">
+                                                                                            <div class="textCenter">
+                                                                                                <div class="imagesUploadBlock">
+                                                                                                    <label class="uploadImg">
+                                                                                                        <span><i class="feather icon-edit-3"></i></span>
+                                                                                                        <input type="file"
+                                                                                                               accept="image/*"
+                                                                                                               name="client_signature"
+                                                                                                               class="imageUploader">
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        @if($order->client_signature)
+                                                                                            <div class="mt-2">
+                                                                                                <img src="{{$order->client_signature}}" alt="Client Signature" class="img-thumbnail" style="max-width: 200px;">
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>

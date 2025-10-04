@@ -635,6 +635,27 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                            <div class="col-12">
+                                                                                <div class="form-group">
+                                                                                    <label>@lang('admin.client_signature')</label>
+                                                                                    <div class="imgMontg col-12 text-center">
+                                                                                        <div class="dropBox">
+                                                                                            <div class="textCenter">
+                                                                                                <div class="imagesUploadBlock">
+                                                                                                    <label class="uploadImg">
+                                                                                                        <span><i class="feather icon-edit-3"></i></span>
+                                                                                                        <input type="file"
+                                                                                                               accept="image/*"
+                                                                                                               name="client_signature"
+                                                                                                               class="imageUploader">
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>

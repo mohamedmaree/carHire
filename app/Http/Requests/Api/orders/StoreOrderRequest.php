@@ -77,6 +77,9 @@ class StoreOrderRequest extends FormRequest
             'passport_expiration_date' => 'nullable|date|after:today',
             'passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             
+            // Client Signature
+            'client_signature' => 'nullable',
+            
             // Options
             'options' => 'nullable|array',
             'options.*.quantity' => 'integer|min:0',
@@ -110,6 +113,7 @@ class StoreOrderRequest extends FormRequest
             'passport_image.image' => 'Passport must be an image.',
             'passport_image.mimes' => 'Passport image must be a file of type: jpeg, png, jpg, gif.',
             'passport_image.max' => 'Passport image may not be greater than 2MB.',
+            'client_signature.string' => 'Client signature must be a valid signature data.',
         ];
     }
 }

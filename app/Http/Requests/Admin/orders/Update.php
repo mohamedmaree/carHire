@@ -75,6 +75,9 @@ class Update extends FormRequest
             'passport_expiration_date' => 'nullable|date',
             'passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             
+            // Client Signature
+            'client_signature' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            
             // Options
             'options' => 'nullable|array',
             'options.*.quantity' => 'integer|min:0',
