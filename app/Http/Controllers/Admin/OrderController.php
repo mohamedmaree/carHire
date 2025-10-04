@@ -14,6 +14,7 @@ use App\Models\Coupon;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\User;
+use App\Jobs\SendBookingConfirmationEmailJob;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -191,6 +192,10 @@ class OrderController extends Controller
         
         // Update total amount with options
         $order->update(['total_amount' => $data['total_amount']]);
+        
+        // Dispatch booking confirmation email job to queue
+        SendBookingConfirmationEmailJob::dispatch($order->id);
+        
         return response()->json(['url' => route('admin.orders.index')]);
     }
 
@@ -343,6 +348,11 @@ class OrderController extends Controller
         
         // Update total amount with options
         $order->update(['total_amount' => $data['total_amount']]);
+        
+        // Dispatch booking confirmation email job to queue (only if order status changed to confirmed)
+        if ($order->order_status->value === 'confirmed') {
+            SendBookingConfirmationEmailJob::dispatch($order->id);
+        }
         
         return response()->json(['url' => route('admin.orders.index')]);
     }

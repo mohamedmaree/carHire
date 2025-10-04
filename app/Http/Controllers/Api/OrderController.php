@@ -16,6 +16,7 @@ use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Traits\ResponseTrait;
 use App\Http\Requests\Api\orders\StoreOrderRequest;
+use App\Jobs\SendBookingConfirmationEmailJob;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -194,6 +195,9 @@ class OrderController extends Controller
         
         // Update total amount with options
         $order->update(['total_amount' => $data['total_amount']]);
+        
+        // Dispatch booking confirmation email job to queue
+        SendBookingConfirmationEmailJob::dispatch($order->id);
         
         return $this->successData(new OrderResource($order->load(['car', 'pickupLocation', 'returnLocation', 'pricePackage', 'options'])), 'Order created successfully');
     }
