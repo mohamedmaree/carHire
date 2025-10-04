@@ -75,6 +75,34 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.parent_option') }}</label>
+                                                                            <div class="controls">
+                                                                                @if($option->parent)
+                                                                                    <p class="form-control-static">
+                                                                                        <span class="badge badge-secondary">{{ $option->parent->name }}</span>
+                                                                                    </p>
+                                                                                @else
+                                                                                    <p class="form-control-static text-muted">-</p>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>{{ __('admin.option_type') }}</label>
+                                                                            <div class="controls">
+                                                                                @if($option->is_parent)
+                                                                                    <span class="badge badge-info">{{ __('admin.parent_option') }}</span>
+                                                                                @elseif($option->is_child)
+                                                                                    <span class="badge badge-secondary">{{ __('admin.child_option') }}</span>
+                                                                                @else
+                                                                                    <span class="badge badge-light">{{ __('admin.standalone_option') }}</span>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.status') }}</label>
                                                                             <div class="controls">
                                                                                 @if ($option->is_active)
@@ -105,6 +133,41 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    @if($option->is_parent && $option->children->count() > 0)
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label>{{ __('admin.child_options') }}</label>
+                                                                            <div class="controls">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>{{ __('admin.name') }}</th>
+                                                                                                <th>{{ __('admin.price') }}</th>
+                                                                                                <th>{{ __('admin.status') }}</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            @foreach($option->children as $child)
+                                                                                            <tr>
+                                                                                                <td>{{ $child->name }}</td>
+                                                                                                <td>{{ $child->formatted_price }}</td>
+                                                                                                <td>
+                                                                                                    @if ($child->is_active)
+                                                                                                        <span class="badge badge-success">{{ __('admin.activate') }}</span>
+                                                                                                    @else
+                                                                                                        <span class="badge badge-danger">{{ __('admin.dis_activate') }}</span>
+                                                                                                    @endif
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            @endforeach
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>

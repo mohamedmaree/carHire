@@ -17,6 +17,7 @@
             </th>
             <th>{{ __('admin.icon')}}</th>
             <th>{{__('admin.name')}}</th>
+            <th>{{__('admin.parent_option')}}</th>
             <th>{{__('admin.short_description')}}</th>
             <th>{{__('admin.description')}}</th>
             <th>{{__('admin.price')}}</th>
@@ -41,7 +42,23 @@
                         <i class="feather icon-circle" style="font-size: 30px;"></i>
                     @endif
                 </td>
-                <td>{{ $option->name }}</td>
+                <td>
+                    @if($option->is_child)
+                        <span class="text-muted">└─ {{ $option->name }}</span>
+                    @else
+                        <strong>{{ $option->name }}</strong>
+                        @if($option->is_parent)
+                            <span class="badge badge-info">{{ __('admin.parent') }}</span>
+                        @endif
+                    @endif
+                </td>
+                <td>
+                    @if($option->parent)
+                        <span class="badge badge-secondary">{{ $option->parent->name }}</span>
+                    @else
+                        <span class="text-muted">-</span>
+                    @endif
+                </td>
                 <td>{{ Str::limit($option->short_description, 30) }}</td>
                 <td>{{ Str::limit($option->description, 50) }}</td>
                 <td>{{ $option->formatted_price }}</td>

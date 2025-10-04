@@ -21,7 +21,9 @@ class Option extends BaseModel
         'price',
         'price_type',
         'is_active',
-        'sort_order'
+        'sort_order',
+        'parent_id',
+        'is_parent'
     ];
 
     public $translatable = ['name', 'description', 'short_description'];
@@ -30,13 +32,29 @@ class Option extends BaseModel
         'price' => 'decimal:2',
         'is_active' => 'boolean',
         'sort_order' => 'integer',
-        'short_description' => 'array'
+        'short_description' => 'array',
+        'is_parent' => 'boolean'
     ];
 
     // Relationships
     public function orders()
     {
         return $this->belongsToMany(Order::class, 'car_rental_order_options')->withPivot('quantity', 'price', 'total_price');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Option::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Option::class, 'parent_id')->orderBy('sort_order');
+    }
+
+    public function activeChildren()
+    {
+        return $this->hasMany(Option::class, 'parent_id')->where('is_active', true)->orderBy('sort_order');
     }
 
     // Scopes
@@ -60,6 +78,22 @@ class Option extends BaseModel
         return $query->where('price_type', 'flat_fee');
     }
 
+    // Hierarchical scopes
+    public function scopeParents($query)
+    {
+        return $query->whereNull('parent_id')->where('is_parent', true);
+    }
+
+    public function scopeChildren($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
+
+    public function scopeRootOptions($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
     // Accessors
     public function getFormattedPriceAttribute()
     {
@@ -75,6 +109,16 @@ class Option extends BaseModel
     public function getPriceTypeTextAttribute()
     {
         return $this->price_type === 'per_day' ? 'Per Day' : 'Flat Fee';
+    }
+
+    public function getIsChildAttribute()
+    {
+        return !is_null($this->parent_id);
+    }
+
+    public function getHasChildrenAttribute()
+    {
+        return $this->children()->count() > 0;
     }
 
     public function getIconAttribute()

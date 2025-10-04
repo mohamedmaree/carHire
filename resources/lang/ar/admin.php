@@ -1228,6 +1228,16 @@ return [
     'brochure_file' => 'ملف الكتيب',
     'view_current_file' => 'عرض الملف الحالي',
     'order_status' => 'حالة الطلب',
+    
+    // Hierarchical Options
+    'parent_option' => 'الخيار الرئيسي',
+    'child_option' => 'الخيار الفرعي',
+    'is_parent_option' => 'هل هو خيار رئيسي',
+    'select_parent_option' => 'اختر الخيار الرئيسي',
+    'option_type' => 'نوع الخيار',
+    'standalone_option' => 'خيار مستقل',
+    'child_options' => 'الخيارات الفرعية',
+    'parent' => 'الرئيسي',
     'payment_status' => 'حالة الدفع',
     'payment_method' => 'طريقة الدفع',
     'payment_reference' => 'مرجع الدفع',

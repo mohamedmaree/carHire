@@ -142,9 +142,38 @@ class OrderController extends Controller
         
         // Attach options
         if (!empty($data['options'])) {
+            $processedOptions = [];
+            
             foreach ($data['options'] as $optionId => $optionData) {
                 if ($optionData['quantity'] > 0) {
                     $option = Option::find($optionId);
+                    
+                    // Skip if this is a parent option and any of its children are selected
+                    if ($option->is_parent) {
+                        $hasChildSelected = false;
+                        foreach ($data['options'] as $otherOptionId => $otherOptionData) {
+                            if ($otherOptionData['quantity'] > 0) {
+                                $otherOption = Option::find($otherOptionId);
+                                if ($otherOption->parent_id == $option->id) {
+                                    $hasChildSelected = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if ($hasChildSelected) {
+                            continue; // Skip parent if child is selected
+                        }
+                    }
+                    
+                    // Skip if this is a child option and its parent is also selected
+                    if ($option->is_child && isset($data['options'][$option->parent_id])) {
+                        $parentData = $data['options'][$option->parent_id];
+                        if ($parentData['quantity'] > 0) {
+                            continue; // Skip child if parent is selected
+                        }
+                    }
+                    
                     $price = $option->price;
                     $totalPrice = $price * $optionData['quantity'];
                     

@@ -51,9 +51,23 @@ Route::group([
         /***************************** CarController End *****************************/
 
         /***************************** OptionController start *****************************/
+        /*
+         * Options API
+         * 
+         * Hierarchical Structure:
+         * - GET /options: Returns only root options (standalone + parent options)
+         * - GET /options-parents: Returns only parent options with their children
+         * - GET /options-children/{parentId}: Returns children of specific parent
+         * - GET /options-all: Returns all options including children (for admin use)
+         * - GET /options/{id}: Returns specific option with parent/children info
+         * - GET /options-by-price-type: Returns root options filtered by price type
+         */
             Route::get('options'                     ,[OptionController::class, 'index']);
             Route::get('options/{id}'                 ,[OptionController::class, 'show']);
             Route::get('options-by-price-type'       ,[OptionController::class, 'byPriceType']);
+            Route::get('options-parents'             ,[OptionController::class, 'parents']);
+            Route::get('options-children/{parentId}'  ,[OptionController::class, 'children']);
+            Route::get('options-all'                 ,[OptionController::class, 'all']);
         /***************************** OptionController End *****************************/
 
         /***************************** LocationController start *****************************/

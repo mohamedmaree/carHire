@@ -144,6 +144,36 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.parent_option') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <select name="parent_id"
+                                                                                                class="select2 form-control"
+                                                                                                id="parent_option">
+                                                                                            <option value="">{{ __('admin.select_parent_option') }}</option>
+                                                                                            @foreach($parentOptions as $parent)
+                                                                                                <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.is_parent_option') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <select name="is_parent"
+                                                                                                class="select2 form-control"
+                                                                                                id="is_parent_option">
+                                                                                            <option value="0">{{ __('admin.child_option') }}</option>
+                                                                                            <option value="1">{{ __('admin.parent_option') }}</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
                                                                                     <label for="first-name-column">{{ __('admin.status') }}</label>
                                                                                     <div class="controls">
                                                                                         <select name="is_active"
@@ -214,4 +244,30 @@
     {{-- submit add form script --}}
     @include('admin.shared.submitAddForm')
     {{-- submit add form script --}}
+
+    <script>
+        $(document).ready(function() {
+            // Handle parent-child relationship logic
+            $('#is_parent_option').change(function() {
+                if ($(this).val() == '1') {
+                    // If this is a parent option, clear parent selection
+                    $('#parent_option').val('').trigger('change');
+                    $('#parent_option').prop('disabled', true);
+                } else {
+                    // If this is a child option, enable parent selection
+                    $('#parent_option').prop('disabled', false);
+                }
+            });
+
+            $('#parent_option').change(function() {
+                if ($(this).val() != '') {
+                    // If parent is selected, this must be a child option
+                    $('#is_parent_option').val('0').trigger('change');
+                }
+            });
+
+            // Initialize on page load
+            $('#is_parent_option').trigger('change');
+        });
+    </script>
 @endsection

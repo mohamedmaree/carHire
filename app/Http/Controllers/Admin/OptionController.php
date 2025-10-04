@@ -34,7 +34,8 @@ class OptionController extends Controller
 
     public function create()
     {
-        return view('admin.options.create');
+        $parentOptions = Option::parents()->active()->ordered()->get();
+        return view('admin.options.create', compact('parentOptions'));
     }
 
     public function store(Store $request)
@@ -47,7 +48,8 @@ class OptionController extends Controller
     public function edit($id)
     {
         $option = Option::findOrFail($id);
-        return view('admin.options.edit', ['option' => $option]);
+        $parentOptions = Option::parents()->active()->ordered()->where('id', '!=', $id)->get();
+        return view('admin.options.edit', ['option' => $option, 'parentOptions' => $parentOptions]);
     }
 
     public function update(Update $request, $id)
@@ -59,7 +61,7 @@ class OptionController extends Controller
 
     public function show($id)
     {
-        $option = Option::findOrFail($id);
+        $option = Option::with('parent', 'children')->findOrFail($id);
         return view('admin.options.show', ['option' => $option]);
     }
 

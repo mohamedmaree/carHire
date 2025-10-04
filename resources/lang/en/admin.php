@@ -1200,6 +1200,16 @@ return [
     'brochure_file' => 'Brochure File',
     'view_current_file' => 'View Current File',
     'order_status' => 'Order Status',
+    
+    // Hierarchical Options
+    'parent_option' => 'Parent Option',
+    'child_option' => 'Child Option',
+    'is_parent_option' => 'Is Parent Option',
+    'select_parent_option' => 'Select Parent Option',
+    'option_type' => 'Option Type',
+    'standalone_option' => 'Standalone Option',
+    'child_options' => 'Child Options',
+    'parent' => 'Parent',
     'payment_status' => 'Payment Status',
     'payment_method' => 'Payment Method',
     'payment_reference' => 'Payment Reference',
