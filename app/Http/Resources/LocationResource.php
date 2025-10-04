@@ -26,6 +26,7 @@ class LocationResource extends JsonResource
             'working_days_text' => $this->working_days_text,
             'working_hours' => $this->working_hours,
             'formatted_working_hours' => $this->formatted_working_hours,
+            'working_hours_slots' => $this->working_hours_slots,
             'holiday_days' => $this->holiday_days,
             'holiday_days_text' => $this->holiday_days_text,
             'holiday_hours' => $this->holiday_hours,

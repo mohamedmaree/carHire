@@ -97,6 +97,7 @@ return [
     "edit_a_profile_page"                                    => "تعديل صفحه تعريفيه",
     "view_a_profile_page"                                    => "عرض صفحه تعريفيه",
     "description"                                            => " الوصف",
+    "short_description"                                      => "الوصف المختصر",
     "saving_changes"                                         => "حفظ التغييرات",
     "notification_address_in_arabic"                         => "عنوان الاشعار بالعربية",
     "notification_address_in_english"                        => "عنوان الاشعار بالانجليزية",

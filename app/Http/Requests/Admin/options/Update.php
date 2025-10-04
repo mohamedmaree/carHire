@@ -16,6 +16,7 @@ class Update extends FormRequest
         return [
             'name' => 'required',
             'description' => 'required',
+            'short_description' => 'required',
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric|min:0',
             'price_type' => 'required|in:per_day,flat_fee',

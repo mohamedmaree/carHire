@@ -11,6 +11,8 @@ use App\Models\Country;
 use App\Models\Category;
 use App\Models\SiteSetting;
 use App\Models\Region;
+use App\Models\Car;
+use App\Models\Offer;
 use App\Traits\ResponseTrait;
 use App\Services\CouponService;
 use App\Services\SettingService;
@@ -29,6 +31,9 @@ use App\Http\Resources\Api\Settings\RegionResource;
 use App\Http\Resources\Api\Settings\RegionWithCitiesResource;
 use App\Models\AppHome;
 use App\Http\Resources\Api\Settings\AppHomeResource;
+use App\Http\Resources\CarResource;
+use App\Http\Resources\OfferResource;
+use Illuminate\Http\Request;
 
 class SettingController extends Controller {
   use ResponseTrait;
@@ -147,6 +152,50 @@ class SettingController extends Controller {
     $home_sections = AppHome::active()->Published()->orderBy('sort','asc')->get();
     $home =  AppHomeResource::collection($home_sections);
     return $this->successData($home);
+  }
+
+  public function homeData(Request $request)
+  {
+    // Get pagination parameters
+    $carsPerPage = $request->get('cars_per_page', $this->paginateNum());
+    $offersPerPage = $request->get('offers_per_page', $this->paginateNum());
+    $carsPage = $request->get('cars_page', 1);
+    $offersPage = $request->get('offers_page', 1);
+
+    // Get cars with pagination
+    $cars = Car::active()
+      ->with(['activePricePackages'])
+      ->ordered()
+      ->paginate($carsPerPage, ['*'], 'cars_page', $carsPage);
+
+    // Get offers with pagination
+    $offers = Offer::activeByDate()
+      ->ordered()
+      ->with('coupon')
+      ->paginate($offersPerPage, ['*'], 'offers_page', $offersPage);
+
+    return $this->successData([
+      'cars' => CarResource::collection($cars),
+      'cars_pagination' => [
+        'current_page' => $cars->currentPage(),
+        'last_page' => $cars->lastPage(),
+        'per_page' => $cars->perPage(),
+        'total' => $cars->total(),
+        'has_more_pages' => $cars->hasMorePages(),
+        'next_page_url' => $cars->nextPageUrl(),
+        'prev_page_url' => $cars->previousPageUrl(),
+      ],
+      'offers' => OfferResource::collection($offers),
+      'offers_pagination' => [
+        'current_page' => $offers->currentPage(),
+        'last_page' => $offers->lastPage(),
+        'per_page' => $offers->perPage(),
+        'total' => $offers->total(),
+        'has_more_pages' => $offers->hasMorePages(),
+        'next_page_url' => $offers->nextPageUrl(),
+        'prev_page_url' => $offers->previousPageUrl(),
+      ],
+    ]);
   }
 
 }

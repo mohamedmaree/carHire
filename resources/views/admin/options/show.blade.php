@@ -91,6 +91,14 @@
                                                                     </div>
                                                                     <div class="col-12">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.short_description') }}</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $option->short_description }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.description') }}</label>
                                                                             <div class="controls">
                                                                                 <p class="form-control-static">{{ $option->description }}</p>

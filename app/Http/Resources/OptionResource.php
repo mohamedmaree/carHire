@@ -18,6 +18,7 @@ class OptionResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'short_description' => $this->short_description,
             'icon' => $this->icon,
             'price' => $this->price,
             'formatted_price' => $this->formatted_price,

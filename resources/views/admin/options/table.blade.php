@@ -17,6 +17,7 @@
             </th>
             <th>{{ __('admin.icon')}}</th>
             <th>{{__('admin.name')}}</th>
+            <th>{{__('admin.short_description')}}</th>
             <th>{{__('admin.description')}}</th>
             <th>{{__('admin.price')}}</th>
             <th>{{__('admin.price_type')}}</th>
@@ -41,6 +42,7 @@
                     @endif
                 </td>
                 <td>{{ $option->name }}</td>
+                <td>{{ Str::limit($option->short_description, 30) }}</td>
                 <td>{{ Str::limit($option->description, 50) }}</td>
                 <td>{{ $option->formatted_price }}</td>
                 <td>{{ $option->price_type_text }}</td>

@@ -39,7 +39,8 @@ Route::group([
             Route::get('country/{country_id}/regions' ,[SettingController::class, 'CountryRegions']);
             Route::post('check-coupon'               ,[SettingController::class, 'checkCoupon']);
             Route::get('is-production'               ,[SettingController::class, 'isProduction']);
-            Route::get('home'                        ,[SettingController::class, 'Home']);
+            // Route::get('home'                        ,[SettingController::class, 'Home']);
+            Route::get('home'                    ,[SettingController::class, 'homeData']);
             Route::post('update-devices'             ,[AuthController::class,  'updateDevices']);
         /***************************** SettingController End *****************************/
 

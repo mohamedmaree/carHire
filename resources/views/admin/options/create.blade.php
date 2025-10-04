@@ -93,6 +93,14 @@
                                                                                             </div>
                                                                                             <div class="col-md-12 col-12">
                                                                                                 <div class="form-group">
+                                                                                                    <label for="first-name-column">{{__('admin.short_description')}} {{ $lang }}</label>
+                                                                                                    <div class="controls">
+                                                                                                        <textarea class="form-control" name="short_description[{{$lang}}]" cols="30" rows="3" placeholder="{{__('admin.write') . __('admin.short_description')}} {{ $lang }}" required data-validation-required-message="{{__('admin.this_field_is_required')}}"></textarea>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-12 col-12">
+                                                                                                <div class="form-group">
                                                                                                     <label for="first-name-column">{{__('admin.description')}} {{ $lang }}</label>
                                                                                                     <div class="controls">
                                                                                                         <textarea class="form-control" name="description[{{$lang}}]" cols="30" rows="5" placeholder="{{__('admin.write') . __('admin.description')}} {{ $lang }}" required data-validation-required-message="{{__('admin.this_field_is_required')}}"></textarea>

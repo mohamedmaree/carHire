@@ -78,6 +78,7 @@ return [
     "edit_a_profile_page"                                    => "Edit profile page",
     "view_a_profile_page"                                    => "Show profile page",
     "description"                                            => " the description",
+    "short_description"                                      => "Short description",
     "saving_changes"                                         => "Saving changes",
     "notification_address_in_arabic"                         => "The title of the notice in Arabic",
     "notification_address_in_english"                        => "Notice title in English",

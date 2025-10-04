@@ -16,6 +16,7 @@ class Option extends BaseModel
     protected $fillable = [
         'name',
         'description',
+        'short_description',
         'icon',
         'price',
         'price_type',
@@ -23,12 +24,13 @@ class Option extends BaseModel
         'sort_order'
     ];
 
-    public $translatable = ['name', 'description'];
+    public $translatable = ['name', 'description', 'short_description'];
 
     protected $casts = [
         'price' => 'decimal:2',
         'is_active' => 'boolean',
-        'sort_order' => 'integer'
+        'sort_order' => 'integer',
+        'short_description' => 'array'
     ];
 
     // Relationships
