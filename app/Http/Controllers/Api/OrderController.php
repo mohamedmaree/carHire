@@ -100,12 +100,12 @@ class OrderController extends Controller
         $data['total_amount'] = $data['subtotal_amount'] - ($data['coupon_discount_amount'] ?? 0);
         
         // Handle airport locations
-        if ($data['pickup_location_id']) {
+        if (isset($data['pickup_location_id'])) {
             $pickupLocation = Location::find($data['pickup_location_id']);
             $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
         }
         
-        if ($data['return_location_id']) {
+        if (isset($data['return_location_id'])) {
             $returnLocation = Location::find($data['return_location_id']);
             $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
         }
