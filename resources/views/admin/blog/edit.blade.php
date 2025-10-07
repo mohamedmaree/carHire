@@ -115,6 +115,16 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.tags') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <input type="text" name="tags_input" id="tags_input" class="form-control" placeholder="{{ __('admin.enter_tags_separated_by_comma') }}" value="{{ $blog->tags ? implode(', ', $blog->tags) : '' }}">
+                                                                                        <small class="text-muted">{{ __('admin.tags_help_text') }}</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
                                                                                     <label for="first-name-column">{{ __('admin.status') }}</label>
                                                                                     <div class="controls">
                                                                                         <select name="is_active" class="select2 form-control" required data-validation-required-message="{{ __('admin.this_field_is_required') }}">
@@ -184,4 +194,5 @@
     {{-- submit edit form script --}}
     @include('admin.shared.submitEditForm')
     {{-- submit edit form script --}}
+
 @endsection

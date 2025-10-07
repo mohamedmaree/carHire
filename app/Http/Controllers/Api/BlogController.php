@@ -57,8 +57,22 @@ class BlogController extends Controller
             });
         }
 
+        if ($request->has('tag')) {
+            $query->byTag($request->tag);
+        }
+
         $blogs = $query->ordered()->paginate($this->paginateNum());
 
         return $this->successData(BlogResource::collection($blogs));
+    }
+
+    /**
+     * Get all unique tags
+     */
+    public function tags()
+    {
+        $tags = Blog::getAllTags();
+        
+        return $this->successData($tags);
     }
 }

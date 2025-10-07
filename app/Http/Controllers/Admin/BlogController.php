@@ -40,7 +40,16 @@ class BlogController extends Controller
 
     public function store(Store $request)
     {
-        Blog::create($request->validated());
+        $data = $request->validated();
+        
+        // Convert comma-separated tags to array
+        if (isset($data['tags_input'])) {
+            $tagsString = trim($data['tags_input']);
+            $data['tags'] = $tagsString ? array_filter(array_map('trim', explode(',', $tagsString))) : [];
+            unset($data['tags_input']);
+        }
+        
+        Blog::create($data);
         Report::addToLog('إضافة مدونة جديدة');
         return response()->json(['url' => route('admin.blogs.index')]);
     }
@@ -54,7 +63,16 @@ class BlogController extends Controller
     public function update(Update $request, $id)
     {
         $blog = Blog::findOrFail($id);
-        $blog->update($request->validated());
+        $data = $request->validated();
+        
+        // Convert comma-separated tags to array
+        if (isset($data['tags_input'])) {
+            $tagsString = trim($data['tags_input']);
+            $data['tags'] = $tagsString ? array_filter(array_map('trim', explode(',', $tagsString))) : [];
+            unset($data['tags_input']);
+        }
+        
+        $blog->update($data);
         Report::addToLog('تعديل مدونة');
         return response()->json(['url' => route('admin.blogs.index')]);
     }

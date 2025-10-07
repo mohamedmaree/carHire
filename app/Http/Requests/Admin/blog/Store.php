@@ -23,6 +23,8 @@ class Store extends FormRequest
             'image'          => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'is_active'      => 'nullable|in:1,0',
             'sort_order'     => 'nullable|integer',
+            'tags_input'     => 'nullable|string',
+
         ];
     }
 }

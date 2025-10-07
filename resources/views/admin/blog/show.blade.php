@@ -117,6 +117,14 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.tags') }}</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $blog->tags ? implode(', ', $blog->tags) : '' }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.sort_order') }}</label>
                                                                             <div class="controls">
                                                                                 <p class="form-control-static">{{ $blog->sort_order }}</p>

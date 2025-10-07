@@ -1756,3 +1756,8 @@ Route::get('brochures/{filename}', function ($filename) {
     
     return response()->file($path);
 })->name('brochure.download');
+
+// Blog page route
+Route::get('blog', function () {
+    return view('site.blog.index');
+})->name('blog.index');

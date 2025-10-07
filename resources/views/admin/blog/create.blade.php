@@ -1,10 +1,8 @@
 @extends('admin.layout.master')
 {{-- extra css files --}}
 @section('css')
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('admin/app-assets/css-rtl/plugins/forms/validation/form-validation.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('admin/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/app-assets/css-rtl/plugins/forms/validation/form-validation.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
 @endsection
 {{-- extra css files --}}
 
@@ -114,6 +112,16 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.tags') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <input type="text" name="tags_input" id="tags_input" class="form-control" placeholder="{{ __('admin.enter_tags_separated_by_comma') }}">
+                                                                                        <small class="text-muted">{{ __('admin.tags_help_text') }}</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
                                                                                     <label for="first-name-column">{{ __('admin.status') }}</label>
                                                                                     <div class="controls">
                                                                                         <select name="is_active" class="select2 form-control" required data-validation-required-message="{{ __('admin.this_field_is_required') }}">
@@ -165,10 +173,11 @@
 
 @endsection
 @section('js')
-    <script src="{{ asset('admin/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
-    <script src="{{ asset('admin/app-assets/js/scripts/forms/validation/form-validation.js') }}"></script>
-    <script src="{{ asset('admin/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ asset('admin/app-assets/js/scripts/extensions/sweet-alerts.js') }}"></script>
+<script src="{{ asset('admin/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js') }}"></script>
+<script src="{{ asset('admin/app-assets/js/scripts/forms/validation/form-validation.js') }}"></script>
+<script src="{{ asset('admin/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('admin/app-assets/js/scripts/extensions/sweet-alerts.js') }}"></script>
+
     <script src="https://cdn.ckeditor.com/4.16.2/full-all/ckeditor.js"></script>
     <script>
         @foreach(languages() as $lang)
@@ -183,4 +192,5 @@
     {{-- submit add form script --}}
     @include('admin.shared.submitAddForm')
     {{-- submit add form script --}}
+
 @endsection

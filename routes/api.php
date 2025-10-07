@@ -85,6 +85,7 @@ Route::group([
             Route::get('blogs/{id}'                    ,[BlogController::class, 'show']);
             Route::get('blogs-latest'                  ,[BlogController::class, 'latest']);
             Route::get('blogs-search'                  ,[BlogController::class, 'search']);
+            Route::get('blogs-tags'                    ,[BlogController::class, 'tags']);
         /***************************** BlogController End *****************************/
 
         /***************************** OfferController start *****************************/
