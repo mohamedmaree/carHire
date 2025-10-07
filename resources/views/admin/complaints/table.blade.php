@@ -37,7 +37,7 @@
                 <td class="product-action">
                     @can('read-complaint')
                         <span class="text-primary"><a
-                                    href="{{ route('admin.complaints.show', ['id' => $complaint->id]) }}"
+                                    href="{{ route('admin.complaints.show', ['complaint' => $complaint->id]) }}"
                                     class="btn btn-warning btn-sm"><i class="feather icon-eye"></i> {{ __('admin.show') }}</a></span>
                     @endcan
                     @can('delete-complaint')

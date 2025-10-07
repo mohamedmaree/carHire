@@ -10,6 +10,7 @@ class StoreComplaintRequest extends BaseApiRequest {
     return [
       'user_name' => 'required|max:50',
       'phone'     => 'required|max:20',
+      'email'     => 'required|email|max:50',
       'complaint' => 'required|max:500',
     ];
   }

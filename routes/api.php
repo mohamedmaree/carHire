@@ -42,7 +42,8 @@ Route::group([
             // Route::get('home'                        ,[SettingController::class, 'Home']);
             Route::get('home'                    ,[SettingController::class, 'homeData']);
             Route::post('update-devices'             ,[AuthController::class,  'updateDevices']);
-        /***************************** SettingController End *****************************/
+            Route::post('new-complaint'                           ,[AuthController::class,       'StoreComplaint']);
+            /***************************** SettingController End *****************************/
 
         /***************************** CarController start *****************************/
             Route::get('cars'                        ,[CarController::class, 'index']);
@@ -133,7 +134,6 @@ Route::group([
             Route::get('count-notifications'                      ,[AuthController::class,       'countUnreadNotifications']);
             Route::delete('delete-notification/{notification_id}' ,[AuthController::class,       'deleteNotification']);
             Route::delete('delete-notifications'                  ,[AuthController::class,       'deleteNotifications']);
-            Route::post('new-complaint'                           ,[AuthController::class,       'StoreComplaint']);
             Route::delete('delete-account'                        , [AuthController::class,  'deleteAccount']);
         /***************************** AuthController end *****************************/
         

@@ -197,7 +197,7 @@ class AuthController extends Controller {
     }
 
     public function StoreComplaint(StoreComplaintRequest $Request) {
-        Complaint::create($Request->validated() + (['user_id' => auth()->id()]));
+        Complaint::create($Request->validated() + (['user_id' => auth()->id()??null]));
         return $this->successMsg(__('apis.complaint_send'));
     }
 

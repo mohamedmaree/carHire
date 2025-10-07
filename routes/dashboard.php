@@ -149,6 +149,7 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         Route::resource('fqs', FqsController::class);
         /*------------ complaints ----------*/
         Route::post('delete-all-complaints', [ ComplaintController::class, 'destroyAll' ])->name('complaints.deleteAll');
+        Route::post('complaints-replay/{id}',[ComplaintController::class,'replay'])->name('complaint.replay');
         Route::resource('complaints', ComplaintController::class);
         /*------------ apphomes ----------*/
         Route::post('delete-all-apphomes', [ AppHomeController::class, 'destroyAll' ])->name('apphomes.deleteAll');

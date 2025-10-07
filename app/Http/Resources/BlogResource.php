@@ -24,8 +24,7 @@ class BlogResource extends JsonResource
             'short_description' => $this->short_description,
             'is_active' => $this->is_active,
             'sort_order' => $this->sort_order,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->format('Y-m-d'),
         ];
     }
 }
