@@ -86,7 +86,9 @@ class SettingService
             'contact_address_ar' => $app_info['contact_address_ar'] ?? '',
             'contact_address_en' => $app_info['contact_address_en'] ?? '',
             'contact_address'    => $app_info['contact_address_' . lang()] ?? '',
-            'brochure_file'      => $app_info['brochure_file'] ? ('/storage/images/settings/' . $app_info['brochure_file']) : '',
+            'contact_address_lat' => $app_info['contact_address_lat'] ?? '24.7135517',
+            'contact_address_lng' => $app_info['contact_address_lng'] ?? '46.6752957',
+            'brochure_file'      => isset($app_info['brochure_file']) ? ('/storage/images/settings/' . $app_info['brochure_file']??'') : '',
         ];
         foreach (languages() as $lang) {
             $data['about_' . $lang] = $app_info['about_' . $lang] ?? '';

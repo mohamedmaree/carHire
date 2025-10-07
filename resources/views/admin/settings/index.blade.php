@@ -3,6 +3,36 @@
 @section('css')
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin/app-assets/css-rtl/plugins/forms/validation/form-validation.css') }}">
+    <style>
+        #contact_address_search {
+            background-color: #fff;
+            font-size: 15px;
+            font-weight: 300;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 100%;
+            height: 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #contact_address_search:focus {
+            border-color: #4d90fe;
+            outline: none;
+        }
+        .pac-container {
+            z-index: 9999999;
+        }
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+    </style>
 @endsection
 {{-- extra css files --}}
 @section('content')
@@ -798,6 +828,18 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
+                                                        <label for="contact_address_map">{{__('admin.contact_address_location')}}</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="contact_address_search" style="width: 50%;" class="controls" type="text" placeholder="{{__('admin.search_location')}}" style="width: 100%; margin-bottom: 10px;">
+                                                            <div id="contact_address_map" style="height: 300px;"></div>
+                                                            <input type="hidden" id="contact_address_lat" name="contact_address_lat" value="{{$data['contact_address_lat'] ?? '24.7135517'}}">
+                                                            <input type="hidden" id="contact_address_lng" name="contact_address_lng" value="{{$data['contact_address_lng'] ?? '46.6752957'}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
                                                         <label>{{__('admin.brochure_file')}}</label>
                                                         <div class="imgMontg col-12 text-center">
                                                             <div class="dropBox">
@@ -1138,5 +1180,69 @@
     {{-- show selected image script --}}
     @include('admin.shared.addImage')
     {{-- show selected image script --}}
+
+    <?php $google_places_key = $data['google_places'] ?? ''; ?>
+    @if($google_places_key)
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key={{$google_places_key}}&libraries=places&language=ar"></script>
+    <script type="text/javascript">
+        // Contact Address Map
+        var contactMap, contactMarker;
+        var contactLatlng = new google.maps.LatLng({{ $data['contact_address_lat'] ?? '24.7135517' }}, {{ $data['contact_address_lng'] ?? '46.6752957' }});
+        var contactGeocoder = new google.maps.Geocoder();
+        var contactMapOptions = {
+            zoom: 14,
+            center: contactLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        contactMap = new google.maps.Map(document.getElementById("contact_address_map"), contactMapOptions);
+        contactMarker = new google.maps.Marker({
+            map: contactMap,
+            position: contactLatlng,
+            draggable: true
+        });
+
+        // Contact Address Search Box
+        var contactInput = document.getElementById('contact_address_search');
+        var contactSearchBox = new google.maps.places.SearchBox(contactInput);
+        contactMap.controls[google.maps.ControlPosition.TOP_LEFT].push(contactInput);
+        
+        contactMap.addListener('bounds_changed', function() {
+            contactSearchBox.setBounds(contactMap.getBounds());
+        });
+        
+        contactSearchBox.addListener('places_changed', function() {
+            var places = contactSearchBox.getPlaces();
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                contactMarker.setPosition(place.geometry.location);
+                $('#contact_address_lat').val(place.geometry.location.lat());
+                $('#contact_address_lng').val(place.geometry.location.lng());
+                if(place.geometry.viewport) {
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            contactMap.fitBounds(bounds);
+        });
+
+        // Contact Address Marker Drag Event
+        google.maps.event.addListener(contactMarker, 'dragend', function () {
+            var position = contactMarker.getPosition();
+            contactGeocoder.geocode({ location: position }, function (results, status) {
+                if (status === 'OK' && results[0]) {
+                    $('#contact_address_search').val(results[0].formatted_address);
+                    $('#contact_address_lat').val(position.lat());
+                    $('#contact_address_lng').val(position.lng());
+                }
+            });
+        });
+    </script>
+    @endif
 @endsection
 

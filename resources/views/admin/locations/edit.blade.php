@@ -5,6 +5,36 @@
           href="{{ asset('admin/app-assets/css-rtl/plugins/forms/validation/form-validation.css') }}">
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+    <style>
+        #location_search {
+            background-color: #fff;
+            font-size: 15px;
+            font-weight: 300;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 50%;
+            height: 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        #location_search:focus {
+            border-color: #4d90fe;
+            outline: none;
+        }
+        .pac-container {
+            z-index: 9999999;
+        }
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+    </style>
 @endsection
 {{-- extra css files --}}
 
@@ -100,20 +130,14 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-md-6 col-12">
+                                                                            <div class="col-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="first-name-column">{{ __('admin.lat') }}</label>
+                                                                                    <label for="location_map">{{__('admin.location_coordinates')}}</label>
                                                                                     <div class="controls">
-                                                                                        <input type="text" name="lat" class="form-control" placeholder="{{ __('admin.lat') }}" value="{{ $location->lat }}">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-6 col-12">
-                                                                                <div class="form-group">
-                                                                                    <label for="first-name-column">{{ __('admin.lng') }}</label>
-                                                                                    <div class="controls">
-                                                                                        <input type="text" name="lng" class="form-control" placeholder="{{ __('admin.lng') }}" value="{{ $location->lng }}">
+                                                                                        <input type="text" id="location_search" style="width: 50%;" class="controls" type="text" placeholder="{{__('admin.search_location')}}" style="width: 100%; margin-bottom: 10px;">
+                                                                                        <div id="location_map" style="height: 300px;"></div>
+                                                                                        <input type="hidden" id="location_lat" name="lat" value="{{ $location->lat ?? '24.7135517' }}">
+                                                                                        <input type="hidden" id="location_lng" name="lng" value="{{ $location->lng ?? '46.6752957' }}">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -231,4 +255,71 @@
     {{-- submit edit form script --}}
     @include('admin.shared.submitEditForm')
     {{-- submit edit form script --}}
+
+    <?php 
+    $settings = \App\Models\SiteSetting::pluck('value', 'key');
+    $google_places_key = $settings['google_places'] ?? ''; 
+    ?>
+    @if($google_places_key)
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key={{$google_places_key}}&libraries=places&language=ar"></script>
+    <script type="text/javascript">
+        // Location Map
+        var locationMap, locationMarker;
+        var locationLatlng = new google.maps.LatLng({{ $location->lat ?? '24.7135517' }}, {{ $location->lng ?? '46.6752957' }});
+        var locationGeocoder = new google.maps.Geocoder();
+        var locationMapOptions = {
+            zoom: 14,
+            center: locationLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        locationMap = new google.maps.Map(document.getElementById("location_map"), locationMapOptions);
+        locationMarker = new google.maps.Marker({
+            map: locationMap,
+            position: locationLatlng,
+            draggable: true
+        });
+
+        // Location Search Box
+        var locationInput = document.getElementById('location_search');
+        var locationSearchBox = new google.maps.places.SearchBox(locationInput);
+        locationMap.controls[google.maps.ControlPosition.TOP_LEFT].push(locationInput);
+        
+        locationMap.addListener('bounds_changed', function() {
+            locationSearchBox.setBounds(locationMap.getBounds());
+        });
+        
+        locationSearchBox.addListener('places_changed', function() {
+            var places = locationSearchBox.getPlaces();
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                locationMarker.setPosition(place.geometry.location);
+                $('#location_lat').val(place.geometry.location.lat());
+                $('#location_lng').val(place.geometry.location.lng());
+                if(place.geometry.viewport) {
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            locationMap.fitBounds(bounds);
+        });
+
+        // Location Marker Drag Event
+        google.maps.event.addListener(locationMarker, 'dragend', function () {
+            var position = locationMarker.getPosition();
+            locationGeocoder.geocode({ location: position }, function (results, status) {
+                if (status === 'OK' && results[0]) {
+                    $('#location_search').val(results[0].formatted_address);
+                    $('#location_lat').val(position.lat());
+                    $('#location_lng').val(position.lng());
+                }
+            });
+        });
+    </script>
+    @endif
 @endsection
