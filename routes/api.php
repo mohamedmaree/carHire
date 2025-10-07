@@ -121,7 +121,7 @@ Route::group([
    
 
 
-    Route::group(['middleware' => ['auth:sanctum', 'is-active']], function () {
+    Route::group(['middleware' => ['auth:sanctum'/*, 'is-active'*/ ]], function () {
         /***************************** AuthController  Start *****************************/
             Route::get('profile'                                  ,[AuthController::class,       'getProfile']);
             Route::put('update-profile'                           ,[AuthController::class,       'updateProfile']);

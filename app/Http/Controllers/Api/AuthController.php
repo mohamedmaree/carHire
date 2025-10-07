@@ -35,10 +35,24 @@ class AuthController extends Controller {
     use ResponseTrait, SmsTrait, GeneralTrait;
 
     public function register(RegisterRequest $request) {
-        $user = User::create($request->validated());
-        $user->sendVerificationCode();
-        $userData = new UserResource($user->refresh());
-        return $this->response('success', __('auth.registered'), $userData);
+        $data = $request->validated();
+        
+        // Set default values for phone and country_code if not provided
+        if (empty($data['phone'])) {
+            $data['phone'] = null;
+        }
+        if (empty($data['country_code'])) {
+            $data['country_code'] = null;
+        }
+        
+        $user = User::create($data);
+        
+        // Only send verification code if phone is provided
+        if ($user->phone && $user->country_code) {
+            $user->sendVerificationCode();
+        }
+        $user->refresh();
+        return $this->response('success', __('auth.registered'), $user->login());
     }
 
     public function activate(ActivateRequest $request) {
@@ -84,9 +98,9 @@ class AuthController extends Controller {
             return $this->blockedReturn($user);
         }
 
-        if (!$user->active) {
-            return $this->phoneActivationReturn($user);
-        }
+        // if (!$user->active) {
+        //     return $this->phoneActivationReturn($user);
+        // }
 
         return $this->response('success', __('apis.signed'), $user->login());
     }

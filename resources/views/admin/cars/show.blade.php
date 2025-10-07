@@ -24,6 +24,13 @@
                                     @lang('admin.price_packages')
                                 </a>
                             </li>
+                            <li class="nav-item" style="margin-top: 3px">
+                                <a class="nav-link d-flex py-75" id="tab-pill-3" data-toggle="pill"
+                                   href="#tab-3" aria-expanded="false">
+                                    <i class="feather icon-star mr-50 font-medium-3"></i>
+                                    @lang('admin.features')
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- right content section -->
@@ -210,6 +217,56 @@
                                                                 @else
                                                                     <div class="text-center">
                                                                         <p>{{ __('admin.no_price_packages_found') }}</p>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Features Tab -->
+                                        <div role="tabpanel" class="tab-pane" id="tab-3" aria-labelledby="tab-pill-3" aria-expanded="false">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    @lang('admin.features')
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                                @if($car->features && count($car->features) > 0)
+                                                                    <div class="row">
+                                                                        @foreach (languages() as $lang)
+                                                                            <div class="col-md-6 mb-3">
+                                                                                <div class="form-group">
+                                                                                    <label>{{ __('admin.features') }} {{ $lang }}</label>
+                                                                                    <div class="controls">
+                                                                                        @php
+                                                                                            $features = $car->getTranslation('features', $lang);
+                                                                                            $featuresArray = is_array($features) ? $features : [];
+                                                                                        @endphp
+                                                                                        @if(count($featuresArray) > 0)
+                                                                                            <ul class="list-group">
+                                                                                                @foreach($featuresArray as $feature)
+                                                                                                    <li class="list-group-item d-flex align-items-center">
+                                                                                                        <i class="feather icon-check-circle text-success mr-2"></i>
+                                                                                                        {{ $feature }}
+                                                                                                    </li>
+                                                                                                @endforeach
+                                                                                            </ul>
+                                                                                        @else
+                                                                                            <p class="form-control-static text-muted">{{ __('admin.no_features_found') }}</p>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                @else
+                                                                    <div class="text-center">
+                                                                        <p class="text-muted">{{ __('admin.no_features_found') }}</p>
                                                                     </div>
                                                                 @endif
                                                             </div>

@@ -26,9 +26,10 @@ class Store extends FormRequest
         return [
             'name'     => 'required|max:191',
             'is_blocked'  => 'nullable',
-            'country_code' => 'required',
-            'phone'    => 'required|min:8|unique:users,phone,NULL,NULL,deleted_at,NULL',
+            'country_code' => 'nullable',
+            'phone'    => 'nullable|min:8|unique:users,phone,NULL,NULL,deleted_at,NULL',
             'email'    => 'required|email|max:191|unique:users,email,NULL,NULL,deleted_at,NULL',
+            'birth_date' => 'required|date|before:today',
             'password' => ['required', 'min:6'],
             'image'   => ['nullable', 'image'],
         ];

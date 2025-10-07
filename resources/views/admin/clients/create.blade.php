@@ -87,14 +87,15 @@
                                                                                 <div class="form-group">
                                                                                     <label for="first-name-column">{{__('admin.phone_number')}}</label>
                                                                                     <div class="row">
-                                                                                        
                                                                                         <div class="col-md-9 col-12">
                                                                                             <div class="controls">
-                                                                                                <input type="number" name="phone" class="form-control" placeholder="{{__('admin.enter_phone_number')}}" required data-validation-required-message="{{__('admin.this_field_is_required')}}" data-validation-number-message="{{__('admin.the_phone_number_ must_not_have_charachters_or_symbol')}}"  >
+                                                                                                <input type="number" name="phone" class="form-control" placeholder="{{__('admin.enter_phone_number')}}" data-validation-number-message="{{__('admin.the_phone_number_ must_not_have_charachters_or_symbol')}}">
+                                                                                                <small class="form-text text-muted">{{__('admin.optional_field')}}</small>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-3 col-12">
                                                                                             <select name="country_code" class="form-control select2">
+                                                                                                <option value="">{{__('admin.select_country_code')}}</option>
                                                                                                 @foreach($countries as $country)
                                                                                                     <option value="{{ $country->key }}"
                                                                                                         @if ($settings['default_country'] == $country->id)
@@ -113,6 +114,15 @@
                                                                                     <label for="first-name-column">{{ __('admin.email')}}</label>
                                                                                     <div class="controls">
                                                                                         <input type="email" name="email" class="form-control" placeholder="{{__('admin.enter_the_email')}}" data-validation-email-message="{{__('admin.email_formula_is_incorrect')}}" required data-validation-required-message="{{__('admin.this_field_is_required')}}" >
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-12 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="first-name-column">{{__('admin.birth_date')}}</label>
+                                                                                    <div class="controls">
+                                                                                        <input type="date" name="birth_date" class="form-control" placeholder="{{__('admin.enter_birth_date')}}" required data-validation-required-message="{{__('admin.this_field_is_required')}}" max="{{ date('Y-m-d', strtotime('-1 day')) }}">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

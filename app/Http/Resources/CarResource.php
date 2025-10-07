@@ -31,6 +31,7 @@ class CarResource extends JsonResource
             'is_active' => $this->is_active,
             'sort_order' => $this->sort_order,
             'formatted_price' => $this->formatted_price,
+            'features' => $this->formatted_features,
             'price_packages' => PricePackageResource::collection($this->whenLoaded('pricePackages')),
             'active_price_packages' => PricePackageResource::collection($this->whenLoaded('activePricePackages')),
             'created_at' => $this->created_at,

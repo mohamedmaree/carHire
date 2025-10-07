@@ -39,7 +39,22 @@ class CarController extends Controller
 
     public function store(Store $request)
     {
-        $car = Car::create($request->validated());
+        $data = $request->validated();
+        
+        // Process features if provided - convert comma-separated strings to arrays
+        if ($request->has('features')) {
+            $features = [];
+            foreach ($request->features as $lang => $featuresText) {
+                if (!empty($featuresText)) {
+                    $featuresArray = array_map('trim', explode(',', $featuresText));
+                    $featuresArray = array_filter($featuresArray); // Remove empty values
+                    $features[$lang] = $featuresArray;
+                }
+            }
+            $data['features'] = $features;
+        }
+        
+        $car = Car::create($data);
         
         // Create default price packages if provided
         if ($request->has('price_packages')) {
@@ -61,7 +76,22 @@ class CarController extends Controller
     public function update(Update $request, $id)
     {
         $car = Car::findOrFail($id);
-        $car->update($request->validated());
+        $data = $request->validated();
+        
+        // Process features if provided - convert comma-separated strings to arrays
+        if ($request->has('features')) {
+            $features = [];
+            foreach ($request->features as $lang => $featuresText) {
+                if (!empty($featuresText)) {
+                    $featuresArray = array_map('trim', explode(',', $featuresText));
+                    $featuresArray = array_filter($featuresArray); // Remove empty values
+                    $features[$lang] = $featuresArray;
+                }
+            }
+            $data['features'] = $features;
+        }
+        
+        $car->update($data);
         
         // Update price packages if provided
         if ($request->has('price_packages')) {

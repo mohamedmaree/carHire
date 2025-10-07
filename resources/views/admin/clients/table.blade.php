@@ -18,6 +18,7 @@
             <th>{{  __('admin.image_') }}</th>
             <th>{{ __('admin.name') }}</th>
             <th>{{ __('admin.email') }}</th>
+            <th>{{ __('admin.birth_date') }}</th>
             <th>{{ __('admin.phone') }}</th>
             <th>{{ __('admin.ban_status') }}</th>
             <th>{{ __('admin.activation') }}</th>
@@ -36,7 +37,8 @@
                 <td><img src="{{$row->image}}" width="30px" alt=""></td>
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->email }}</td>
-                <td>{{ $row->phone }}</td>
+                <td>{{ $row->birth_date ? \Carbon\Carbon::parse($row->birth_date)->format('Y-m-d') : __('admin.not_provided') }}</td>
+                <td>{{ $row->phone ?? __('admin.not_provided') }}</td>
                 <td>
                     @if ($row->is_blocked)
                         <span class="btn btn-sm round btn-outline-danger">

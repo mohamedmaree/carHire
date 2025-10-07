@@ -25,10 +25,11 @@ class Car extends BaseModel
         'fuel_type',
         'engine_size',
         'is_active',
-        'sort_order'
+        'sort_order',
+        'features'
     ];
 
-    public $translatable = ['name', 'description'];
+    public $translatable = ['name', 'description', 'features'];
 
     protected $casts = [
         'is_active' => 'boolean',
@@ -36,7 +37,8 @@ class Car extends BaseModel
         'bags' => 'integer',
         'year' => 'integer',
         'engine_size' => 'decimal:1',
-        'sort_order' => 'integer'
+        'sort_order' => 'integer',
+        'features' => 'array'
     ];
 
     // Relationships
@@ -76,5 +78,21 @@ class Car extends BaseModel
     {
         $limitedPackage = $this->pricePackages()->where('is_unlimited', false)->first();
         return $limitedPackage ? '$' . number_format($limitedPackage->price, 2) : 'N/A';
+    }
+
+    public function getFormattedFeaturesAttribute()
+    {
+        if (!$this->features) {
+            return [];
+        }
+
+        $formattedFeatures = [];
+        foreach ($this->features as $feature) {
+            $formattedFeatures[] = [
+                'text' => $feature,
+            ];
+        }
+
+        return $formattedFeatures;
     }
 }

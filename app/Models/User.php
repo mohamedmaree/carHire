@@ -43,6 +43,7 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'birth_date',
         'image',
         'active',
         'is_blocked',

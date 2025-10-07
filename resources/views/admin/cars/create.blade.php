@@ -32,6 +32,13 @@
                                         @lang('admin.price_packages')
                                     </a>
                                 </li>
+                                <li class="nav-item" style="margin-top: 3px">
+                                    <a class="nav-link d-flex py-75" id="tab-pill-3" data-toggle="pill"
+                                       href="#tab-3" aria-expanded="false">
+                                        <i class="feather icon-star mr-50 font-medium-3"></i>
+                                        @lang('admin.features')
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <!-- right content section -->
@@ -330,6 +337,52 @@
                                                                                 </div>
                                                                             @endforeach
                                                                         </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 d-flex justify-content-center mt-3">
+                                                        <button type="submit" class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.add')}}</button>
+                                                        <a href="{{ url()->previous() }}" type="reset" class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Features Tab -->
+                                            <div role="tabpanel" class="tab-pane" id="tab-3" aria-labelledby="tab-pill-3" aria-expanded="false">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        @lang('admin.features')
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="card">
+                                                            <div class="card-content">
+                                                                <div class="card-body">
+                                                                    <div class="col-12">
+                                                                        <ul class="nav nav-tabs mb-3">
+                                                                            @foreach (languages() as $lang)
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link @if($loop->first) active @endif" data-toggle="pill" href="#features_{{$lang}}" aria-expanded="true">{{ __('admin.features') }} {{ $lang }}</a>
+                                                                                </li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </div>
+
+                                                                    <div class="tab-content">
+                                                                        @foreach (languages() as $lang)
+                                                                            <div role="tabpanel" class="tab-pane fade @if($loop->first) show active @endif" id="features_{{$lang}}" aria-labelledby="features_{{$lang}}" aria-expanded="true">
+                                                                                <div class="col-md-12 col-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="features_{{ $lang }}">{{__('admin.features')}} {{ $lang }}</label>
+                                                                                        <div class="controls">
+                                                                                            <textarea class="form-control" name="features[{{$lang}}]" id="features_{{ $lang }}" cols="30" rows="5" placeholder="{{__('admin.write') . __('admin.features')}} {{ $lang }} ({{__('admin.separate_by_comma')}})"></textarea>
+                                                                                            <small class="form-text text-muted">{{__('admin.features_help_text')}}</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
                                                                     </div>
                                                                 </div>
                                                             </div>
