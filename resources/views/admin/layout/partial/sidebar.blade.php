@@ -174,7 +174,14 @@
                             </a>
                         </li>
                     @endcan
-
+                    @can('read-all-intro-partener')
+                        <li class="is-shown @if(Route::currentRouteName() == 'admin.introparteners.index') active @endif">
+                            <a href="{{route('admin.introparteners.index')}}"><i
+                                        class="feather icon-circle"></i>
+                                @lang('admin.Success_Partners')
+                            </a>
+                        </li>
+                    @endcan
                     @can('read-all-intro')
                          <li  class="nav-item  @if(Route::currentRouteName() == 'admin.intros.index') active @endif " >
                             <a href="{{route('admin.intros.index')}}">
@@ -298,15 +305,6 @@
                         <li class="is-shown @if(Route::currentRouteName() == 'admin.introsliders.index') active @endif">
                             <a href="{{route('admin.introsliders.index')}}">
                                 <i class="feather icon-circle"></i> @lang('admin.insolder')
-                            </a>
-                        </li>
-                    @endcan
-
-                    @can('read-all-intro-partener')
-                        <li class="is-shown @if(Route::currentRouteName() == 'admin.introparteners.index') active @endif">
-                            <a href="{{route('admin.introparteners.index')}}"><i
-                                        class="feather icon-circle"></i>
-                                @lang('admin.Success_Partners')
                             </a>
                         </li>
                     @endcan

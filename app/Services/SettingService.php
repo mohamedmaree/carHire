@@ -89,6 +89,22 @@ class SettingService
             'contact_address_lat' => $app_info['contact_address_lat'] ?? '24.7135517',
             'contact_address_lng' => $app_info['contact_address_lng'] ?? '46.6752957',
             'brochure_file'      => isset($app_info['brochure_file']) ? ('/storage/images/settings/' . $app_info['brochure_file']??'') : '',
+            
+            // Facts By The Numbers
+            'facts' => [
+                'happy_customers' => $app_info['happy_customers'] ?? '3K+',
+                'vip_members' => $app_info['vip_members'] ?? '2K+',
+                'reviews' => $app_info['reviews'] ?? '400+',
+                'years_experience' => $app_info['years_experience'] ?? '5+',
+            ],
+            
+            // App Download Section
+            'app_download' => [
+                'title' => $app_info['app_download_title_' . lang()] ?? 'DOWNLOAD OUR APP',
+                'description' => $app_info['app_download_description_' . lang()] ?? 'Looking for a car rental on the go? The DistinQt Car Hire App makes it quick, easy, book, and manage your perfect vehicle rental all from your smart phone seamless booking with just a few taps, stay in control by tracking your reservations and pick-up details.',
+                'google_play_link' => $app_info['app_google_play_link'] ?? 'https://play.google.com/store/apps/details?id=com.distinqt.carhire',
+                'apple_store_link' => $app_info['app_apple_store_link'] ?? 'https://apps.apple.com/app/distinqt-car-hire/id123456789',
+            ],
         ];
         foreach (languages() as $lang) {
             $data['about_' . $lang] = $app_info['about_' . $lang] ?? '';

@@ -27,6 +27,7 @@ Route::group([
             Route::get('fqss'                        ,[SettingController::class, 'fqss']);
             Route::get('socials'                     ,[SettingController::class, 'socials']);
             Route::get('images'                      ,[SettingController::class, 'images']);
+            Route::get('partners'                     ,[SettingController::class, 'partners']);
             Route::get('categories/{id?}'            ,[SettingController::class, 'categories']);
             Route::get('countries'                   ,[SettingController::class, 'countries']);
             Route::get('countries-with-cities'       ,[SettingController::class, 'countriesWithCities']);

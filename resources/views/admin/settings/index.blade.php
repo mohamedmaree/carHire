@@ -102,6 +102,20 @@
                             </a>
                         </li>
                         <li class="nav-item " style="margin-top: 3px">
+                            <a class="nav-link d-flex py-75" id="account-pill-facts" data-toggle="pill"
+                               href="#account-vertical-facts" aria-expanded="false">
+                                <i class="feather icon-bar-chart-2 mr-50 font-medium-3"></i>
+                                {{__('admin.facts_by_numbers')}}
+                            </a>
+                        </li>
+                        <li class="nav-item " style="margin-top: 3px">
+                            <a class="nav-link d-flex py-75" id="account-pill-app-download" data-toggle="pill"
+                               href="#account-vertical-app-download" aria-expanded="false">
+                                <i class="feather icon-smartphone mr-50 font-medium-3"></i>
+                                {{__('admin.app_download')}}
+                            </a>
+                        </li>
+                        <li class="nav-item " style="margin-top: 3px">
                             <a class="nav-link d-flex py-75" id="account-pill-smtp" data-toggle="pill"
                                href="#account-vertical-smtp" aria-expanded="false">
                                 <i class="feather icon-mail mr-50 font-medium-3"></i>
@@ -861,6 +875,162 @@
                                                                     </a>
                                                                 </div>
                                                             @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 d-flex justify-content-center mt-3">
+                                                    <button type="submit"
+                                                            class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
+                                                    <a href="{{ url()->previous() }}" type="reset"
+                                                       class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="account-vertical-facts"
+                                         aria-labelledby="account-pill-facts" aria-expanded="false">
+                                        <form action="{{route('admin.settings.update')}}" method="post"
+                                              enctype="multipart/form-data">
+                                            @method('put')
+                                            @csrf
+                                            <div class="row">
+
+                                                <div class="col-12">
+                                                    <h4 class="mb-3">{{__('admin.facts_by_numbers')}}</h4>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="happy_customers">{{__('admin.happy_customers')}}</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="happy_customers" id="happy_customers" class="form-control" 
+                                                                   value="{{$data['happy_customers'] ?? '3K+'}}" 
+                                                                   placeholder="{{__('admin.happy_customers')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="vip_members">{{__('admin.vip_members')}}</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="vip_members" id="vip_members" class="form-control" 
+                                                                   value="{{$data['vip_members'] ?? '2K+'}}" 
+                                                                   placeholder="{{__('admin.vip_members')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="reviews">{{__('admin.reviews')}}</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="reviews" id="reviews" class="form-control" 
+                                                                   value="{{$data['reviews'] ?? '400+'}}" 
+                                                                   placeholder="{{__('admin.reviews')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="years_experience">{{__('admin.years_experience')}}</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="years_experience" id="years_experience" class="form-control" 
+                                                                   value="{{$data['years_experience'] ?? '5+'}}" 
+                                                                   placeholder="{{__('admin.years_experience')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 d-flex justify-content-center mt-3">
+                                                    <button type="submit"
+                                                            class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
+                                                    <a href="{{ url()->previous() }}" type="reset"
+                                                       class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <!-- App Download Section -->
+                                    <div role="tabpanel" class="tab-pane" id="account-vertical-app-download"
+                                         aria-labelledby="account-pill-app-download" aria-expanded="false">
+                                        <form action="{{route('admin.settings.update')}}" method="post"
+                                              enctype="multipart/form-data">
+                                            @method('put')
+                                            @csrf
+                                            <div class="row">
+
+                                                <div class="col-12">
+                                                    <h4 class="mb-3">{{__('admin.app_download')}}</h4>
+                                                </div>
+
+                                                <!-- App Download Links -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="app_google_play_link">{{__('admin.google_play_link')}}</label>
+                                                        <div class="controls">
+                                                            <input type="url" name="app_google_play_link" id="app_google_play_link" class="form-control" 
+                                                                   value="{{$data['app_google_play_link'] ?? 'https://play.google.com/store/apps/details?id=com.distinqt.carhire'}}" 
+                                                                   placeholder="{{__('admin.google_play_link')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="app_apple_store_link">{{__('admin.apple_store_link')}}</label>
+                                                        <div class="controls">
+                                                            <input type="url" name="app_apple_store_link" id="app_apple_store_link" class="form-control" 
+                                                                   value="{{$data['app_apple_store_link'] ?? 'https://apps.apple.com/app/distinqt-car-hire/id123456789'}}" 
+                                                                   placeholder="{{__('admin.apple_store_link')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- App Download Title (Multilingual) -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="app_download_title_ar">{{__('admin.app_download_title')}} ({{__('admin.arabic')}})</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="app_download_title_ar" id="app_download_title_ar" class="form-control" 
+                                                                   value="{{$data['app_download_title_ar'] ?? 'حمل تطبيقنا'}}" 
+                                                                   placeholder="{{__('admin.app_download_title')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="app_download_title_en">{{__('admin.app_download_title')}} ({{__('admin.english')}})</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="app_download_title_en" id="app_download_title_en" class="form-control" 
+                                                                   value="{{$data['app_download_title_en'] ?? 'DOWNLOAD OUR APP'}}" 
+                                                                   placeholder="{{__('admin.app_download_title')}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- App Download Description (Multilingual) -->
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="app_download_description_ar">{{__('admin.app_download_description')}} ({{__('admin.arabic')}})</label>
+                                                        <div class="controls">
+                                                            <textarea name="app_download_description_ar" id="app_download_description_ar" class="form-control" rows="4" 
+                                                                      placeholder="{{__('admin.app_download_description')}}">{{$data['app_download_description_ar'] ?? 'تبحث عن تأجير سيارة أثناء التنقل؟ تطبيق DistinQt Car Hire يجعل الحجز سريع وسهل، احجز وأدر تأجير السيارة المثالية من هاتفك الذكي. حجز سلس بضغطة قليلة، ابق مسيطراً من خلال تتبع حجوزاتك وتفاصيل الاستلام.'}}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="app_download_description_en">{{__('admin.app_download_description')}} ({{__('admin.english')}})</label>
+                                                        <div class="controls">
+                                                            <textarea name="app_download_description_en" id="app_download_description_en" class="form-control" rows="4" 
+                                                                      placeholder="{{__('admin.app_download_description')}}">{{$data['app_download_description_en'] ?? 'Looking for a car rental on the go? The DistinQt Car Hire App makes it quick, easy, book, and manage your perfect vehicle rental all from your smart phone seamless booking with just a few taps, stay in control by tracking your reservations and pick-up details.'}}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>

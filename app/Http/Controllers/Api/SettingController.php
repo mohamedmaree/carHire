@@ -30,7 +30,9 @@ use App\Http\Resources\Api\Settings\CountryWithRegionsResource;
 use App\Http\Resources\Api\Settings\RegionResource;
 use App\Http\Resources\Api\Settings\RegionWithCitiesResource;
 use App\Models\AppHome;
+use App\Models\IntroPartener;
 use App\Http\Resources\Api\Settings\AppHomeResource;
+use App\Http\Resources\Api\Settings\IntroPartenerResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\OfferResource;
 use Illuminate\Http\Request;
@@ -196,6 +198,12 @@ class SettingController extends Controller {
         'prev_page_url' => $offers->previousPageUrl(),
       ],
     ]);
+  }
+
+  public function partners()
+  {
+    $partners = IntroPartenerResource::collection(IntroPartener::latest()->get());
+    return $this->successData($partners);
   }
 
 }
