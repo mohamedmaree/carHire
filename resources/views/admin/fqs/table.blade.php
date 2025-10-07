@@ -30,12 +30,12 @@
                 <td>{{$fqs->question}}</td>
                 <td class="product-action">
                     @can('read-intro-fqs')
-                        <span class="text-primary"><a href="{{ route('admin.fqs.show', ['fqs' => $fqs->id]) }}"
+                        <span class="text-primary"><a href="{{ route('admin.fqs.show', ['fq' => $fqs->id]) }}"
                                                       class="btn btn-warning btn-sm"><i class="feather icon-eye"></i> {{ __('admin.show') }}</a></span>
                     @endcan
                     @can('update-intro-fqs')
                         <span class="action-edit text-primary"><a
-                                    href="{{ route('admin.fqs.edit', ['fqs' => $fqs->id]) }}"
+                                    href="{{ route('admin.fqs.edit', ['fq' => $fqs->id]) }}"
                                     class="btn btn-primary btn-sm"><i class="feather icon-edit"></i>{{ __('admin.edit') }}</a></span>
                     @endcan
                     @can('delete-intro-fqs')

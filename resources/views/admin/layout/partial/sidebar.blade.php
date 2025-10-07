@@ -257,6 +257,14 @@
                             </a>
                         </li>
                     @endcan
+                    @can('read-all-fqs')
+                        <li class="is-shown @if(Route::currentRouteName() == 'admin.fqs.index') active @endif">
+                            <a href="{{route('admin.fqs.index')}}"><i
+                                        class="feather icon-circle"></i>
+                                @lang('admin.common_questions')
+                            </a>
+                        </li>
+                    @endcan
                     @can('read-all-complaint')
                          <li  class="nav-item  @if(Route::currentRouteName() == 'admin.complaints.index') active @endif " >
                             <a href="{{route('admin.complaints.index')}}">
