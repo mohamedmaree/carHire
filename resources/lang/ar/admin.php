@@ -1403,6 +1403,10 @@ return [
     'select_country_code' => 'اختر رمز الدولة',
     'enter_birth_date' => 'أدخل تاريخ الميلاد',
 
+    'quantity_required' => 'مطلوب الكمية',
+    'no_quantity' => 'بدون كمية',
+    'quantity_required_help' => 'فعّل هذا إذا كان المستخدمون بحاجة لتحديد الكمية لهذا الخيار (مثل مقاعد الأطفال)',
+
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 ];

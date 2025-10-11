@@ -192,6 +192,22 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.quantity_required') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <select name="quantity_required"
+                                                                                                class="select2 form-control"
+                                                                                                required
+                                                                                                data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                                                            <option value="0" {{ !$option->quantity_required ? 'selected' : '' }}>{{ __('admin.no_quantity') }}</option>
+                                                                                            <option value="1" {{ $option->quantity_required ? 'selected' : '' }}>{{ __('admin.quantity_required') }}</option>
+                                                                                        </select>
+                                                                                        <small class="form-text text-muted">{{ __('admin.quantity_required_help') }}</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
                                                                                     <label for="first-name-column">{{ __('admin.sort_order') }}</label>
                                                                                     <div class="controls">
                                                                                         <input type="number" name="sort_order"

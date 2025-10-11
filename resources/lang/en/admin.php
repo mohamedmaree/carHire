@@ -1375,6 +1375,10 @@ return [
     'select_country_code' => 'Select country code',
     'enter_birth_date' => 'Enter birth date',
 
+    'quantity_required' => 'Quantity Required',
+    'no_quantity' => 'No Quantity',
+    'quantity_required_help' => 'Enable this if users need to specify quantity for this option (e.g., Child Seats)',
+
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 

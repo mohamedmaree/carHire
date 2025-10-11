@@ -21,6 +21,7 @@ class Option extends BaseModel
         'price',
         'price_type',
         'is_active',
+        'quantity_required',
         'sort_order',
         'parent_id',
         'is_parent'
@@ -31,6 +32,7 @@ class Option extends BaseModel
     protected $casts = [
         'price' => 'decimal:2',
         'is_active' => 'boolean',
+        'quantity_required' => 'boolean',
         'sort_order' => 'integer',
         'short_description' => 'array',
         'is_parent' => 'boolean'
