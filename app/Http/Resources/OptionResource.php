@@ -26,6 +26,7 @@ class OptionResource extends JsonResource
             'price_type_text' => $this->price_type_text,
             'is_active' => $this->is_active,
             'quantity_required' => $this->quantity_required,
+            'is_required' => $this->is_required,
             'sort_order' => $this->sort_order,
             
             // Hierarchical information
@@ -64,6 +65,7 @@ class OptionResource extends JsonResource
                         'price_type_text' => $child->price_type_text,
                         'is_active' => $child->is_active,
                         'quantity_required' => $child->quantity_required,
+                        'is_required' => $child->is_required,
                         'sort_order' => $child->sort_order,
                     ];
                 });

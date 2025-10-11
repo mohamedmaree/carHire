@@ -1407,6 +1407,11 @@ return [
     'no_quantity' => 'بدون كمية',
     'quantity_required_help' => 'فعّل هذا إذا كان المستخدمون بحاجة لتحديد الكمية لهذا الخيار (مثل مقاعد الأطفال)',
 
+    'is_required' => 'خيار مطلوب',
+    'optional' => 'اختياري',
+    'required' => 'مطلوب',
+    'is_required_help' => 'فعّل هذا إذا كان هذا الخيار يجب اختياره عند إجراء الحجز',
+
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 ];

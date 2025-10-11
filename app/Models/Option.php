@@ -22,6 +22,7 @@ class Option extends BaseModel
         'price_type',
         'is_active',
         'quantity_required',
+        'is_required',
         'sort_order',
         'parent_id',
         'is_parent'
@@ -33,6 +34,7 @@ class Option extends BaseModel
         'price' => 'decimal:2',
         'is_active' => 'boolean',
         'quantity_required' => 'boolean',
+        'is_required' => 'boolean',
         'sort_order' => 'integer',
         'short_description' => 'array',
         'is_parent' => 'boolean'
@@ -78,6 +80,16 @@ class Option extends BaseModel
     public function scopeFlatFee($query)
     {
         return $query->where('price_type', 'flat_fee');
+    }
+
+    public function scopeRequired($query)
+    {
+        return $query->where('is_required', true);
+    }
+
+    public function scopeOptional($query)
+    {
+        return $query->where('is_required', false);
     }
 
     // Hierarchical scopes

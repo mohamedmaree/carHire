@@ -1379,6 +1379,11 @@ return [
     'no_quantity' => 'No Quantity',
     'quantity_required_help' => 'Enable this if users need to specify quantity for this option (e.g., Child Seats)',
 
+    'is_required' => 'Required Option',
+    'optional' => 'Optional',
+    'required' => 'Required',
+    'is_required_help' => 'Enable this if this option must be selected when making a reservation',
+
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 

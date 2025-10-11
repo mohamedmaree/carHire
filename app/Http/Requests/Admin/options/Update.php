@@ -22,6 +22,7 @@ class Update extends FormRequest
             'price_type' => 'required|in:per_day,flat_fee',
             'is_active' => 'boolean',
             'quantity_required' => 'boolean',
+            'is_required' => 'boolean',
             'sort_order' => 'integer|min:0',
             'parent_id' => 'nullable|exists:options,id',
             'is_parent' => 'boolean',
