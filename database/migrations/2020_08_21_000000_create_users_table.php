@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration {
       $table->string('country_code',5)->default('965');
       $table->string('phone',15);
       $table->string('email',50);
-      $table->string('password',100);
+      $table->string('password',100)->nullable();
       $table->string('image', 50)->default('default.png');
       $table->boolean('active')->default(0);
       $table->boolean('is_blocked')->default(0);

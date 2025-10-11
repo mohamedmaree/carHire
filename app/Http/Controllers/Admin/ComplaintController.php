@@ -23,7 +23,7 @@ class ComplaintController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $complaints = Complaint::search(request()->searchArray)->paginate(30);
+            $complaints = Complaint::with('carBrand')->search(request()->searchArray)->paginate(30);
             $html = view('admin.complaints.table' ,compact('complaints'))->render() ;
             return response()->json(['html' => $html]);
         }
@@ -32,7 +32,7 @@ class ComplaintController extends Controller
 
     public function show($id)
     {
-        $complaint = Complaint::findOrFail($id);
+        $complaint = Complaint::with('carBrand')->findOrFail($id);
         return view('admin.complaints.show', compact('complaint'));
     }
 

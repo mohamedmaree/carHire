@@ -31,9 +31,11 @@ use App\Http\Resources\Api\Settings\RegionResource;
 use App\Http\Resources\Api\Settings\RegionWithCitiesResource;
 use App\Models\AppHome;
 use App\Models\IntroPartener;
+use App\Models\CarBrand;
 use App\Http\Resources\Api\Settings\AppHomeResource;
 use App\Http\Resources\Api\Settings\IntroPartenerResource;
 use App\Http\Resources\CarResource;
+use App\Http\Resources\CarBrandResource;
 use App\Http\Resources\OfferResource;
 use Illuminate\Http\Request;
 
@@ -204,6 +206,12 @@ class SettingController extends Controller {
   {
     $partners = IntroPartenerResource::collection(IntroPartener::latest()->get());
     return $this->successData($partners);
+  }
+
+  public function carBrands()
+  {
+    $carBrands = CarBrandResource::collection(CarBrand::active()->ordered()->get());
+    return $this->successData($carBrands);
   }
 
 }

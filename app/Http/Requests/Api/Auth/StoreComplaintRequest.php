@@ -12,6 +12,7 @@ class StoreComplaintRequest extends BaseApiRequest {
       'phone'     => 'required|max:20',
       'email'     => 'required|email|max:50',
       'complaint' => 'required|max:500',
+      'car_brand_id' => 'nullable|exists:car_brands,id',
     ];
   }
 }

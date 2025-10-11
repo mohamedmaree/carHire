@@ -134,6 +134,7 @@ return [
     "Send_notification"                                      => "send notice",
     "Send_email"                                             => "Send an email",
     "active"                                                 => "active",
+    "inactive"                                               => "inactive",
     "password"                                               => "The password",
     "incorrect_password"                                     => "The password is incorrect",
     "email"                                                  => "E-mail",
@@ -1384,6 +1385,30 @@ return [
     'required' => 'Required',
     'is_required_help' => 'Enable this if this option must be selected when making a reservation',
 
+    'car_brand' => 'Car Brand',
+    'car_brands' => 'Car Brands',
+    'car_brand_details' => 'Car Brand Details',
+    'logo' => 'Logo',
+    'logo_help' => 'Upload a logo image for the car brand',
+    'not_specified' => 'Not Specified',
+
+    'is_required' => 'is required',
+    'already_exists' => 'already exists',
+    'must_be_image' => 'must be an image',
+    'must_be_jpeg_png_jpg_gif_svg' => 'must be jpeg, png, jpg, gif, or svg',
+    'max_size_2mb' => 'maximum size is 2MB',
+    'must_be_number' => 'must be a number',
+    'must_be_greater_than_zero' => 'must be greater than or equal to zero',
+    'car_brands' => [
+        'index'    => 'Car Brands',
+        'create'   => 'Add Car Brand',
+        'edit'     => 'Edit Car Brand',
+        'update'   => 'Update Car Brand',
+        'read'     => 'View Car Brand',
+        'read-all' => 'View all Car Brands',
+        'delete'   => 'Delete Car Brand',
+        'show'   => 'View Car Brand',
+    ],
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 

@@ -64,6 +64,7 @@ Route::group([
          * - GET /options/{id}: Returns specific option with parent/children info
          * - GET /options-by-price-type: Returns root options filtered by price type
          */
+            Route::get('car-brands'                    ,[SettingController::class, 'carBrands']);
             Route::get('options'                     ,[OptionController::class, 'index']);
             Route::get('options/{id}'                 ,[OptionController::class, 'show']);
             Route::get('options-by-price-type'       ,[OptionController::class, 'byPriceType']);

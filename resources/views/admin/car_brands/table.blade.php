@@ -14,43 +14,48 @@
                     <span class="checkmark"></span>
                 </label>
             </th>
-            <th>{{__('admin.date')}}</th>
-            <th>{{__('admin.name_to_complain')}}</th>
-            <th>{{__('admin.phone_to_complain')}}</th>
-            <th>{{__('admin.email_to_complain')}}</th>
-            <th>{{__('admin.car_brand')}}</th>
+            <th>{{ __('admin.logo')}}</th>
+            <th>{{__('admin.name')}}</th>
+            <th>{{__('admin.sort_order')}}</th>
+            <th>{{__('admin.status')}}</th>
             <th>{{__('admin.control')}}</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($complaints as $complaint)
-            <tr class="delete_complaint">
+        @foreach($carBrands as $carBrand)
+            <tr class="delete_row">
                 <td class="text-center">
                     <label class="container-checkbox">
-                        <input type="checkbox" class="checkSingle" id="{{$complaint->id}}">
+                        <input type="checkbox" class="checkSingle" id="{{$carBrand->id}}">
                         <span class="checkmark"></span>
                     </label>
                 </td>
-                <td>{{\Carbon\Carbon::parse($complaint->created_at)->format('d/m/Y')}}</td>
-                <td>{{$complaint->user_name}}</td>
-                <td>{{$complaint->phone}}</td>
-                <td>{{$complaint->email}}</td>
                 <td>
-                    @if($complaint->carBrand)
-                        <span class="badge badge-primary">{{$complaint->carBrand->name}}</span>
+                    @if($carBrand->logo)
+                        <img src="{{$carBrand->logo}}" width="30px" alt="{{$carBrand->name}}">
                     @else
-                        <span class="text-muted">{{__('admin.not_specified')}}</span>
+                        <span class="text-muted">{{__('admin.no_image')}}</span>
                     @endif
                 </td>
+                <td>{{$carBrand->name}}</td>
+                <td>{{$carBrand->sort_order}}</td>
+                <td>
+                    {!! toggleBooleanView($carBrand , route('admin.model.active' , ['model' =>'CarBrand' , 'id' => $carBrand->id , 'action' => 'is_active'])) !!}
+                </td>
                 <td class="product-action">
-                    @can('read-complaint')
+                    @can('read-car-brand')
                         <span class="text-primary"><a
-                                    href="{{ route('admin.complaints.show', ['complaint' => $complaint->id]) }}"
+                                    href="{{ route('admin.car_brands.show', ['car_brand' => $carBrand->id]) }}"
                                     class="btn btn-warning btn-sm"><i class="feather icon-eye"></i> {{ __('admin.show') }}</a></span>
                     @endcan
-                    @can('delete-complaint')
+                    @can('update-car-brand')
+                        <span class="text-primary"><a
+                                    href="{{ route('admin.car_brands.edit', ['car_brand' => $carBrand->id]) }}"
+                                    class="btn btn-primary btn-sm"><i class="feather icon-edit"></i> {{ __('admin.edit') }}</a></span>
+                    @endcan
+                    @can('delete-car-brand')
                         <span class="delete-row btn btn-danger btn-sm"
-                              data-url="{{ url('admin/complaints/' . $complaint->id) }}"><i
+                              data-url="{{ url('admin/car_brands/' . $carBrand->id) }}"><i
                                     class="feather icon-trash"></i>{{ __('admin.delete') }}</span>
                     @endcan
                 </td>
@@ -60,7 +65,7 @@
     </table>
     {{-- table content --}}
     {{-- no data found div --}}
-    @if ($complaints->count() == 0)
+    @if ($carBrands->count() == 0)
         <div class="d-flex flex-column w-100 align-center mt-4">
             <img src="{{asset('admin/app-assets/images/pages/404.png')}}" alt="">
             <span class="mt-2" style="font-family: cairo">{{__('admin.there_are_no_matches_matching')}}</span>
@@ -70,9 +75,9 @@
 
 </div>
 {{-- pagination  links div --}}
-@if ($complaints->count() > 0 && $complaints instanceof \Illuminate\Pagination\AbstractPaginator )
+@if ($carBrands->count() > 0 && $carBrands instanceof \Illuminate\Pagination\AbstractPaginator )
     <div class="d-flex justify-content-center mt-3">
-        {{$complaints->links()}}
+        {{$carBrands->links()}}
     </div>
 @endif
 {{-- pagination  links div --}}

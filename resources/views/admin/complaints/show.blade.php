@@ -48,6 +48,21 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">{{ __('admin.car_brand') }}</label>
+                                                <div class="controls">
+                                                    @if($complaint->carBrand)
+                                                        <input type="text" class="form-control"
+                                                            value="{{ $complaint->carBrand->name }}" disabled>
+                                                    @else
+                                                        <input type="text" class="form-control"
+                                                            value="{{ __('admin.not_specified') }}" disabled>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
                                                 <label for="first-name-column">{{ __('admin.complaining') }}</label>

@@ -26,7 +26,7 @@ class RegisterRequest extends BaseApiRequest {
             'phone'        => 'nullable|numeric|digits_between:8,10|unique:users,phone,NULL,id,deleted_at,NULL',
             'email'        => 'required|email|unique:users,email,NULL,id,deleted_at,NULL|max:50',
             'birth_date'   => 'required|date|before:today',
-            'password'     => 'required|min:6|max:100',
+            // 'password'     => 'required|min:6|max:100',
             'image'        => 'nullable',
         ];
     }

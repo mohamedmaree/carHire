@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\{AdminReportsController,
     AdminController,
     AppHomeController,
     AuthController,
+    CarBrandController,
     CategoryController,
     CityController,
     ClientController,
@@ -150,6 +151,8 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         /*------------ complaints ----------*/
         Route::post('delete-all-complaints', [ ComplaintController::class, 'destroyAll' ])->name('complaints.deleteAll');
         Route::post('complaints-replay/{id}',[ComplaintController::class,'replay'])->name('complaint.replay');
+        Route::post('delete-all-car_brands', [ CarBrandController::class, 'destroyAll' ])->name('car_brands.deleteAll');
+        Route::resource('car_brands', CarBrandController::class);
         Route::resource('complaints', ComplaintController::class);
         /*------------ apphomes ----------*/
         Route::post('delete-all-apphomes', [ AppHomeController::class, 'destroyAll' ])->name('apphomes.deleteAll');

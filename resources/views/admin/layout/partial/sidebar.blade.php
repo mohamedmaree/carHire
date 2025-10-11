@@ -265,6 +265,13 @@
                             </a>
                         </li>
                     @endcan
+                    @can('read-all-car-brand')
+                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.car_brands.index') active @endif " >
+                            <a href="{{route('admin.car_brands.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.car_brands.index')
+                            </a>
+                        </li>
+                    @endcan
                     @can('read-all-complaint')
                          <li  class="nav-item  @if(Route::currentRouteName() == 'admin.complaints.index') active @endif " >
                             <a href="{{route('admin.complaints.index')}}">

@@ -7,11 +7,16 @@ class Complaint extends BaseModel
 {
     const PERMISSIONS_NOT_APPLIED = false;
 
-    protected $fillable = ['user_name' , 'user_id' , 'complaint' , 'phone' , 'email'];
+    protected $fillable = ['user_name' , 'user_id' , 'complaint' , 'phone' , 'email', 'car_brand_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function carBrand()
+    {
+        return $this->belongsTo(CarBrand::class, 'car_brand_id', 'id');
     }
 
     public function replays()

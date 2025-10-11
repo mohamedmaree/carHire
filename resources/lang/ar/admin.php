@@ -158,6 +158,7 @@ return [
     "Send_user_notification"                                 => "ارسال اشعار للمستخدمين",
     "Send_email"                                             => "ارسال بريد الكتروني",
     "active"                                                 => "نشط",
+    "inactive"                                               => "غير نشط",
     "password"                                               => "كلمة السر",
     "incorrect_password"                                     => "كلمة السر غير صحيحة",
     "email"                                                  => "البريد الالكتروني",
@@ -1412,6 +1413,30 @@ return [
     'required' => 'مطلوب',
     'is_required_help' => 'فعّل هذا إذا كان هذا الخيار يجب اختياره عند إجراء الحجز',
 
+    'car_brand' => 'علامة السيارة التجارية',
+    'car_brands' => 'علامات السيارات التجارية',
+    'car_brand_details' => 'تفاصيل علامة السيارة التجارية',
+    'logo' => 'الشعار',
+    'logo_help' => 'رفع صورة شعار لعلامة السيارة التجارية',
+    'not_specified' => 'غير محدد',
+
+    'is_required' => 'مطلوب',
+    'already_exists' => 'موجود بالفعل',
+    'must_be_image' => 'يجب أن يكون صورة',
+    'must_be_jpeg_png_jpg_gif_svg' => 'يجب أن يكون jpeg أو png أو jpg أو gif أو svg',
+    'max_size_2mb' => 'الحد الأقصى للحجم 2 ميجابايت',
+    'must_be_number' => 'يجب أن يكون رقم',
+    'must_be_greater_than_zero' => 'يجب أن يكون أكبر من أو يساوي الصفر',
+    'car_brands' => [
+        'index'    => 'علامات السيارات التجارية',
+        'create'   => 'اضافة علامة سيارة تجارية',
+        'edit'     => 'تعديل علامة سيارة تجارية',
+        'update'   => 'تعديل علامة سيارة تجارية',
+        'read'     => 'عرض علامة سيارة تجارية',
+        'read-all' => 'عرض جميع علامات السيارات التجارية',
+        'delete'   => 'حذف علامة سيارة تجارية',
+        'show'   => 'عرض علامة سيارة تجارية',
+    ],
     #new_comand_translations_here
     #!!!!!!!!!!!!!!!!!! don't delete the previous comment !!!!!!!!!!!!!!!!!
 ];
