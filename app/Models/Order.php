@@ -51,6 +51,7 @@ class Order extends BaseModel
         
         // Order Status and Management
         'order_status', 'payment_status', 'payment_method', 'payment_reference',
+        'eway_transaction_id', 'eway_access_code', 'eway_response', 'paid_at',
         'notes', 'admin_notes', 'is_active', 'sort_order'
     ];
 
@@ -75,6 +76,7 @@ class Order extends BaseModel
         'sort_order' => 'integer',
         'order_status' => OrderStatus::class,
         'payment_status' => PaymentStatus::class,
+        'paid_at' => 'datetime',
         // ID fields cast to integers
         'pickup_location_id' => 'integer',
         'return_location_id' => 'integer',

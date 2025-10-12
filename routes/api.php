@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OfferController;
+use App\Http\Controllers\Api\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -157,7 +158,13 @@ Route::group([
             Route::post('send-message/{room}'              ,[ChatController::class, 'sendMessage']);
             Route::post('upload-room-file/{room}'          ,[ChatController::class, 'uploadRoomFile']);
         /***************************** ChatController end *****************************/
+        
     });
-
+        /***************************** PaymentController start *****************************/
+        Route::get('payment/success/{order}'                    ,[PaymentController::class, 'success'])->name('api.payment.success');
+        Route::get('payment/cancel/{order}'                     ,[PaymentController::class, 'cancel'])->name('api.payment.cancel');
+        Route::get('payment/status/{order}'                     ,[PaymentController::class, 'status'])->name('api.payment.status');
+        Route::post('payment/webhook'                           ,[PaymentController::class, 'webhook'])->name('api.payment.webhook');
+        /***************************** PaymentController end *****************************/
 
 });

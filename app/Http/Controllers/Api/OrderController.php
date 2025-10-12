@@ -16,8 +16,9 @@ use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Traits\ResponseTrait;
 use App\Http\Requests\Api\orders\StoreOrderRequest;
-use App\Jobs\SendBookingConfirmationEmailJob;
+use App\Services\EwayPaymentService;
 use Illuminate\Http\Request;
+use App\Jobs\SendBookingConfirmationEmailJob;
 
 class OrderController extends Controller
 {
@@ -199,6 +200,18 @@ class OrderController extends Controller
         // Dispatch booking confirmation email job to queue
         SendBookingConfirmationEmailJob::dispatch($order->id);
         
-        return $this->successData(new OrderResource($order->load(['car', 'pickupLocation', 'returnLocation', 'pricePackage', 'options'])), 'Order created successfully');
+        // Create payment URL using eWAY
+        $paymentService = new EwayPaymentService();
+        $paymentResult = $paymentService->createPaymentUrl($order);
+        
+        if ($paymentResult['success']) {
+            return $this->successData([
+                'order' => new OrderResource($order->load(['car', 'pickupLocation', 'returnLocation', 'pricePackage', 'options'])),
+                'payment_url' => $paymentResult['payment_url'],
+                'access_code' => $paymentResult['access_code']
+            ], 'Order created successfully. Please complete payment to confirm your booking.');
+        } else {
+            return $this->response('fail','Order created but payment initialization failed. Please contact support.',$paymentResult['errors']);
+        }
     }
 }

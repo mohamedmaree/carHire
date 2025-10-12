@@ -8,6 +8,7 @@ enum PaymentStatus: string
     case PAID = 'paid';
     case FAILED = 'failed';
     case REFUNDED = 'refunded';
+    case CANCELLED = 'cancelled';
 
     public function getLabel(): string
     {
@@ -16,6 +17,7 @@ enum PaymentStatus: string
             self::PAID => __('admin.paid'),
             self::FAILED => __('admin.failed'),
             self::REFUNDED => __('admin.refunded'),
+            self::CANCELLED => __('admin.cancelled'),
         };
     }
 
@@ -26,6 +28,7 @@ enum PaymentStatus: string
             self::PAID => 'badge-success',
             self::FAILED => 'badge-danger',
             self::REFUNDED => 'badge-info',
+            self::CANCELLED => 'badge-secondary',
         };
     }
 
