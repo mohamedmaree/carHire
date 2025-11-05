@@ -18,8 +18,8 @@ class store extends FormRequest
             'max_use'                 => 'required|numeric',
             'discount'              => 'required|numeric',
             'max_discount'          => 'required|numeric',
-            'start_date'            => 'required|after:'.\Carbon\Carbon::now(),
-            'expire_date'           => 'required|after:'.\Carbon\Carbon::now(),
+            'start_date'            => 'required',
+            'expire_date'           => 'required',
             'type'                  => 'required|in:ratio,number',
         ] ;
     }

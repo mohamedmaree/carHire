@@ -22,6 +22,7 @@ class Offer extends BaseModel
         'start_date',
         'end_date',
         'is_active',
+        'show_in_popup',
         'sort_order'
     ];
 
@@ -30,6 +31,7 @@ class Offer extends BaseModel
     protected $casts = [
         'discount_amount' => 'decimal:2',
         'is_active' => 'boolean',
+        'show_in_popup' => 'boolean',
         'sort_order' => 'integer',
         'start_date' => 'date',
         'end_date' => 'date'
@@ -64,6 +66,11 @@ class Offer extends BaseModel
                         $q->whereNull('end_date')
                           ->orWhere('end_date', '>=', $now);
                     });
+    }
+
+    public function scopeShowInPopup($query)
+    {
+        return $query->where('show_in_popup', true);
     }
 
     // Accessors

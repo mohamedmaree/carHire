@@ -102,6 +102,14 @@ class OrderController extends Controller
         // Calculate total amount
         $data['total_amount'] = $data['subtotal_amount'] - ($data['coupon_discount_amount'] ?? 0);
         
+        // Handle fees - ensure it's null if empty or 0
+        if (empty($data['fees']) || $data['fees'] == 0) {
+            $data['fees'] = null;
+        } else {
+            // Add fees to total amount
+            $data['total_amount'] += $data['fees'];
+        }
+        
         // Handle airport locations
         if ($data['pickup_location_id']) {
             $pickupLocation = Location::find($data['pickup_location_id']);
@@ -233,6 +241,10 @@ class OrderController extends Controller
             $data['subtotal_amount'] = 0;
         }
         
+        // Reset coupon discount fields first
+        $data['coupon_discount_amount'] = null;
+        $data['coupon_discount_percentage'] = null;
+        
         // Handle coupon discount
         if (!empty($data['coupon_code'])) {
             $coupon = Coupon::where('coupon_num', $data['coupon_code'])
@@ -254,8 +266,63 @@ class OrderController extends Controller
             }
         }
         
-        // Calculate total amount
-        $data['total_amount'] = $data['subtotal_amount'] - ($data['coupon_discount_amount'] ?? 0);
+        // Handle fees - ensure it's null if empty or 0
+        if (empty($data['fees']) || $data['fees'] == 0) {
+            $data['fees'] = null;
+        }
+        
+        // Calculate options total FIRST (before calculating final total)
+        $optionsTotal = 0;
+        if (!empty($data['options'])) {
+            foreach ($data['options'] as $optionId => $optionData) {
+                if ($optionData['quantity'] > 0) {
+                    $option = Option::find($optionId);
+                    
+                    // Skip if this is a parent option and any of its children are selected
+                    if ($option && $option->is_parent) {
+                        $hasChildSelected = false;
+                        foreach ($data['options'] as $otherOptionId => $otherOptionData) {
+                            if ($otherOptionData['quantity'] > 0) {
+                                $otherOption = Option::find($otherOptionId);
+                                if ($otherOption && $otherOption->parent_id == $option->id) {
+                                    $hasChildSelected = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if ($hasChildSelected) {
+                            continue; // Skip parent if child is selected
+                        }
+                    }
+                    
+                    // Skip if this is a child option and its parent is also selected
+                    if ($option && $option->is_child && isset($data['options'][$option->parent_id])) {
+                        $parentData = $data['options'][$option->parent_id];
+                        if ($parentData['quantity'] > 0) {
+                            continue; // Skip child if parent is selected
+                        }
+                    }
+                    
+                    if ($option) {
+                        $price = $option->price;
+                        $totalPrice = $price * $optionData['quantity'];
+                        
+                        if ($option->price_type == 'per_day') {
+                            $totalPrice *= $data['rental_days'];
+                        }
+                        
+                        $optionsTotal += $totalPrice;
+                    }
+                }
+            }
+        }
+        
+        // Calculate total amount from scratch: subtotal - coupon discount + fees + options
+        $data['total_amount'] = $data['subtotal_amount'] 
+            - ($data['coupon_discount_amount'] ?? 0) 
+            + ($data['fees'] ?? 0) 
+            + $optionsTotal;
         
         // Handle airport locations
         if ($data['pickup_location_id']) {
@@ -293,9 +360,10 @@ class OrderController extends Controller
         
         $data['user_id'] = $user->id;
         
+        // Update order with all data including calculated total_amount
         $order->update($data);
         
-        // Update options
+        // Update options separately
         $order->options()->detach();
         if (!empty($data['options'])) {
             foreach ($data['options'] as $optionId => $optionData) {
@@ -303,12 +371,12 @@ class OrderController extends Controller
                     $option = Option::find($optionId);
                     
                     // Skip if this is a parent option and any of its children are selected
-                    if ($option->is_parent) {
+                    if ($option && $option->is_parent) {
                         $hasChildSelected = false;
                         foreach ($data['options'] as $otherOptionId => $otherOptionData) {
                             if ($otherOptionData['quantity'] > 0) {
                                 $otherOption = Option::find($otherOptionId);
-                                if ($otherOption->parent_id == $option->id) {
+                                if ($otherOption && $otherOption->parent_id == $option->id) {
                                     $hasChildSelected = true;
                                     break;
                                 }
@@ -321,33 +389,30 @@ class OrderController extends Controller
                     }
                     
                     // Skip if this is a child option and its parent is also selected
-                    if ($option->is_child && isset($data['options'][$option->parent_id])) {
+                    if ($option && $option->is_child && isset($data['options'][$option->parent_id])) {
                         $parentData = $data['options'][$option->parent_id];
                         if ($parentData['quantity'] > 0) {
                             continue; // Skip child if parent is selected
                         }
                     }
                     
-                    $price = $option->price;
-                    $totalPrice = $price * $optionData['quantity'];
-                    
-                    if ($option->price_type == 'per_day') {
-                        $totalPrice *= $data['rental_days'];
+                    if ($option) {
+                        $price = $option->price;
+                        $totalPrice = $price * $optionData['quantity'];
+                        
+                        if ($option->price_type == 'per_day') {
+                            $totalPrice *= $data['rental_days'];
+                        }
+                        
+                        $order->options()->attach($optionId, [
+                            'quantity' => $optionData['quantity'],
+                            'price' => $price,
+                            'total_price' => $totalPrice
+                        ]);
                     }
-                    
-                    $order->options()->attach($optionId, [
-                        'quantity' => $optionData['quantity'],
-                        'price' => $price,
-                        'total_price' => $totalPrice
-                    ]);
-                    
-                    $data['total_amount'] += $totalPrice;
                 }
             }
         }
-        
-        // Update total amount with options
-        $order->update(['total_amount' => $data['total_amount']]);
         
         // Dispatch booking confirmation email job to queue (only if order status changed to confirmed)
         if ($order->order_status->value === 'confirmed') {

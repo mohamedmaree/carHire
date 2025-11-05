@@ -71,6 +71,47 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.caption') }} ({{ __('admin.ar') }})</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $location->getTranslation('caption', 'ar') }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>{{ __('admin.caption') }} ({{ __('admin.en') }})</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $location->getTranslation('caption', 'en') }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>{{ __('admin.description') }} ({{ __('admin.ar') }})</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $location->getTranslation('description', 'ar') }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>{{ __('admin.description') }} ({{ __('admin.en') }})</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $location->getTranslation('description', 'en') }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>{{ __('admin.toll_delivery_fees') }}</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $location->toll_delivery_fees ?? __('admin.not_specified') }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.type') }}</label>
                                                                             <div class="controls">
                                                                                 <p class="form-control-static">

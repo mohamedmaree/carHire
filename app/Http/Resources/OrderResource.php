@@ -200,6 +200,8 @@ class OrderResource extends JsonResource
             
             // Amounts
             'subtotal_amount' => $this->subtotal_amount,
+            'fees' => $this->fees,
+            'formatted_fees' => $this->formatted_fees,
             'total_amount' => $this->total_amount,
             'formatted_subtotal_amount' => $this->formatted_subtotal_amount,
             'formatted_total_amount' => $this->formatted_total_amount,

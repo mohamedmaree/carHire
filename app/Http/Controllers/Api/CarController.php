@@ -19,7 +19,7 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::active()
-            ->with(['activePricePackages'])
+            ->with(['activePricePackages', 'images'])
             ->ordered()
             ->get();
 
@@ -32,7 +32,7 @@ class CarController extends Controller
     public function show($id)
     {
         $car = Car::active()
-            ->with(['pricePackages'])
+            ->with(['pricePackages', 'images'])
             ->findOrFail($id);
 
         return $this->successData(new CarResource($car));
@@ -43,7 +43,7 @@ class CarController extends Controller
      */
     public function search(Request $request)
     {
-        $query = Car::active()->with(['activePricePackages']);
+        $query = Car::active()->with(['activePricePackages', 'images']);
 
         // Filter by transmission
         if ($request->has('transmission')) {

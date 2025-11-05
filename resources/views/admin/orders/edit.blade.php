@@ -438,6 +438,15 @@
                                                                                 </div>
                                                                             </div>
 
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label>@lang('admin.fees')</label>
+                                                                                    <div class="controls">
+                                                                                        <input type="number" name="fees" class="form-control" value="{{old('fees', $order->fees)}}" placeholder="@lang('admin.fees')" step="0.01" min="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>

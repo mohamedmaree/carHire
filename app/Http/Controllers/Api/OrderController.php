@@ -100,16 +100,27 @@ class OrderController extends Controller
         // Calculate total amount
         $data['total_amount'] = $data['subtotal_amount'] - ($data['coupon_discount_amount'] ?? 0);
         
-        // Handle airport locations
+        // Handle airport locations and add toll delivery fees
+        $tollDeliveryFees = 0;
         if (isset($data['pickup_location_id'])) {
             $pickupLocation = Location::find($data['pickup_location_id']);
             $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
+            if ($pickupLocation && $pickupLocation->toll_delivery_fees) {
+                $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
+            }
         }
         
         if (isset($data['return_location_id'])) {
             $returnLocation = Location::find($data['return_location_id']);
             $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
+            if ($returnLocation && $returnLocation->toll_delivery_fees) {
+                $tollDeliveryFees += $returnLocation->toll_delivery_fees;
+            }
         }
+        
+        // Add toll delivery fees to total amount
+        $data['total_amount'] += $tollDeliveryFees;
+        $data['fees'] = $tollDeliveryFees;
         
         // Handle user creation/update
         $user = User::where('email', $data['email'])

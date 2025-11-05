@@ -13,7 +13,6 @@ class Create extends FormRequest
 
     public function rules()
     {
-        dd(request()->all());
         return [
             'name'         => 'required|max:191',
             'country_code' => 'required',

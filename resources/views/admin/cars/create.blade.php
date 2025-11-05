@@ -7,7 +7,7 @@
 {{-- extra css files --}}
 
 @section('content')
-<form method="POST" action="{{route('admin.cars.store')}}" class="store form-horizontal" novalidate>
+<form method="POST" action="{{route('admin.cars.store')}}" class="store form-horizontal" novalidate enctype="multipart/form-data">
 
     <div class="content-body">
         <section id="dashboard-ecommerce">
@@ -37,6 +37,13 @@
                                        href="#tab-3" aria-expanded="false">
                                         <i class="feather icon-star mr-50 font-medium-3"></i>
                                         @lang('admin.features')
+                                    </a>
+                                </li>
+                                <li class="nav-item" style="margin-top: 3px">
+                                    <a class="nav-link d-flex py-75" id="tab-pill-4" data-toggle="pill"
+                                       href="#tab-4" aria-expanded="false">
+                                        <i class="feather icon-image mr-50 font-medium-3"></i>
+                                        @lang('admin.car_images')
                                     </a>
                                 </li>
                             </ul>
@@ -391,6 +398,41 @@
                                                     <div class="col-12 d-flex justify-content-center mt-3">
                                                         <button type="submit" class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.add')}}</button>
                                                         <a href="{{ url()->previous() }}" type="reset" class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Car Images Tab -->
+                                            <div role="tabpanel" class="tab-pane" id="tab-4" aria-labelledby="tab-pill-4" aria-expanded="false">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        @lang('admin.car_images')
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <div class="card">
+                                                            <div class="card-content">
+                                                                <div class="card-body">
+                                                                    <div class="col-12">
+                                                                        <div class="imgMontg col-12 text-center">
+                                                                            <div class="dropBox">
+                                                                                <div class="textCenter">
+                                                                                    <div class="imagesUploadBlock">
+                                                                                        <label class="uploadImg">
+                                                                                            <span><i class="feather icon-image"></i></span>
+                                                                                            <input type="file" accept="image/*" name="car_images[]" class="imageUploader" multiple>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 d-flex justify-content-center mt-3">
+                                                                        <button type="submit" class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.add')}}</button>
+                                                                        <a href="{{ url()->previous() }}" type="reset" class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

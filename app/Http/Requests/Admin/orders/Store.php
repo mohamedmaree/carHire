@@ -54,6 +54,9 @@ class Store extends FormRequest
             // Coupon Information
             'coupon_code' => 'nullable|string|max:50',
             
+            // Fees
+            'fees' => 'nullable|numeric|min:0|max:99999999.99',
+            
             // Customer Information
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',

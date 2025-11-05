@@ -95,6 +95,22 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.show_in_popup') }}</label>
+                                                                            <div class="controls">
+                                                                                @if ($offer->show_in_popup)
+                                                                                    <span class="btn btn-sm round btn-outline-success">
+                                                                                        {{ __('admin.yes') }} <i class="la la-check font-medium-2"></i>
+                                                                                    </span>
+                                                                                @else
+                                                                                    <span class="btn btn-sm round btn-outline-secondary">
+                                                                                        {{ __('admin.no') }} <i class="la la-close font-medium-2"></i>
+                                                                                    </span>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.sort_order') }}</label>
                                                                             <div class="controls">
                                                                                 <p class="form-control-static">{{ $offer->sort_order }}</p>

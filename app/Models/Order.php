@@ -32,7 +32,7 @@ class Order extends BaseModel
         'customer_age', 'customer_country_id',
         
         // Car and Options
-        'car_id', 'price_package_id', 'rental_days', 'total_amount', 'subtotal_amount',
+        'car_id', 'price_package_id', 'rental_days', 'total_amount', 'subtotal_amount', 'fees',
         
         // Coupon Information
         'coupon_code', 'coupon_discount_amount', 'coupon_discount_percentage',
@@ -69,6 +69,7 @@ class Order extends BaseModel
         'rental_days' => 'integer',
         'total_amount' => 'decimal:2',
         'subtotal_amount' => 'decimal:2',
+        'fees' => 'decimal:2',
         'coupon_discount_amount' => 'decimal:2',
         'coupon_discount_percentage' => 'decimal:2',
         'customer_age' => 'integer',
@@ -194,6 +195,14 @@ class Order extends BaseModel
     public function getFormattedSubtotalAmountAttribute()
     {
         return '$' . number_format($this->subtotal_amount, 2);
+    }
+
+    public function getFormattedFeesAttribute()
+    {
+        if ($this->fees) {
+            return '$' . number_format($this->fees, 2);
+        }
+        return '$0.00';
     }
 
     public function getOrderStatusTextAttribute()

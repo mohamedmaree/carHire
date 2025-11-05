@@ -51,12 +51,15 @@ class AdminController extends Controller
 
     public function store(Create $request)
     {
+        $data = $request->validated();
         $is_blocked = ($request->is_blocked) ? 1 : 0;
-        $admin = Admin::create($request->validated() + [ 'is_blocked' => $is_blocked ]);
+        $data['is_blocked'] = $is_blocked;
+        unset($data['role_id']);
+        $admin = Admin::create($data);
         $role = Role::findOrFail($request->role_id);
         $admin->assignRole($role);
         Report::addToLog('  اضافه مدير');
-        return $this->successOtherData([ 'url' => route('admin.admins.index') ]);
+        return response()->json([ 'url' => route('admin.admins.index') ]);
     }
 
     public function edit($id)
@@ -80,7 +83,7 @@ class AdminController extends Controller
         $role = Role::findOrFail($request->role_id);
         $admin->syncRoles($role);
         Report::addToLog('  تعديل مدير');
-        return $this->successOtherData([ 'url' => route('admin.admins.index') ]);
+        return response()->json([ 'url' => route('admin.admins.index') ]);
     }
 
     public function show($id)
@@ -101,7 +104,7 @@ class AdminController extends Controller
 
         Admin::findOrFail($id)->delete();
         Report::addToLog('  حذف مدير');
-        return $this->successOtherData([ 'id' => $id ]);
+        return response()->json([ 'id' => $id ]);
 
     }
 

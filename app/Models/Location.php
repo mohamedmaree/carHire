@@ -12,15 +12,16 @@ class Location extends BaseModel
     const PERMISSIONS_NOT_APPLIED = false;
 
     protected $fillable = [
-        'name', 'address', 'lat', 'lng', 'type', 'working_days', 'working_hours', 
+        'name', 'address', 'caption', 'toll_delivery_fees', 'description', 'lat', 'lng', 'type', 'working_days', 'working_hours', 
         'holiday_days', 'holiday_hours', 'is_active', 'sort_order'
     ];
 
-    public $translatable = ['name', 'address'];
+    public $translatable = ['name', 'address', 'caption', 'description'];
 
     protected $casts = [
         'lat' => 'decimal:8',
         'lng' => 'decimal:8',
+        'toll_delivery_fees' => 'decimal:2',
         'working_days' => 'array',
         'holiday_days' => 'array',
         'is_active' => 'boolean',

@@ -57,6 +57,11 @@ class Car extends BaseModel
         return $this->hasMany(Order::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(CarImage::class)->orderBy('created_at', 'asc');
+    }
+
     // Scopes
     public function scopeActive($query)
     {

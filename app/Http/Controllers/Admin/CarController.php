@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\cars\Store;
 use App\Http\Requests\Admin\cars\Update;
 use App\Models\Car;
+use App\Models\CarImage;
 use App\Traits\Report;
 
 class CarController extends Controller
@@ -63,13 +64,23 @@ class CarController extends Controller
             }
         }
         
+        // Handle car images
+        if ($request->hasFile('car_images')) {
+            foreach ($request->file('car_images') as $image) {
+                $carImage = new CarImage();
+                $carImage->image = $image;
+                $carImage->car_id = $car->id;
+                $carImage->save();
+            }
+        }
+        
         Report::addToLog('إضافة سيارة جديدة');
         return response()->json(['url' => route('admin.cars.index')]);
     }
 
     public function edit($id)
     {
-        $car = Car::with('pricePackages')->findOrFail($id);
+        $car = Car::with(['pricePackages', 'images'])->findOrFail($id);
         return view('admin.cars.edit', ['car' => $car]);
     }
 
@@ -101,14 +112,32 @@ class CarController extends Controller
             }
         }
         
+        // Handle car images - add new images
+        if ($request->hasFile('car_images')) {
+            foreach ($request->file('car_images') as $image) {
+                $carImage = new CarImage();
+                $carImage->image = $image;
+                $carImage->car_id = $car->id;
+                $carImage->save();
+            }
+        }
+        
         Report::addToLog('تعديل سيارة');
         return response()->json(['url' => route('admin.cars.index')]);
     }
 
     public function show($id)
     {
-        $car = Car::with('pricePackages')->findOrFail($id);
+        $car = Car::with(['pricePackages', 'images'])->findOrFail($id);
         return view('admin.cars.show', ['car' => $car]);
+    }
+    
+    public function deleteImage($carId, $id)
+    {
+        $carImage = CarImage::where('car_id', $carId)->findOrFail($id);
+        $carImage->delete();
+        Report::addToLog('حذف صورة سيارة');
+        return response()->json(['success' => true]);
     }
 
     public function destroy($id)

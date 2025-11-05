@@ -31,6 +31,13 @@
                                     @lang('admin.features')
                                 </a>
                             </li>
+                            <li class="nav-item" style="margin-top: 3px">
+                                <a class="nav-link d-flex py-75" id="tab-pill-4" data-toggle="pill"
+                                   href="#tab-4" aria-expanded="false">
+                                    <i class="feather icon-image mr-50 font-medium-3"></i>
+                                    @lang('admin.car_images')
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- right content section -->
@@ -267,6 +274,36 @@
                                                                 @else
                                                                     <div class="text-center">
                                                                         <p class="text-muted">{{ __('admin.no_features_found') }}</p>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Car Images Tab -->
+                                        <div role="tabpanel" class="tab-pane" id="tab-4" aria-labelledby="tab-pill-4" aria-expanded="false">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    @lang('admin.car_images')
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                                @if($car->images->count() > 0)
+                                                                    <div class="row">
+                                                                        @foreach($car->images as $carImage)
+                                                                            <div class="col-md-3 mb-3">
+                                                                                <img src="{{ $carImage->image }}" alt="Car Image" class="img-thumbnail" style="width: 100%; height: 200px; object-fit: cover;">
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
+                                                                @else
+                                                                    <div class="text-center">
+                                                                        <p class="text-muted">{{ __('admin.no_images_found') }}</p>
                                                                     </div>
                                                                 @endif
                                                             </div>

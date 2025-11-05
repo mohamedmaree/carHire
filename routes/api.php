@@ -29,6 +29,8 @@ Route::group([
             Route::get('socials'                     ,[SettingController::class, 'socials']);
             Route::get('images'                      ,[SettingController::class, 'images']);
             Route::get('partners'                     ,[SettingController::class, 'partners']);
+            Route::get('home-banners'                ,[SettingController::class, 'homeBanners']);
+            Route::get('home-sections'               ,[SettingController::class, 'homeSections']);
             Route::get('categories/{id?}'            ,[SettingController::class, 'categories']);
             Route::get('countries'                   ,[SettingController::class, 'countries']);
             Route::get('countries-with-cities'       ,[SettingController::class, 'countriesWithCities']);
@@ -95,6 +97,7 @@ Route::group([
             Route::get('offers'                           ,[OfferController::class, 'index']);
             Route::get('offers/{id}'                      ,[OfferController::class, 'show']);
             Route::get('offers-latest'                    ,[OfferController::class, 'latest']);
+            Route::get('offers-popup'                     ,[OfferController::class, 'popup']);
         /***************************** OfferController End *****************************/
 
         /***************************** OrderController start *****************************/

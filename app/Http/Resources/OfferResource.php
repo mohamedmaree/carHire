@@ -37,6 +37,7 @@ class OfferResource extends JsonResource
                 return $this->coupon->coupon_num;
             }),
             'is_active' => $this->is_active,
+            'show_in_popup' => $this->show_in_popup,
             'sort_order' => $this->sort_order,
             'formatted_date' => $this->formatted_date,
             'short_description' => $this->short_description,

@@ -19,6 +19,14 @@ class CarResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'image' => $this->image,
+            'images' => $this->whenLoaded('images', function () {
+                return $this->images->map(function ($carImage) {
+                    return [
+                        'id' => $carImage->id,
+                        'image' => $carImage->image,
+                    ];
+                });
+            }),
             'seats' => $this->seats,
             'bags' => $this->bags,
             'transmission' => $this->transmission,

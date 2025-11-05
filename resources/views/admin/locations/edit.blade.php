@@ -112,8 +112,33 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
+                                                                                            <div class="col-md-12 col-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="first-name-column">{{__('admin.caption')}} {{ $lang }}</label>
+                                                                                                    <div class="controls">
+                                                                                                        <input type="text" name="caption[{{$lang}}]" class="form-control" placeholder="{{__('admin.write') . __('admin.caption')}} {{ $lang }}" value="{{ $location->getTranslation('caption', $lang) }}">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-12 col-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="first-name-column">{{__('admin.description')}} {{ $lang }}</label>
+                                                                                                    <div class="controls">
+                                                                                                        <textarea class="form-control" name="description[{{$lang}}]" cols="30" rows="5" placeholder="{{__('admin.write') . __('admin.description')}} {{ $lang }}">{{ $location->getTranslation('description', $lang) }}</textarea>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
                                                                                         </div>
                                                                                     @endforeach
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label for="first-name-column">{{__('admin.toll_delivery_fees')}}</label>
+                                                                                    <div class="controls">
+                                                                                        <input type="number" name="toll_delivery_fees" class="form-control" placeholder="{{__('admin.write') . __('admin.toll_delivery_fees')}}" step="0.01" min="0" value="{{ $location->toll_delivery_fees }}">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
 

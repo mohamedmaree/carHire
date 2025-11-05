@@ -88,6 +88,13 @@
                             </a>
                         </li>
                         <li class="nav-item " style="margin-top: 3px">
+                            <a class="nav-link d-flex py-75" id="account-pill-our-location" data-toggle="pill"
+                               href="#account-vertical-our-location" aria-expanded="false">
+                                <i class="feather icon-map-pin mr-50 font-medium-3"></i>
+                                {{__('admin.our_location')}}
+                            </a>
+                        </li>
+                        <li class="nav-item " style="margin-top: 3px">
                             <a class="nav-link d-flex py-75" id="account-pill-privacy" data-toggle="pill"
                                href="#account-vertical-privacy" aria-expanded="false">
                                 <i class="feather icon-award mr-50 font-medium-3"></i>
@@ -113,6 +120,13 @@
                                href="#account-vertical-app-download" aria-expanded="false">
                                 <i class="feather icon-smartphone mr-50 font-medium-3"></i>
                                 {{__('admin.app_download')}}
+                            </a>
+                        </li>
+                        <li class="nav-item " style="margin-top: 3px">
+                            <a class="nav-link d-flex py-75" id="account-pill-home-sections" data-toggle="pill"
+                               href="#account-vertical-home-sections" aria-expanded="false">
+                                <i class="feather icon-layout mr-50 font-medium-3"></i>
+                                {{__('admin.home_sections')}}
                             </a>
                         </li>
                         <li class="nav-item " style="margin-top: 3px">
@@ -171,6 +185,28 @@
                                                                    id="account-name"
                                                                    placeholder="{{__('admin.the_name_of_the_application_in_english')}}"
                                                                    value="{{$data['name_en']}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="tagline-ar">{{__('admin.tagline')}} ({{__('admin.ar')}})</label>
+                                                            <input type="text" class="form-control" name="tagline_ar"
+                                                                   id="tagline-ar"
+                                                                   placeholder="{{__('admin.tagline')}} ({{__('admin.ar')}})"
+                                                                   value="{{$data['tagline_ar'] ?? ''}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label for="tagline-en">{{__('admin.tagline')}} ({{__('admin.en')}})</label>
+                                                            <input type="text" class="form-control" name="tagline_en"
+                                                                   id="tagline-en"
+                                                                   placeholder="{{__('admin.tagline')}} ({{__('admin.en')}})"
+                                                                   value="{{$data['tagline_en'] ?? ''}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -391,8 +427,58 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
+                                                
+                                                <div class="col-12 mt-4">
+                                                    <h5 class="mb-3">{{__('admin.home_banner_images')}}</h5>
+                                                    <div class="row">
+                                                        <div class="imgMontg col-12 col-lg-4 col-md-12 text-center">
+                                                            <div class="dropBox">
+                                                                <div class="textCenter d-flex flex-column">
+                                                                    <div class="imagesUploadBlock">
+                                                                        <label class="uploadImg">
+                                                                            <span><i class="feather icon-image"></i></span>
+                                                                            <input type="file" accept="image/*"
+                                                                                   name="home_banner_1"
+                                                                                   class="imageUploader">
+                                                                        </label>
+                                                                        <div class="uploadedBlock">
+                                                                            <img src="{{$data['home_banner_1'] ?? ''}}">
+                                                                            <button class="close"><i
+                                                                                        class="feather icon-trash-2"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span>{{__('admin.home_banner')}} 1</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="imgMontg col-12 col-lg-4 col-md-12 text-center">
+                                                            <div class="dropBox">
+                                                                <div class="textCenter d-flex flex-column">
+                                                                    <div class="imagesUploadBlock">
+                                                                        <label class="uploadImg">
+                                                                            <span><i class="feather icon-image"></i></span>
+                                                                            <input type="file" accept="image/*"
+                                                                                   name="home_banner_2"
+                                                                                   class="imageUploader">
+                                                                        </label>
+                                                                        <div class="uploadedBlock">
+                                                                            <img src="{{$data['home_banner_2'] ?? ''}}">
+                                                                            <button class="close"><i
+                                                                                        class="feather icon-trash-2"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span>{{__('admin.home_banner')}} 2</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-12 d-flex justify-content-center mt-3">
                                                     <button type="submit"
                                                             class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
@@ -700,48 +786,217 @@
                                               enctype="multipart/form-data">
                                             @method('put')
                                             @csrf
+                                            
                                             <div class="row">
-
                                                 <div class="col-12">
-                                                    <ul class="nav nav-tabs  mb-3">
+                                                    <ul class="nav nav-tabs mb-3">
                                                         @foreach (languages() as $lang)
                                                             <li class="nav-item">
                                                                 <a class="nav-link @if($loop->first) active @endif"
-                                                                   data-toggle="pill" href="#about_{{$lang}}"
+                                                                   data-toggle="pill" href="#about_lang_{{$lang}}"
                                                                    aria-expanded="true">{{  __('admin.data') }} {{ $lang }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
-
-                                                <div class="tab-content">
+                                                
+                                                <div class="tab-content w-100">
                                                     @foreach (languages() as $lang)
                                                         <div role="tabpanel"
                                                              class="tab-pane fade @if($loop->first) show active @endif "
-                                                             id="about_{{$lang}}" aria-labelledby="first_{{$lang}}"
+                                                             id="about_lang_{{$lang}}" aria-labelledby="about_lang_{{$lang}}"
                                                              aria-expanded="true">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <div class="controls">
-                                                                        <label for="account-name">{{__('admin.about_the_application')}} {{ $lang  }}</label>
-                                                                        <textarea class="form-control"
-                                                                                  name="about_{{ $lang }}"
-                                                                                  id="about_{{ $lang }}_editor"
-                                                                                  cols="30" rows="10"
-                                                                                  placeholder="{{__('admin.about_the_application')}} {{ $lang }}">{{$data['about_'.$lang]??''}}</textarea>
+                                                            
+                                                            <!-- Section 1 Title -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{__('admin.about_section_1')}} - {{__('admin.title')}} ({{ $lang }})</label>
+                                                                        <input type="text" name="about_section_1_title_{{$lang}}" class="form-control" 
+                                                                               value="{{$data['about_section_1']['title_'.$lang] ?? ''}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Section 2 Title -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{__('admin.about_section_2')}} - {{__('admin.title')}} ({{ $lang }})</label>
+                                                                        <input type="text" name="about_section_2_title_{{$lang}}" class="form-control" 
+                                                                               value="{{$data['about_section_2']['title_'.$lang] ?? ''}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- About (for Section 1) -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="controls">
+                                                                            <label>{{__('admin.about_the_application')}} ({{ $lang }}) - {{__('admin.description')}} {{__('admin.about_section_1')}}</label>
+                                                                            <textarea class="form-control"
+                                                                                      name="about_{{ $lang }}"
+                                                                                      id="about_{{ $lang }}_editor"
+                                                                                      cols="30" rows="10"
+                                                                                      placeholder="{{__('admin.about_the_application')}} {{ $lang }}">{{$data['about_'.$lang]??''}}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- About 2 (for Section 2) -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="controls">
+                                                                            <label>{{__('admin.about_2')}} ({{ $lang }}) - {{__('admin.description')}} {{__('admin.about_section_2')}}</label>
+                                                                            <textarea class="form-control"
+                                                                                      name="about_2_{{ $lang }}"
+                                                                                      id="about_2_{{ $lang }}_editor"
+                                                                                      cols="30" rows="10"
+                                                                                      placeholder="{{__('admin.about_2')}} {{ $lang }}">{{$data['about_2_'.$lang]??''}}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                
+                                                <!-- Images Section (outside language tabs) -->
+                                                <div class="col-12 mt-4">
+                                                    <hr>
+                                                    <h4 class="mb-3">{{__('admin.about_images')}}</h4>
+                                                    
+                                                    <!-- Section 1 Image -->
+                                                    <div class="row mb-4">
+                                                        <div class="col-12">
+                                                            <h5 class="mb-2">{{__('admin.about_section_1')}} - {{__('admin.image')}}</h5>
+                                                            <div class="imgMontg col-12 text-center">
+                                                                <div class="dropBox">
+                                                                    <div class="textCenter d-flex flex-column">
+                                                                        <div class="imagesUploadBlock">
+                                                                            <label class="uploadImg">
+                                                                                <span><i class="feather icon-image"></i></span>
+                                                                                <input type="file" accept="image/*" name="about_section_1_image" class="imageUploader">
+                                                                            </label>
+                                                                            <div class="uploadedBlock">
+                                                                                @if(!empty($data['about_section_1']['image']))
+                                                                                    <img src="{{$data['about_section_1']['image']}}">
+                                                                                @endif
+                                                                                <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span>{{__('admin.image')}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    
+                                                    <!-- Section 2 Image -->
+                                                    <div class="row mb-4">
+                                                        <div class="col-12">
+                                                            <h5 class="mb-2">{{__('admin.about_section_2')}} - {{__('admin.image')}}</h5>
+                                                            <div class="imgMontg col-12 text-center">
+                                                                <div class="dropBox">
+                                                                    <div class="textCenter d-flex flex-column">
+                                                                        <div class="imagesUploadBlock">
+                                                                            <label class="uploadImg">
+                                                                                <span><i class="feather icon-image"></i></span>
+                                                                                <input type="file" accept="image/*" name="about_section_2_image" class="imageUploader">
+                                                                            </label>
+                                                                            <div class="uploadedBlock">
+                                                                                @if(!empty($data['about_section_2']['image']))
+                                                                                    <img src="{{$data['about_section_2']['image']}}">
+                                                                                @endif
+                                                                                <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span>{{__('admin.image')}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 d-flex justify-content-center mt-3">
+                                                <button type="submit"
+                                                        class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
+                                                <a href="{{ url()->previous() }}" type="reset"
+                                                   class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="account-vertical-our-location"
+                                         aria-labelledby="account-pill-our-location" aria-expanded="false">
+                                        <form action="{{route('admin.settings.update')}}" method="post"
+                                              enctype="multipart/form-data">
+                                            @method('put')
+                                            @csrf
+                                            
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <ul class="nav nav-tabs mb-3">
+                                                        @foreach (languages() as $lang)
+                                                            <li class="nav-item">
+                                                                <a class="nav-link @if($loop->first) active @endif"
+                                                                   data-toggle="pill" href="#our_location_lang_{{$lang}}"
+                                                                   aria-expanded="true">{{  __('admin.data') }} {{ $lang }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                                
+                                                <div class="tab-content w-100">
+                                                    @foreach (languages() as $lang)
+                                                        <div role="tabpanel"
+                                                             class="tab-pane fade @if($loop->first) show active @endif "
+                                                             id="our_location_lang_{{$lang}}" aria-labelledby="our_location_lang_{{$lang}}"
+                                                             aria-expanded="true">
+                                                            
+                                                            <!-- Our Location Title -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{__('admin.title')}} ({{ $lang }})</label>
+                                                                        <input type="text" name="our_location_title_{{$lang}}" class="form-control" 
+                                                                               value="{{$data['our_location']['title_'.$lang] ?? ''}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Our Location Description -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="controls">
+                                                                            <label>{{__('admin.description')}} ({{ $lang }})</label>
+                                                                            <textarea class="form-control"
+                                                                                      name="our_location_description_{{$lang}}"
+                                                                                      id="our_location_description_{{$lang}}_editor"
+                                                                                      cols="30" rows="10"
+                                                                                      placeholder="{{__('admin.our_location')}} {{ $lang }}">{{$data['our_location']['description_'.$lang]??''}}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
                                                     @endforeach
                                                 </div>
+                                            </div>
 
-                                                <div class="col-12 d-flex justify-content-center mt-3">
-                                                    <button type="submit"
-                                                            class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
-                                                    <a href="{{ url()->previous() }}" type="reset"
-                                                       class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
-                                                </div>
+                                            <div class="col-12 d-flex justify-content-center mt-3">
+                                                <button type="submit"
+                                                        class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
+                                                <a href="{{ url()->previous() }}" type="reset"
+                                                   class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
                                             </div>
                                         </form>
                                     </div>
@@ -1045,6 +1300,254 @@
                                         </form>
                                     </div>
 
+                                    <div role="tabpanel" class="tab-pane" id="account-vertical-home-sections"
+                                         aria-labelledby="account-pill-home-sections" aria-expanded="false">
+                                        <form action="{{route('admin.settings.update')}}" method="post"
+                                              enctype="multipart/form-data">
+                                            @method('put')
+                                            @csrf
+                                            
+                                            <!-- Section 1: Transparency Section -->
+                                            <div class="row mb-4">
+                                                <div class="col-12">
+                                                    <h4 class="mb-3">{{__('admin.section_transparency')}}</h4>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.title')}} ({{__('admin.ar')}})</label>
+                                                        <input type="text" name="section_transparency_title_ar" class="form-control" 
+                                                               value="{{$data['section_transparency']['title_ar'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.title')}} ({{__('admin.en')}})</label>
+                                                        <input type="text" name="section_transparency_title_en" class="form-control" 
+                                                               value="{{$data['section_transparency']['title_en'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.subtitle')}} ({{__('admin.ar')}})</label>
+                                                        <input type="text" name="section_transparency_subtitle_ar" class="form-control" 
+                                                               value="{{$data['section_transparency']['subtitle_ar'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.subtitle')}} ({{__('admin.en')}})</label>
+                                                        <input type="text" name="section_transparency_subtitle_en" class="form-control" 
+                                                               value="{{$data['section_transparency']['subtitle_en'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.description')}} ({{__('admin.ar')}})</label>
+                                                        <textarea name="section_transparency_description_ar" class="form-control" rows="4">{{$data['section_transparency']['description_ar'] ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.description')}} ({{__('admin.en')}})</label>
+                                                        <textarea name="section_transparency_description_en" class="form-control" rows="4">{{$data['section_transparency']['description_en'] ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-12">
+                                                    <div class="imgMontg col-12 text-center">
+                                                        <div class="dropBox">
+                                                            <div class="textCenter d-flex flex-column">
+                                                                <div class="imagesUploadBlock">
+                                                                    <label class="uploadImg">
+                                                                        <span><i class="feather icon-image"></i></span>
+                                                                        <input type="file" accept="image/*,video/*" name="section_transparency_file" class="imageUploader">
+                                                                    </label>
+                                                                    <div class="uploadedBlock">
+                                                                        @if(!empty($data['section_transparency']['file']))
+                                                                            @if(strpos($data['section_transparency']['file'], '.mp4') !== false || strpos($data['section_transparency']['file'], '.mov') !== false)
+                                                                                <video src="{{$data['section_transparency']['file']}}" style="max-width: 200px; max-height: 200px;"></video>
+                                                                            @else
+                                                                                <img src="{{$data['section_transparency']['file']}}">
+                                                                            @endif
+                                                                        @endif
+                                                                        <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <span>{{__('admin.file')}} ({{__('admin.image_or_video')}})</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <hr class="my-4">
+                                            
+                                            <!-- Section 2: Damage Liability Section -->
+                                            <div class="row mb-4">
+                                                <div class="col-12">
+                                                    <h4 class="mb-3">{{__('admin.section_damage_liability')}}</h4>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.title')}} ({{__('admin.ar')}})</label>
+                                                        <input type="text" name="section_damage_liability_title_ar" class="form-control" 
+                                                               value="{{$data['section_damage_liability']['title_ar'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.title')}} ({{__('admin.en')}})</label>
+                                                        <input type="text" name="section_damage_liability_title_en" class="form-control" 
+                                                               value="{{$data['section_damage_liability']['title_en'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.subtitle')}} ({{__('admin.ar')}})</label>
+                                                        <input type="text" name="section_damage_liability_subtitle_ar" class="form-control" 
+                                                               value="{{$data['section_damage_liability']['subtitle_ar'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.subtitle')}} ({{__('admin.en')}})</label>
+                                                        <input type="text" name="section_damage_liability_subtitle_en" class="form-control" 
+                                                               value="{{$data['section_damage_liability']['subtitle_en'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.description')}} ({{__('admin.ar')}})</label>
+                                                        <textarea name="section_damage_liability_description_ar" class="form-control" rows="4">{{$data['section_damage_liability']['description_ar'] ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.description')}} ({{__('admin.en')}})</label>
+                                                        <textarea name="section_damage_liability_description_en" class="form-control" rows="4">{{$data['section_damage_liability']['description_en'] ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-12">
+                                                    <div class="imgMontg col-12 text-center">
+                                                        <div class="dropBox">
+                                                            <div class="textCenter d-flex flex-column">
+                                                                <div class="imagesUploadBlock">
+                                                                    <label class="uploadImg">
+                                                                        <span><i class="feather icon-image"></i></span>
+                                                                        <input type="file" accept="image/*,video/*" name="section_damage_liability_file" class="imageUploader">
+                                                                    </label>
+                                                                    <div class="uploadedBlock">
+                                                                        @if(!empty($data['section_damage_liability']['file']))
+                                                                            @if(strpos($data['section_damage_liability']['file'], '.mp4') !== false || strpos($data['section_damage_liability']['file'], '.mov') !== false)
+                                                                                <video src="{{$data['section_damage_liability']['file']}}" style="max-width: 200px; max-height: 200px;"></video>
+                                                                            @else
+                                                                                <img src="{{$data['section_damage_liability']['file']}}">
+                                                                            @endif
+                                                                        @endif
+                                                                        <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <span>{{__('admin.file')}} ({{__('admin.image_or_video')}})</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <hr class="my-4">
+                                            
+                                            <!-- Section 3: Our Story Section -->
+                                            <div class="row mb-4">
+                                                <div class="col-12">
+                                                    <h4 class="mb-3">{{__('admin.section_our_story')}}</h4>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.title')}} ({{__('admin.ar')}})</label>
+                                                        <input type="text" name="section_our_story_title_ar" class="form-control" 
+                                                               value="{{$data['section_our_story']['title_ar'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.title')}} ({{__('admin.en')}})</label>
+                                                        <input type="text" name="section_our_story_title_en" class="form-control" 
+                                                               value="{{$data['section_our_story']['title_en'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.subtitle')}} ({{__('admin.ar')}})</label>
+                                                        <input type="text" name="section_our_story_subtitle_ar" class="form-control" 
+                                                               value="{{$data['section_our_story']['subtitle_ar'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.subtitle')}} ({{__('admin.en')}})</label>
+                                                        <input type="text" name="section_our_story_subtitle_en" class="form-control" 
+                                                               value="{{$data['section_our_story']['subtitle_en'] ?? ''}}">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.description')}} ({{__('admin.ar')}})</label>
+                                                        <textarea name="section_our_story_description_ar" class="form-control" rows="4">{{$data['section_our_story']['description_ar'] ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label>{{__('admin.description')}} ({{__('admin.en')}})</label>
+                                                        <textarea name="section_our_story_description_en" class="form-control" rows="4">{{$data['section_our_story']['description_en'] ?? ''}}</textarea>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-12">
+                                                    <div class="imgMontg col-12 text-center">
+                                                        <div class="dropBox">
+                                                            <div class="textCenter d-flex flex-column">
+                                                                <div class="imagesUploadBlock">
+                                                                    <label class="uploadImg">
+                                                                        <span><i class="feather icon-image"></i></span>
+                                                                        <input type="file" accept="image/*,video/*" name="section_our_story_file" class="imageUploader">
+                                                                    </label>
+                                                                    <div class="uploadedBlock">
+                                                                        @if(!empty($data['section_our_story']['file']))
+                                                                            @if(strpos($data['section_our_story']['file'], '.mp4') !== false || strpos($data['section_our_story']['file'], '.mov') !== false)
+                                                                                <video src="{{$data['section_our_story']['file']}}" style="max-width: 200px; max-height: 200px;"></video>
+                                                                            @else
+                                                                                <img src="{{$data['section_our_story']['file']}}">
+                                                                            @endif
+                                                                        @endif
+                                                                        <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <span>{{__('admin.file')}} ({{__('admin.image_or_video')}})</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 d-flex justify-content-center mt-3">
+                                                <button type="submit"
+                                                        class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
+                                                <a href="{{ url()->previous() }}" type="reset"
+                                                   class="btn btn-outline-warning mr-1 mb-1">{{__('admin.back')}}</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                     <div role="tabpanel" class="tab-pane" id="account-vertical-smtp"
                                          aria-labelledby="account-pill-smtp" aria-expanded="false">
                                         <form action="{{route('admin.settings.update')}}" method="post"
@@ -1261,6 +1764,8 @@
     <script>
         @foreach(languages() as $lang)
         CKEDITOR.replace('about_{{ $lang }}_editor');
+        CKEDITOR.replace('about_2_{{ $lang }}_editor');
+        CKEDITOR.replace('our_location_description_{{$lang}}_editor');
         CKEDITOR.replace('terms_{{ $lang }}_editor');
         CKEDITOR.replace('privacy_{{ $lang }}_editor');
         @endforeach

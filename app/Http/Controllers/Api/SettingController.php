@@ -49,8 +49,12 @@ class SettingController extends Controller {
   }
 
   public function about() {
-    $about = SiteSetting::where(['key' => 'about_' . lang()])->first()->value;
-    return $this->successData( $about);
+    $data = SettingService::appInformations(SiteSetting::pluck('value', 'key'));
+    $aboutSections = [
+      'about_section_1' => $data['about_section_1'] ?? [],
+      'about_section_2' => $data['about_section_2'] ?? [],
+    ];
+    return $this->successData($aboutSections);
   }
 
   public function terms() {
@@ -212,6 +216,24 @@ class SettingController extends Controller {
   {
     $carBrands = CarBrandResource::collection(CarBrand::active()->ordered()->get());
     return $this->successData($carBrands);
+  }
+
+  public function homeBanners()
+  {
+    $data = SettingService::appInformations(SiteSetting::pluck('value', 'key'));
+    $banners = $data['home_banners'] ?? [];
+    return $this->successData($banners);
+  }
+
+  public function homeSections()
+  {
+    $data = SettingService::appInformations(SiteSetting::pluck('value', 'key'));
+    $sections = [
+      'transparency' => $data['section_transparency'] ?? [],
+      'damage_liability' => $data['section_damage_liability'] ?? [],
+      'our_story' => $data['section_our_story'] ?? [],
+    ];
+    return $this->successData($sections);
   }
 
 }

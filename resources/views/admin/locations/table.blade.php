@@ -17,6 +17,7 @@
             </th>
             <th>{{__('admin.name')}}</th>
             <th>{{__('admin.address')}}</th>
+            <th>{{ __('admin.toll_delivery_fees') }}</th>
             <th>{{__('admin.type')}}</th>
             <th>{{__('admin.coordinates')}}</th>
             <th>{{__('admin.working_hours')}}</th>
@@ -35,6 +36,7 @@
                 </td>
                 <td>{{ $location->name }}</td>
                 <td>{{ Str::limit($location->address, 50) }}</td>
+                <td>{{ $location->toll_delivery_fees }}</td>
                 <td>
                     @if($location->type == 'airport')
                         <span class="badge badge-primary">{{ __('admin.airport') }}</span>

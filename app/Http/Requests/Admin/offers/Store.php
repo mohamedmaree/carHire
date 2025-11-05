@@ -30,6 +30,7 @@ class Store extends FormRequest
             'start_date' => 'nullable|date|after_or_equal:today',
             'end_date' => 'nullable|date|after:start_date',
             'is_active' => 'boolean',
+            'show_in_popup' => 'boolean',
             'sort_order' => 'integer|min:0',
         ];
     }

@@ -35,6 +35,8 @@ class Update extends FormRequest
             'price_packages.*.is_unlimited' => 'boolean',
             'price_packages.*.is_active' => 'boolean',
             'price_packages.*.sort_order' => 'integer|min:0',
+            'car_images' => 'nullable|array',
+            'car_images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

@@ -155,6 +155,21 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.show_in_popup') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <select name="show_in_popup"
+                                                                                                class="select2 form-control"
+                                                                                                required
+                                                                                                data-validation-required-message="{{ __('admin.this_field_is_required') }}">
+                                                                                            <option value="0" {{ !$offer->show_in_popup ? 'selected' : '' }}>{{ __('admin.no') }}</option>
+                                                                                            <option value="1" {{ $offer->show_in_popup ? 'selected' : '' }}>{{ __('admin.yes') }}</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
                                                                                     <label for="first-name-column">{{ __('admin.sort_order') }}</label>
                                                                                     <div class="controls">
                                                                                         <input type="number" name="sort_order"

@@ -226,6 +226,12 @@
                                                     <td><strong>@lang('admin.subtotal_amount'):</strong></td>
                                                     <td>{{$order->formatted_subtotal_amount}}</td>
                                                 </tr>
+                                                @if($order->fees)
+                                                <tr>
+                                                    <td><strong>@lang('admin.fees'):</strong></td>
+                                                    <td>{{$order->formatted_fees}}</td>
+                                                </tr>
+                                                @endif
                                                 @if($order->options->isNotEmpty())
                                                 <tr>
                                                     <td><strong>@lang('admin.options_total'):</strong></td>

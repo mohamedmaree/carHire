@@ -43,4 +43,19 @@ class OfferController extends Controller
             
         return $this->successData(OfferResource::collection($offers));
     }
+
+    public function popup()
+    {
+        $offer = Offer::activeByDate()
+            ->showInPopup()
+            ->ordered()
+            ->with('coupon')
+            ->first();
+            
+        if (!$offer) {
+            return $this->failMsg('No popup offer available');
+        }
+            
+        return $this->successData(new OfferResource($offer));
+    }
 }

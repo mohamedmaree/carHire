@@ -21,6 +21,7 @@
             <th>{{__('admin.discount_amount')}}</th>
             <th>{{__('admin.coupon')}}</th>
             <th>{{__('admin.status')}}</th>
+            <th>{{__('admin.show_in_popup')}}</th>
             <th>{{__('admin.control')}}</th>
         </tr>
         </thead>
@@ -58,6 +59,17 @@
                     @else
                         <span class="btn btn-sm round btn-outline-danger">
                             {{ __('admin.dis_activate') }} <i class="la la-close font-medium-2"></i>
+                        </span>
+                    @endif
+                </td>
+                <td>
+                    @if ($offer->show_in_popup)
+                        <span class="btn btn-sm round btn-outline-success">
+                            {{ __('admin.yes') }} <i class="la la-check font-medium-2"></i>
+                        </span>
+                    @else
+                        <span class="btn btn-sm round btn-outline-secondary">
+                            {{ __('admin.no') }} <i class="la la-close font-medium-2"></i>
                         </span>
                     @endif
                 </td>

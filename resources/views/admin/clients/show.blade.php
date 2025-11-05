@@ -93,7 +93,7 @@
                             <div class="col-md-4">
                                 <div  class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right  border-0 shadow-0 order-1 order-lg-2 sidebar-expand-md">
                                 <div class="sidebar-content">
-                                    <div class="card border-left-3 border-left-success rounded-left-0">
+                                    {{-- <div class="card border-left-3 border-left-success rounded-left-0">
                                         <div class="card-header bg-transparent header-elements-inline">
                                             <span class="card-title font-weight-semibold">{{  __('admin.add_or_deduct_balance') }}</span>
                                         </div>
@@ -107,9 +107,9 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="card border-left-3 border-left-success rounded-left-0">
+                                    {{-- <div class="card border-left-3 border-left-success rounded-left-0">
                                         <div class="card-header bg-transparent header-elements-inline">
                                             <span class="card-title font-weight-semibold">{{  __('admin.wallet') }}</span>
                                         </div>
@@ -123,7 +123,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="card border-left-3 border-left-primary rounded-left-0">
                                         <div class="card-header bg-transparent header-elements-inline">
                                             <span class="card-title font-weight-semibold">{{  __('admin.send_notify') }}</span>

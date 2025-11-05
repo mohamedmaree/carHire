@@ -177,6 +177,7 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
 
         /*------------ cars ----------*/
         Route::post('delete-all-cars', [ CarController::class, 'destroyAll' ])->name('cars.deleteAll');
+        Route::delete('cars/{car}/images/{image}', [ CarController::class, 'deleteImage' ])->name('cars.images.delete');
         Route::resource('cars', CarController::class);
         /*------------ price-packages ----------*/
         Route::post('delete-all-price-packages', [ PricePackageController::class, 'destroyAll' ])->name('price-packages.deleteAll');

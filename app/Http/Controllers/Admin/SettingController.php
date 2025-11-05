@@ -32,14 +32,18 @@ class SettingController extends Controller
         $request_array = $request->all();
         Cache::forget('settings');
         foreach ($request_array as $key => $val) {
-            if (in_array($key, [ 'logo', 'side_logo', 'fav_icon', 'default_user', 'intro_loader', 'intro_logo', 'about_image_2', 'about_image_1', 'login_background', 'profile_cover', 'brochure_file' ])) {
+            if (in_array($key, [ 'logo', 'side_logo', 'fav_icon', 'default_user', 'intro_loader', 'intro_logo', 'about_image_2', 'about_image_1', 'login_background', 'profile_cover', 'brochure_file', 'home_banner_1', 'home_banner_2', 'section_transparency_file', 'section_damage_liability_file', 'section_our_story_file', 'about_section_1_image', 'about_section_2_image' ])) {
+                // Check if it's a video file
+                $isVideo = in_array($val->getClientMimeType(), ['video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo', 'video/webm']);
+                
                 if ($key == 'brochure_file') {
                     // Handle brochure file upload to images/settings folder
                     $thumbsPath = 'storage/images/settings/';
                     $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
                     SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
                     $val->storeAs($thumbsPath, $name);
-                } elseif ($val->getClientOriginalExtension() == 'svg' || !in_array($val->getClientmimeType(), [ 'image/jpeg', 'image/jpg', 'image/png' ])) {
+                } elseif ($isVideo || $val->getClientOriginalExtension() == 'svg' || !in_array($val->getClientmimeType(), [ 'image/jpeg', 'image/jpg', 'image/png' ])) {
+                    // Handle video files and non-image files (SVG, etc.)
                     if ($key == 'default_user') {
                         $thumbsPath = 'images/users/';
                         $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
@@ -49,11 +53,12 @@ class SettingController extends Controller
                         $name = 'no_data.png';
                     } else {
                         $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
-                        $thumbsPath = 'images/settings/';
+                        $thumbsPath = 'storage/images/settings/';
                         SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
                     }
                     $val->storeAs($thumbsPath, $name);
                 } else {
+                    // Handle image files with image processing
                     $img = Image::make($val);
                     if ($key == 'default_user') {
                         $thumbsPath = 'storage/images/users/';
@@ -67,13 +72,6 @@ class SettingController extends Controller
                         $thumbsPath = 'storage/images/settings/';
                         SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
                     }
-                    $img->save($thumbsPath . $name);
-                }
-
-                if ($val->getClientOriginalExtension() == 'svg' || !in_array($val->getClientmimeType(), [ 'image/jpeg', 'image/jpg', 'image/png' ])) {
-                    $val->storeAs($thumbsPath, $name);
-                } else {
-                    $img = Image::make($val);
                     $img->save($thumbsPath . $name);
                 }
 

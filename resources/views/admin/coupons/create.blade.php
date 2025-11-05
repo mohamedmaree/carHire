@@ -102,7 +102,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="first-name-column">{{__('admin.larger_value_for_discount')}}</label>
                                                                                 <div class="controls">
-                                                                                    <input readonly type="number" name="max_discount" class="max_discount form-control" placeholder="{{__('admin.write_the_greatest_value_for_the_discount')}}" required data-validation-required-message="{{__('admin.this_field_is_required')}}" >
+                                                                                    <input type="number" name="max_discount" class="max_discount form-control" placeholder="{{__('admin.write_the_greatest_value_for_the_discount')}}" required data-validation-required-message="{{__('admin.this_field_is_required')}}" >
                                                                                 </div>
                                                                             </div>
                                                                         </div>

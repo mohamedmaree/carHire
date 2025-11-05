@@ -11,6 +11,9 @@ class SettingService
             'is_production'         => $app_info['is_production'],
             'name_ar'               => $app_info['name_ar'],
             'name_en'               => $app_info['name_en'],
+            'tagline_ar'            => $app_info['tagline_ar'] ?? '',
+            'tagline_en'            => $app_info['tagline_en'] ?? '',
+            'tagline'               => $app_info['tagline_' . lang()] ?? '',
             'email'                 => $app_info['email'],
             'country_code'          => $app_info['country_code'],
             'phone'                 => $app_info['phone'],
@@ -35,6 +38,8 @@ class SettingService
 
             'about_image_2'          => ('/storage/images/settings/' . $app_info['about_image_2']),
             'about_image_1'          => ('/storage/images/settings/' . $app_info['about_image_1']),
+            'home_banner_1'          => !empty($app_info['home_banner_1']) ? '/storage/images/settings/' . $app_info['home_banner_1'] : '',
+            'home_banner_2'          => !empty($app_info['home_banner_2']) ? '/storage/images/settings/' . $app_info['home_banner_2'] : '',
             'services_text_ar'       => $app_info['services_text_ar'],
             'services_text_en'       => $app_info['services_text_en'],
             'services_text'          => $app_info['services_text_' . lang()],
@@ -105,9 +110,87 @@ class SettingService
                 'google_play_link' => $app_info['app_google_play_link'] ?? 'https://play.google.com/store/apps/details?id=com.distinqt.carhire',
                 'apple_store_link' => $app_info['app_apple_store_link'] ?? 'https://apps.apple.com/app/distinqt-car-hire/id123456789',
             ],
+            
+            // Home Banner Images
+            'home_banners' => array_values(array_filter([
+                !empty($app_info['home_banner_1']) ? '/storage/images/settings/' . $app_info['home_banner_1'] : null,
+                !empty($app_info['home_banner_2']) ? '/storage/images/settings/' . $app_info['home_banner_2'] : null,
+            ])),
+            
+            // Home Sections
+            'section_transparency' => [
+                'title' => $app_info['section_transparency_title_' . lang()] ?? '',
+                'title_ar' => $app_info['section_transparency_title_ar'] ?? '',
+                'title_en' => $app_info['section_transparency_title_en'] ?? '',
+                'subtitle' => $app_info['section_transparency_subtitle_' . lang()] ?? '',
+                'subtitle_ar' => $app_info['section_transparency_subtitle_ar'] ?? '',
+                'subtitle_en' => $app_info['section_transparency_subtitle_en'] ?? '',
+                'description' => $app_info['section_transparency_description_' . lang()] ?? '',
+                'description_ar' => $app_info['section_transparency_description_ar'] ?? '',
+                'description_en' => $app_info['section_transparency_description_en'] ?? '',
+                'file' => !empty($app_info['section_transparency_file']) ? '/storage/images/settings/' . $app_info['section_transparency_file'] : null,
+            ],
+            
+            'section_damage_liability' => [
+                'title' => $app_info['section_damage_liability_title_' . lang()] ?? '',
+                'title_ar' => $app_info['section_damage_liability_title_ar'] ?? '',
+                'title_en' => $app_info['section_damage_liability_title_en'] ?? '',
+                'subtitle' => $app_info['section_damage_liability_subtitle_' . lang()] ?? '',
+                'subtitle_ar' => $app_info['section_damage_liability_subtitle_ar'] ?? '',
+                'subtitle_en' => $app_info['section_damage_liability_subtitle_en'] ?? '',
+                'description' => $app_info['section_damage_liability_description_' . lang()] ?? '',
+                'description_ar' => $app_info['section_damage_liability_description_ar'] ?? '',
+                'description_en' => $app_info['section_damage_liability_description_en'] ?? '',
+                'file' => !empty($app_info['section_damage_liability_file']) ? '/storage/images/settings/' . $app_info['section_damage_liability_file'] : null,
+            ],
+            
+            'section_our_story' => [
+                'title' => $app_info['section_our_story_title_' . lang()] ?? '',
+                'title_ar' => $app_info['section_our_story_title_ar'] ?? '',
+                'title_en' => $app_info['section_our_story_title_en'] ?? '',
+                'subtitle' => $app_info['section_our_story_subtitle_' . lang()] ?? '',
+                'subtitle_ar' => $app_info['section_our_story_subtitle_ar'] ?? '',
+                'subtitle_en' => $app_info['section_our_story_subtitle_en'] ?? '',
+                'description' => $app_info['section_our_story_description_' . lang()] ?? '',
+                'description_ar' => $app_info['section_our_story_description_ar'] ?? '',
+                'description_en' => $app_info['section_our_story_description_en'] ?? '',
+                'file' => !empty($app_info['section_our_story_file']) ? '/storage/images/settings/' . $app_info['section_our_story_file'] : null,
+            ],
+            
+            // About Sections
+            'about_section_1' => [
+                'title' => $app_info['about_section_1_title_' . lang()] ?? '',
+                'title_ar' => $app_info['about_section_1_title_ar'] ?? '',
+                'title_en' => $app_info['about_section_1_title_en'] ?? '',
+                'description' => $app_info['about_' . lang()] ?? '',
+                'description_ar' => $app_info['about_ar'] ?? '',
+                'description_en' => $app_info['about_en'] ?? '',
+                'image' => !empty($app_info['about_section_1_image']) ? '/storage/images/settings/' . $app_info['about_section_1_image'] : null,
+            ],
+            
+            'about_section_2' => [
+                'title' => $app_info['about_section_2_title_' . lang()] ?? '',
+                'title_ar' => $app_info['about_section_2_title_ar'] ?? '',
+                'title_en' => $app_info['about_section_2_title_en'] ?? '',
+                'description' => $app_info['about_2_' . lang()] ?? '',
+                'description_ar' => $app_info['about_2_ar'] ?? '',
+                'description_en' => $app_info['about_2_en'] ?? '',
+                'image' => !empty($app_info['about_section_2_image']) ? '/storage/images/settings/' . $app_info['about_section_2_image'] : null,
+            ],
+            
+            // Our Location
+            'our_location' => [
+                'title' => $app_info['our_location_title_' . lang()] ?? '',
+                'title_ar' => $app_info['our_location_title_ar'] ?? '',
+                'title_en' => $app_info['our_location_title_en'] ?? '',
+                'description' => $app_info['our_location_description_' . lang()] ?? '',
+                'description_ar' => $app_info['our_location_description_ar'] ?? '',
+                'description_en' => $app_info['our_location_description_en'] ?? '',
+            ],
         ];
         foreach (languages() as $lang) {
             $data['about_' . $lang] = $app_info['about_' . $lang] ?? '';
+            $data['about_2_' . $lang] = $app_info['about_2_' . $lang] ?? '';
             $data['terms_' . $lang] = $app_info['terms_' . $lang] ?? '';
             $data['privacy_' . $lang] = $app_info['privacy_' . $lang] ?? '';
         }

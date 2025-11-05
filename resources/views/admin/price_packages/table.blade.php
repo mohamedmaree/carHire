@@ -33,7 +33,7 @@
                         <span class="checkmark"></span>
                     </label>
                 </td>
-                <td>{{ $pricePackage->car->name }}</td>
+                <td>{{ $pricePackage->car->name??'' }}</td>
                 <td>{{ $pricePackage->name }}</td>
                 <td>{{ $pricePackage->formatted_price }}</td>
                 <td>{{ $pricePackage->kilometer_limit_text }}</td>

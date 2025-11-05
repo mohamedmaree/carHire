@@ -30,7 +30,7 @@ class AuthController extends Controller {
       if (session()->has('lang')) {
         session()->forget('lang');
       }
-      session()->put('lang', 'ar');
+      session()->put('lang', 'en');
     }
     return back();
   }
@@ -49,7 +49,7 @@ class AuthController extends Controller {
     if (auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password , 'is_blocked' => 0], $remember)) {
         
         RateLimiter::clear($this->throttleKey());
-        session()->put('lang', 'ar');
+        session()->put('lang', 'en');
 
         return response()->json(['status' => 'login', 'url' => route('admin.dashboard'), 'message' => __('admin.login_successfully_logged')]);
 
