@@ -43,7 +43,7 @@
                 </a>
             @endforeach
         </div>
-        <div class="row">
+        {{-- <div class="row">
 
             <h3 class="col-12 d-flex  mb-2">{{__('admin.induction_Statistics')}}</h3>
 
@@ -65,8 +65,8 @@
                     </div>
                 </a>
             @endforeach
-        </div>
-        <div class="row hight-card">
+        </div> --}}
+        {{-- <div class="row hight-card">
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-end">
@@ -93,7 +93,7 @@
                 </div>
             </div>
                   
-        </div>
+        </div> --}}
 @endsection
 @section('js')
     <script>

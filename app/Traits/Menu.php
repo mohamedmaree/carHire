@@ -81,6 +81,48 @@ trait Menu {
         'url'   => url('admin/images'),
       ],
       [
+        'name'  => __('admin.blogs.index'),
+        'count' => \App\Models\Blog::count(),
+        'icon'  => 'icon-book-open',
+        'url'   => route('admin.blogs.index'),
+      ],
+      [
+        'name'  => __('admin.cars.index'),
+        'count' => \App\Models\Car::count(),
+        'icon'  => 'icon-car',
+        'url'   => route('admin.cars.index'),
+      ],
+      [
+        'name'  => __('admin.locations.index'),
+        'count' => \App\Models\Location::count(),
+        'icon'  => 'icon-map-pin',
+        'url'   => route('admin.locations.index'),
+      ],
+      [
+        'name'  => __('admin.offers.index'),
+        'count' => \App\Models\Offer::count(),
+        'icon'  => 'icon-tag',
+        'url'   => route('admin.offers.index'),
+      ],
+      [
+        'name'  => __('admin.options.index'),
+        'count' => \App\Models\Option::count(),
+        'icon'  => 'icon-list',
+        'url'   => route('admin.options.index'),
+      ],
+      [
+        'name'  => __('admin.orders.index'),
+        'count' => \App\Models\Order::count(),
+        'icon'  => 'icon-shopping-cart',
+        'url'   => route('admin.orders.index'),
+      ],
+      [
+        'name'  => __('admin.price-packages.index'),
+        'count' => \App\Models\PricePackage::count(),
+        'icon'  => 'icon-dollar-sign',
+        'url'   => route('admin.price-packages.index'),
+      ],
+      [
         'name'  => __('admin.Validities'),
         'count' => \App\Models\Role::count(),
         'icon'  => 'icon-eye',
