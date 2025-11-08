@@ -78,6 +78,10 @@ class OrderController extends Controller
             $data['subtotal_amount'] = 0;
         }
         
+        // Reset coupon discount fields first
+        $data['coupon_discount_amount'] = null;
+        $data['coupon_discount_percentage'] = null;
+        
         // Handle coupon discount
         if (!empty($data['coupon_code'])) {
             $coupon = Coupon::where('coupon_num', $data['coupon_code'])
