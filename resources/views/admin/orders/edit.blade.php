@@ -583,9 +583,9 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-12">
+                                                                            <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.driver_license_image')</label>
+                                                                                    <label>@lang('admin.front_driver_license_image')</label>
                                                                                     <div class="imgMontg col-12 text-center">
                                                                                         <div class="dropBox">
                                                                                             <div class="textCenter">
@@ -594,15 +594,41 @@
                                                                                                         <span><i class="feather icon-image"></i></span>
                                                                                                         <input type="file"
                                                                                                                accept="image/*"
-                                                                                                               name="driver_license_image"
+                                                                                                               name="front_driver_license_image"
                                                                                                                class="imageUploader">
                                                                                                     </label>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        @if($order->driver_license_image)
+                                                                                        @if($order->front_driver_license_image)
                                                                                             <div class="mt-2">
-                                                                                                <img src="{{$order->driver_license_image}}" alt="Driver License" class="img-thumbnail" style="max-width: 200px;">
+                                                                                                <img src="{{$order->front_driver_license_image}}" alt="Front Driver License" class="img-thumbnail" style="max-width: 200px;">
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label>@lang('admin.back_driver_license_image')</label>
+                                                                                    <div class="imgMontg col-12 text-center">
+                                                                                        <div class="dropBox">
+                                                                                            <div class="textCenter">
+                                                                                                <div class="imagesUploadBlock">
+                                                                                                    <label class="uploadImg">
+                                                                                                        <span><i class="feather icon-image"></i></span>
+                                                                                                        <input type="file"
+                                                                                                               accept="image/*"
+                                                                                                               name="back_driver_license_image"
+                                                                                                               class="imageUploader">
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        @if($order->back_driver_license_image)
+                                                                                            <div class="mt-2">
+                                                                                                <img src="{{$order->back_driver_license_image}}" alt="Back Driver License" class="img-thumbnail" style="max-width: 200px;">
                                                                                             </div>
                                                                                         @endif
                                                                                     </div>

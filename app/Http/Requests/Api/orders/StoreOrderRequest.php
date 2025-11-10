@@ -70,7 +70,8 @@ class StoreOrderRequest extends FormRequest
             // Driver License Information
             'driver_license_number' => 'nullable|string|max:100',
             'driver_license_expiration_date' => 'nullable|date|after:today',
-            'driver_license_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'front_driver_license_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'back_driver_license_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             
             // International Customer Information
             'current_country_address' => 'nullable|string|max:500',
@@ -107,9 +108,12 @@ class StoreOrderRequest extends FormRequest
             'email.email' => 'Please provide a valid email address.',
             'driver_license_expiration_date.after' => 'Driver license expiration date must be in the future.',
             'passport_expiration_date.after' => 'Passport expiration date must be in the future.',
-            'driver_license_image.image' => 'Driver license must be an image.',
-            'driver_license_image.mimes' => 'Driver license image must be a file of type: jpeg, png, jpg, gif.',
-            'driver_license_image.max' => 'Driver license image may not be greater than 2MB.',
+            'front_driver_license_image.image' => 'Front driver license must be an image.',
+            'front_driver_license_image.mimes' => 'Front driver license image must be a file of type: jpeg, png, jpg, gif.',
+            'front_driver_license_image.max' => 'Front driver license image may not be greater than 2MB.',
+            'back_driver_license_image.image' => 'Back driver license must be an image.',
+            'back_driver_license_image.mimes' => 'Back driver license image must be a file of type: jpeg, png, jpg, gif.',
+            'back_driver_license_image.max' => 'Back driver license image may not be greater than 2MB.',
             'passport_image.image' => 'Passport must be an image.',
             'passport_image.mimes' => 'Passport image must be a file of type: jpeg, png, jpg, gif.',
             'passport_image.max' => 'Passport image may not be greater than 2MB.',

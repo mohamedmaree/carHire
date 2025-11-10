@@ -380,10 +380,20 @@
                                                 </tr>
                                                 @endif
                                             </table>
-                                            @if($order->driver_license_image)
+                                            @if($order->front_driver_license_image || $order->back_driver_license_image)
                                                 <div class="mt-3">
-                                                    <strong>@lang('admin.driver_license_image'):</strong><br>
-                                                    <img src="{{$order->driver_license_image}}" alt="Driver License" class="img-thumbnail" style="max-width: 300px;">
+                                                    @if($order->front_driver_license_image)
+                                                        <div class="mb-3">
+                                                            <strong>@lang('admin.front_driver_license_image'):</strong><br>
+                                                            <img src="{{$order->front_driver_license_image}}" alt="Front Driver License" class="img-thumbnail" style="max-width: 300px;">
+                                                        </div>
+                                                    @endif
+                                                    @if($order->back_driver_license_image)
+                                                        <div>
+                                                            <strong>@lang('admin.back_driver_license_image'):</strong><br>
+                                                            <img src="{{$order->back_driver_license_image}}" alt="Back Driver License" class="img-thumbnail" style="max-width: 300px;">
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             @endif
                                             @else

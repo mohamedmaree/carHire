@@ -180,7 +180,8 @@ class OrderResource extends JsonResource
             // Driver License Information
             'driver_license_number' => $this->driver_license_number,
             'driver_license_expiration_date' => $this->driver_license_expiration_date?->format('Y-m-d'),
-            'driver_license_image' => $this->driver_license_image,
+            'front_driver_license_image' => $this->front_driver_license_image,
+            'back_driver_license_image' => $this->back_driver_license_image,
             
             // International Customer Information
             'current_country_address' => $this->current_country_address,

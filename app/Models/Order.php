@@ -41,7 +41,7 @@ class Order extends BaseModel
         'first_name', 'last_name', 'email', 'phone', 'address', 'city_id', 'country_id', 'zip', 'birthdate','user_id',
         
         // Driver License Information
-        'driver_license_number', 'driver_license_expiration_date', 'driver_license_image',
+        'driver_license_number', 'driver_license_expiration_date', 'front_driver_license_image', 'back_driver_license_image',
         
         // International Customer Information
         'current_country_address', 'passport_expiration_date', 'passport_image',
@@ -277,19 +277,35 @@ class Order extends BaseModel
     }
 
     // Image accessors and mutators for driver license and passport
-    public function getDriverLicenseImageAttribute()
+    public function getFrontDriverLicenseImageAttribute()
     {
-        if (isset($this->attributes['driver_license_image'])) {
-            return $this->getImage($this->attributes['driver_license_image'], static::IMAGEPATH);
+        if (isset($this->attributes['front_driver_license_image'])) {
+            return $this->getImage($this->attributes['front_driver_license_image'], static::IMAGEPATH);
         }
         return $this->defaultImage(static::IMAGEPATH);
     }
 
-    public function setDriverLicenseImageAttribute($value)
+    public function setFrontDriverLicenseImageAttribute($value)
     {
         if (null != $value && is_file($value)) {
-            isset($this->attributes['driver_license_image']) ? $this->deleteFile($this->attributes['driver_license_image'], static::IMAGEPATH) : '';
-            $this->attributes['driver_license_image'] = $this->uploadAllTyps($value, static::IMAGEPATH);
+            isset($this->attributes['front_driver_license_image']) ? $this->deleteFile($this->attributes['front_driver_license_image'], static::IMAGEPATH) : '';
+            $this->attributes['front_driver_license_image'] = $this->uploadAllTyps($value, static::IMAGEPATH);
+        }
+    }
+
+    public function getBackDriverLicenseImageAttribute()
+    {
+        if (isset($this->attributes['back_driver_license_image'])) {
+            return $this->getImage($this->attributes['back_driver_license_image'], static::IMAGEPATH);
+        }
+        return $this->defaultImage(static::IMAGEPATH);
+    }
+
+    public function setBackDriverLicenseImageAttribute($value)
+    {
+        if (null != $value && is_file($value)) {
+            isset($this->attributes['back_driver_license_image']) ? $this->deleteFile($this->attributes['back_driver_license_image'], static::IMAGEPATH) : '';
+            $this->attributes['back_driver_license_image'] = $this->uploadAllTyps($value, static::IMAGEPATH);
         }
     }
 
@@ -370,8 +386,11 @@ class Order extends BaseModel
         parent::boot();
         
         static::deleted(function ($model) {
-            if (isset($model->attributes['driver_license_image'])) {
-                $model->deleteFile($model->attributes['driver_license_image'], static::IMAGEPATH);
+            if (isset($model->attributes['front_driver_license_image'])) {
+                $model->deleteFile($model->attributes['front_driver_license_image'], static::IMAGEPATH);
+            }
+            if (isset($model->attributes['back_driver_license_image'])) {
+                $model->deleteFile($model->attributes['back_driver_license_image'], static::IMAGEPATH);
             }
             if (isset($model->attributes['passport_image'])) {
                 $model->deleteFile($model->attributes['passport_image'], static::IMAGEPATH);

@@ -71,7 +71,8 @@ class Store extends FormRequest
             // Driver License Information
             'driver_license_number' => 'nullable|string|max:100',
             'driver_license_expiration_date' => 'nullable|date|after:today',
-            'driver_license_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'front_driver_license_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'back_driver_license_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             
             // International Customer Information
             'current_country_address' => 'nullable|string|max:500',
