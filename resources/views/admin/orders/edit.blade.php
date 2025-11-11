@@ -574,7 +574,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-md-6 col-12">
+                                                                            <div class="col-md-12 col-12">
                                                                                 <div class="form-group">
                                                                                     <label>@lang('admin.driver_license_expiration_date')</label>
                                                                                     <div class="controls">
@@ -644,7 +644,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-md-6 col-12">
+                                                                            <div class="col-md-12 col-12">
                                                                                 <div class="form-group">
                                                                                     <label>@lang('admin.passport_expiration_date')</label>
                                                                                     <div class="controls">
@@ -653,9 +653,9 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-12">
+                                                                            <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.passport_image')</label>
+                                                                                    <label>@lang('admin.front_passport_image')</label>
                                                                                     <div class="imgMontg col-12 text-center">
                                                                                         <div class="dropBox">
                                                                                             <div class="textCenter">
@@ -664,15 +664,41 @@
                                                                                                         <span><i class="feather icon-image"></i></span>
                                                                                                         <input type="file"
                                                                                                                accept="image/*"
-                                                                                                               name="passport_image"
+                                                                                                               name="front_passport_image"
                                                                                                                class="imageUploader">
                                                                                                     </label>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        @if($order->passport_image)
+                                                                                        @if($order->front_passport_image)
                                                                                             <div class="mt-2">
-                                                                                                <img src="{{$order->passport_image}}" alt="Passport" class="img-thumbnail" style="max-width: 200px;">
+                                                                                                <img src="{{$order->front_passport_image}}" alt="Front Passport" class="img-thumbnail" style="max-width: 200px;">
+                                                                                            </div>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label>@lang('admin.back_passport_image')</label>
+                                                                                    <div class="imgMontg col-12 text-center">
+                                                                                        <div class="dropBox">
+                                                                                            <div class="textCenter">
+                                                                                                <div class="imagesUploadBlock">
+                                                                                                    <label class="uploadImg">
+                                                                                                        <span><i class="feather icon-image"></i></span>
+                                                                                                        <input type="file"
+                                                                                                               accept="image/*"
+                                                                                                               name="back_passport_image"
+                                                                                                               class="imageUploader">
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        @if($order->back_passport_image)
+                                                                                            <div class="mt-2">
+                                                                                                <img src="{{$order->back_passport_image}}" alt="Back Passport" class="img-thumbnail" style="max-width: 200px;">
                                                                                             </div>
                                                                                         @endif
                                                                                     </div>

@@ -575,7 +575,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-md-6 col-12">
+                                                                            <div class="col-md-12 col-12">
                                                                                 <div class="form-group">
                                                                                     <label>@lang('admin.driver_license_expiration_date')</label>
                                                                                     <div class="controls">
@@ -635,7 +635,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-md-6 col-12">
+                                                                            <div class="col-md-12 col-12">
                                                                                 <div class="form-group">
                                                                                     <label>@lang('admin.passport_expiration_date')</label>
                                                                                     <div class="controls">
@@ -644,9 +644,9 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-12">
+                                                                            <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.passport_image')</label>
+                                                                                    <label>@lang('admin.front_passport_image')</label>
                                                                                     <div class="imgMontg col-12 text-center">
                                                                                         <div class="dropBox">
                                                                                             <div class="textCenter">
@@ -655,7 +655,28 @@
                                                                                                         <span><i class="feather icon-image"></i></span>
                                                                                                         <input type="file"
                                                                                                                accept="image/*"
-                                                                                                               name="passport_image"
+                                                                                                               name="front_passport_image"
+                                                                                                               class="imageUploader">
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
+                                                                                    <label>@lang('admin.back_passport_image')</label>
+                                                                                    <div class="imgMontg col-12 text-center">
+                                                                                        <div class="dropBox">
+                                                                                            <div class="textCenter">
+                                                                                                <div class="imagesUploadBlock">
+                                                                                                    <label class="uploadImg">
+                                                                                                        <span><i class="feather icon-image"></i></span>
+                                                                                                        <input type="file"
+                                                                                                               accept="image/*"
+                                                                                                               name="back_passport_image"
                                                                                                                class="imageUploader">
                                                                                                     </label>
                                                                                                 </div>

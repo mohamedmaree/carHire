@@ -77,7 +77,8 @@ class Store extends FormRequest
             // International Customer Information
             'current_country_address' => 'nullable|string|max:500',
             'passport_expiration_date' => 'nullable|date|after:today',
-            'passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'front_passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'back_passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             
             // Client Signature
             'client_signature' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

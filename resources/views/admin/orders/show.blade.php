@@ -404,7 +404,7 @@
                                 </div>
 
                                 <!-- International Customer Information -->
-                                @if($order->current_country_address || $order->passport_expiration_date || $order->passport_image)
+                                @if($order->current_country_address || $order->passport_expiration_date || $order->front_passport_image || $order->back_passport_image)
                                 <div class="col-md-6">
                                     <div class="card">
                                         <div class="card-header">
@@ -423,10 +423,20 @@
                                                 {{$order->passport_expiration_date->format('Y-m-d')}}
                                             </div>
                                             @endif
-                                            @if($order->passport_image)
+                                            @if($order->front_passport_image || $order->back_passport_image)
                                             <div class="mb-3">
-                                                <strong>@lang('admin.passport_image'):</strong><br>
-                                                <img src="{{$order->passport_image}}" alt="Passport" class="img-thumbnail" style="max-width: 300px;">
+                                                @if($order->front_passport_image)
+                                                    <div class="mb-2">
+                                                        <strong>@lang('admin.front_passport_image'):</strong><br>
+                                                        <img src="{{$order->front_passport_image}}" alt="Front Passport" class="img-thumbnail" style="max-width: 300px;">
+                                                    </div>
+                                                @endif
+                                                @if($order->back_passport_image)
+                                                    <div>
+                                                        <strong>@lang('admin.back_passport_image'):</strong><br>
+                                                        <img src="{{$order->back_passport_image}}" alt="Back Passport" class="img-thumbnail" style="max-width: 300px;">
+                                                    </div>
+                                                @endif
                                             </div>
                                             @endif
                                         </div>

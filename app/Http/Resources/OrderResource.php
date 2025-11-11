@@ -186,7 +186,8 @@ class OrderResource extends JsonResource
             // International Customer Information
             'current_country_address' => $this->current_country_address,
             'passport_expiration_date' => $this->passport_expiration_date?->format('Y-m-d'),
-            'passport_image' => $this->passport_image,
+            'front_passport_image' => $this->front_passport_image,
+            'back_passport_image' => $this->back_passport_image,
             
             // Client Signature
             'client_signature' => $this->client_signature,

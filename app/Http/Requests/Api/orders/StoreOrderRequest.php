@@ -76,7 +76,8 @@ class StoreOrderRequest extends FormRequest
             // International Customer Information
             'current_country_address' => 'nullable|string|max:500',
             'passport_expiration_date' => 'nullable|date|after:today',
-            'passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'front_passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'back_passport_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             
             // Client Signature
             'client_signature' => 'nullable',
@@ -114,9 +115,12 @@ class StoreOrderRequest extends FormRequest
             'back_driver_license_image.image' => 'Back driver license must be an image.',
             'back_driver_license_image.mimes' => 'Back driver license image must be a file of type: jpeg, png, jpg, gif.',
             'back_driver_license_image.max' => 'Back driver license image may not be greater than 2MB.',
-            'passport_image.image' => 'Passport must be an image.',
-            'passport_image.mimes' => 'Passport image must be a file of type: jpeg, png, jpg, gif.',
-            'passport_image.max' => 'Passport image may not be greater than 2MB.',
+            'front_passport_image.image' => 'Front passport must be an image.',
+            'front_passport_image.mimes' => 'Front passport image must be a file of type: jpeg, png, jpg, gif.',
+            'front_passport_image.max' => 'Front passport image may not be greater than 2MB.',
+            'back_passport_image.image' => 'Back passport must be an image.',
+            'back_passport_image.mimes' => 'Back passport image must be a file of type: jpeg, png, jpg, gif.',
+            'back_passport_image.max' => 'Back passport image may not be greater than 2MB.',
             'client_signature.string' => 'Client signature must be a valid signature data.',
         ];
     }
