@@ -15,8 +15,6 @@ class Store extends FormRequest
     {
         return [
             'name' => 'required|array',
-            'name.ar' => 'required|string|max:255',
-            'name.en' => 'required|string|max:255',
             'date' => 'required|date|unique:public_holidays,date',
             'is_active' => 'nullable|in:1,0',
             'sort_order' => 'nullable|integer|min:0',
