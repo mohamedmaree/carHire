@@ -1132,7 +1132,7 @@ return [
         'show'   => 'View Blog',
     ],
 
-    'public_holidays' => [
+    'public-holidays' => [
         'index'    => 'Public Holidays',
         'create'   => 'Add Public Holiday',
         'edit'     => 'Edit Public Holiday',

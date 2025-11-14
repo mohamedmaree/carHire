@@ -1148,7 +1148,7 @@ return [
         'show'   => 'عرض عرض',
     ],
 
-    'public_holidays' => [
+    'public-holidays' => [
         'index'    => 'العطلات الرسمية',
         'create'   => 'إضافة عطلة رسمية',
         'edit'     => 'تعديل عطلة رسمية',
