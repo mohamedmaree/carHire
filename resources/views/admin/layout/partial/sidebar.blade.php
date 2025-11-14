@@ -123,6 +123,16 @@
             </li>
             @endcan
 
+            {{-- Public Holidays Section --}}
+            @can('read-all-public-holiday')
+            <li class="nav-item @if(Route::currentRouteName() == 'admin.public-holidays.index') active @endif">
+                <a href="{{route('admin.public-holidays.index')}}">
+                    <i class="feather icon-calendar"></i>
+                    <span class="menu-title" data-i18n="Dashboard">@lang('admin.public_holidays.index')</span>
+                </a>
+            </li>
+            @endcan
+
             {{-- Marketing Section --}}
             <li class="nav-item has-sub sidebar-group-active open">
                 <a href="javascript:void(0);">

@@ -1132,6 +1132,25 @@ return [
         'show'   => 'View Blog',
     ],
 
+    'public_holidays' => [
+        'index'    => 'Public Holidays',
+        'create'   => 'Add Public Holiday',
+        'edit'     => 'Edit Public Holiday',
+        'update'   => 'Update Public Holiday',
+        'read'     => 'View Public Holiday',
+        'read-all' => 'View All Public Holidays',
+        'delete'   => 'Delete Public Holiday',
+        'read-all-intro-settings' => 'View Public Holidays',
+        'read-all-dashboard-settings' => 'View Public Holidays',
+        'show'   => 'View Public Holiday',
+    ],
+    'public_holiday_name' => 'Public Holiday Name',
+    'date' => 'Date',
+    'year' => 'Year',
+    'this_date_is_public_holiday' => 'This date is a public holiday',
+    'pickup_date_is_public_holiday' => 'Pickup date is a public holiday: :name',
+    'return_date_is_public_holiday' => 'Return date is a public holiday: :name',
+
     'orders' => [
         'index'    => 'Orders',
         'create'   => 'Add Order',

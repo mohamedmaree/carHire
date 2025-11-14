@@ -12,6 +12,7 @@ use App\Models\Option;
 use App\Models\PricePackage;
 use App\Models\Coupon;
 use App\Models\User;
+use App\Models\PublicHoliday;
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
 use App\Traits\ResponseTrait;
@@ -67,9 +68,23 @@ class OrderController extends Controller
     {
         $data = $request->validated();
         
-        // Calculate rental days
+        // Check for public holidays
         $pickupDate = \Carbon\Carbon::parse($data['pickup_date']);
         $returnDate = \Carbon\Carbon::parse($data['return_date']);
+        
+        // Check if pickup date is a public holiday
+        $pickupHoliday = PublicHoliday::isHoliday($pickupDate->format('Y-m-d'));
+        if ($pickupHoliday) {
+            return $this->failMsg(__('admin.pickup_date_is_public_holiday', ['name' => $pickupHoliday->name]));
+        }
+        
+        // Check if return date is a public holiday
+        $returnHoliday = PublicHoliday::isHoliday($returnDate->format('Y-m-d'));
+        if ($returnHoliday) {
+            return $this->failMsg(__('admin.return_date_is_public_holiday', ['name' => $returnHoliday->name]));
+        }
+        
+        // Calculate rental days
         $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
         
         // Calculate amounts

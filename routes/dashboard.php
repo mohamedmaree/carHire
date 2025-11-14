@@ -193,6 +193,9 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         Route::resource('blogs', BlogController::class);
         Route::post('delete-all-orders', [ OrderController::class, 'destroyAll' ])->name('orders.deleteAll');
         Route::resource('orders', OrderController::class);
+        /*------------ public holidays ----------*/
+        Route::post('delete-all-public-holidays', [ \App\Http\Controllers\Admin\PublicHolidayController::class, 'destroyAll' ])->name('public-holidays.deleteAll');
+        Route::resource('public-holidays', \App\Http\Controllers\Admin\PublicHolidayController::class);
 
         #new_routes_here
 

@@ -14,6 +14,7 @@ use App\Models\Coupon;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\User;
+use App\Models\PublicHoliday;
 use App\Jobs\SendBookingConfirmationEmailJob;
 use Illuminate\Http\Request;
 
@@ -63,9 +64,29 @@ class OrderController extends Controller
     {
         $data = $request->validated();
         
-        // Calculate rental days
+        // Check for public holidays
         $pickupDate = \Carbon\Carbon::parse($data['pickup_date']);
         $returnDate = \Carbon\Carbon::parse($data['return_date']);
+        
+        // Check if pickup date is a public holiday
+        $pickupHoliday = PublicHoliday::isHoliday($pickupDate->format('Y-m-d'));
+        if ($pickupHoliday) {
+            return response()->json([
+                'icon' => 'error',
+                'title' => __('admin.pickup_date_is_public_holiday', ['name' => $pickupHoliday->name])
+            ], 422);
+        }
+        
+        // Check if return date is a public holiday
+        $returnHoliday = PublicHoliday::isHoliday($returnDate->format('Y-m-d'));
+        if ($returnHoliday) {
+            return response()->json([
+                'icon' => 'error',
+                'title' => __('admin.return_date_is_public_holiday', ['name' => $returnHoliday->name])
+            ], 422);
+        }
+        
+        // Calculate rental days
         $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
         
         // Calculate amounts
@@ -230,9 +251,29 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $data = $request->validated();
         
-        // Calculate rental days
+        // Check for public holidays
         $pickupDate = \Carbon\Carbon::parse($data['pickup_date']);
         $returnDate = \Carbon\Carbon::parse($data['return_date']);
+        
+        // Check if pickup date is a public holiday
+        $pickupHoliday = PublicHoliday::isHoliday($pickupDate->format('Y-m-d'));
+        if ($pickupHoliday) {
+            return response()->json([
+                'icon' => 'error',
+                'title' => __('admin.pickup_date_is_public_holiday', ['name' => $pickupHoliday->name])
+            ], 422);
+        }
+        
+        // Check if return date is a public holiday
+        $returnHoliday = PublicHoliday::isHoliday($returnDate->format('Y-m-d'));
+        if ($returnHoliday) {
+            return response()->json([
+                'icon' => 'error',
+                'title' => __('admin.return_date_is_public_holiday', ['name' => $returnHoliday->name])
+            ], 422);
+        }
+        
+        // Calculate rental days
         $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
         
         // Calculate amounts

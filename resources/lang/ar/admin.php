@@ -1148,6 +1148,25 @@ return [
         'show'   => 'عرض عرض',
     ],
 
+    'public_holidays' => [
+        'index'    => 'العطلات الرسمية',
+        'create'   => 'إضافة عطلة رسمية',
+        'edit'     => 'تعديل عطلة رسمية',
+        'update'   => 'تحديث عطلة رسمية',
+        'read'     => 'عرض عطلة رسمية',
+        'read-all' => 'عرض جميع العطلات الرسمية',
+        'delete'   => 'حذف عطلة رسمية',
+        'read-all-intro-settings' => 'عرض العطلات الرسمية',
+        'read-all-dashboard-settings' => 'عرض العطلات الرسمية',
+        'show'   => 'عرض عطلة رسمية',
+    ],
+    'public_holiday_name' => 'اسم العطلة الرسمية',
+    'date' => 'التاريخ',
+    'year' => 'السنة',
+    'this_date_is_public_holiday' => 'هذا التاريخ هو عطلة رسمية',
+    'pickup_date_is_public_holiday' => 'تاريخ الاستلام هو عطلة رسمية: :name',
+    'return_date_is_public_holiday' => 'تاريخ الإرجاع هو عطلة رسمية: :name',
+
     'blogs' => [
         'index'    => 'المدونات',
         'create'   => 'اضافة مدونة',
