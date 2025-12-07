@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin/app-assets/css-rtl/plugins/forms/validation/form-validation.css') }}">
     <style>
-        #contact_address_search {
+        #contact_address_search, #our_location_search {
             background-color: #fff;
             font-size: 15px;
             font-weight: 300;
@@ -16,7 +16,7 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
-        #contact_address_search:focus {
+        #contact_address_search:focus, #our_location_search:focus {
             border-color: #4d90fe;
             outline: none;
         }
@@ -166,7 +166,7 @@
                                             @method('put')
                                             @csrf
                                             <div class="row">
-                                                <div class="col-12 col-md-12">
+                                                {{-- <div class="col-12 col-md-12">
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label for="account-name">{{__('admin.the_name_of_the_application_in_arabic')}}</label>
@@ -176,7 +176,7 @@
                                                                    value="{{$data['name_ar']}}">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-12 col-md-12">
                                                     <div class="form-group">
                                                         <div class="controls">
@@ -188,7 +188,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-md-12">
+                                                {{-- <div class="col-12 col-md-12">
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label for="tagline-ar">{{__('admin.tagline')}} ({{__('admin.ar')}})</label>
@@ -198,7 +198,7 @@
                                                                    value="{{$data['tagline_ar'] ?? ''}}">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-12 col-md-12">
                                                     <div class="form-group">
                                                         <div class="controls">
@@ -225,7 +225,7 @@
                                                     <div class="form-group">
                                                         <label for="first-name-column">{{__('admin.phone_number')}}</label>
                                                         <div class="row">
-                                                            <div class="col-md-9 col-12">
+                                                            <div class="col-md-12 col-12">
                                                                 <div class="controls">
                                                                     <input type="number" name="phone"
                                                                            value="{{$data['phone']}}"
@@ -236,7 +236,7 @@
                                                                            data-validation-number-message="{{__('admin.the_phone_number_ must_not_have_charachters_or_symbol')}}">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3 col-12">
+                                                            {{-- <div class="col-md-3 col-12">
                                                                 <select name="country_code"
                                                                         class="form-control select2">
                                                                     @foreach($countries as $country)
@@ -247,7 +247,7 @@
                                                                             {{ $country->key.'+' }}</option>
                                                                     @endforeach
                                                                 </select>
-                                                            </div>
+                                                            </div> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -479,6 +479,65 @@
                                                     </div>
                                                 </div>
 
+                                                <!-- Order Pricing Settings -->
+                                                <div class="col-12 mt-4">
+                                                    <h5 class="mb-3">{{__('admin.order_pricing_settings')}}</h5>
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-12">
+                                                            <div class="form-group">
+                                                                <label for="gst_percentage">{{__('admin.gst_percentage')}}</label>
+                                                                <div class="controls">
+                                                                    <input type="number" 
+                                                                           name="gst_percentage" 
+                                                                           id="gst_percentage" 
+                                                                           class="form-control" 
+                                                                           step="0.01"
+                                                                           min="0"
+                                                                           max="100"
+                                                                           value="{{$data['gst_percentage'] ?? '10'}}" 
+                                                                           placeholder="{{__('admin.gst_percentage')}}">
+                                                                    <small class="text-muted">{{__('admin.gst_percentage_hint')}}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 col-12">
+                                                            <div class="form-group">
+                                                                <label for="refundable_deposit">{{__('admin.refundable_deposit')}}</label>
+                                                                <div class="controls">
+                                                                    <input type="number" 
+                                                                           name="refundable_deposit" 
+                                                                           id="refundable_deposit" 
+                                                                           class="form-control" 
+                                                                           step="0.01"
+                                                                           min="0"
+                                                                           value="{{$data['refundable_deposit'] ?? '500'}}" 
+                                                                           placeholder="{{__('admin.refundable_deposit')}}">
+                                                                    <small class="text-muted">{{__('admin.refundable_deposit_hint')}}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 col-12">
+                                                            <div class="form-group">
+                                                                <label for="surcharges_fee_percentage">{{__('admin.surcharges_fee_percentage')}}</label>
+                                                                <div class="controls">
+                                                                    <input type="number" 
+                                                                           name="surcharges_fee_percentage" 
+                                                                           id="surcharges_fee_percentage" 
+                                                                           class="form-control" 
+                                                                           step="0.01"
+                                                                           min="0"
+                                                                           max="100"
+                                                                           value="{{$data['surcharges_fee_percentage'] ?? '1.5'}}" 
+                                                                           placeholder="{{__('admin.surcharges_fee_percentage')}}">
+                                                                    <small class="text-muted">{{__('admin.surcharges_fee_percentage_hint')}}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-12 d-flex justify-content-center mt-3">
                                                     <button type="submit"
                                                             class="btn btn-primary mr-1 mb-1 submit_button">{{__('admin.saving_changes')}}</button>
@@ -696,6 +755,33 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
+                                                </div>
+
+                                                <!-- Terms File Upload -->
+                                                <div class="col-12 mt-4">
+                                                    <div class="imgMontg col-12 text-center">
+                                                        <div class="dropBox">
+                                                            <div class="textCenter d-flex flex-column">
+                                                                <div class="imagesUploadBlock">
+                                                                    <label class="uploadImg">
+                                                                        <span><i class="feather icon-file"></i></span>
+                                                                        <input type="file" name="terms_file" class="imageUploader">
+                                                                    </label>
+                                                                    <div class="uploadedBlock">
+                                                                        <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <span>{{__('admin.terms_file')}} 
+                                                                    @if(!empty($data['terms_file']))
+                                                                        <a href="{{$data['terms_file']}}" target="_blank" style="color: #007bff; text-decoration: underline;">
+                                                                            <i class="feather icon-file-text"></i> {{__('admin.view_file')}}
+                                                                        </a>
+                                                                    @endif
+
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-12 d-flex justify-content-center mt-3">
@@ -990,6 +1076,19 @@
                                                         </div>
                                                     @endforeach
                                                 </div>
+
+                                                <!-- Our Location Map -->
+                                                <div class="col-12 mt-4">
+                                                    <div class="form-group">
+                                                        <label for="our_location_map">{{__('admin.our_location_location')}}</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="our_location_search" style="width: 50%;" class="controls" type="text" placeholder="{{__('admin.search_location')}}" style="width: 100%; margin-bottom: 10px;">
+                                                            <div id="our_location_map" style="height: 300px;"></div>
+                                                            <input type="hidden" id="our_location_lat" name="our_location_lat" value="{{$data['our_location_lat'] ?? '24.7135517'}}">
+                                                            <input type="hidden" id="our_location_lng" name="our_location_lng" value="{{$data['our_location_lng'] ?? '46.6752957'}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="col-12 d-flex justify-content-center mt-3">
@@ -1041,6 +1140,32 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
+                                                </div>
+
+                                                <!-- Privacy File Upload -->
+                                                <div class="col-12 mt-4">
+                                                    <div class="imgMontg col-12 text-center">
+                                                        <div class="dropBox">
+                                                            <div class="textCenter d-flex flex-column">
+                                                                <div class="imagesUploadBlock">
+                                                                    <label class="uploadImg">
+                                                                        <span><i class="feather icon-file"></i></span>
+                                                                        <input type="file" name="privacy_file" class="imageUploader">
+                                                                    </label>
+                                                                    <div class="uploadedBlock">
+                                                                        <button class="close"><i class="feather icon-trash-2"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                                <span>{{__('admin.privacy_file')}} 
+                                                                    @if(!empty($data['privacy_file']))
+                                                                        <a href="{{$data['privacy_file']}}" target="_blank" style="color: #007bff; text-decoration: underline;">
+                                                                            <i class="feather icon-file-text"></i> {{__('admin.view_file')}}
+                                                                        </a>
+                                                                    @endif
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-12 d-flex justify-content-center mt-3">
@@ -1247,7 +1372,7 @@
                                                 </div>
 
                                                 <!-- App Download Title (Multilingual) -->
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="app_download_title_ar">{{__('admin.app_download_title')}} ({{__('admin.arabic')}})</label>
                                                         <div class="controls">
@@ -1256,7 +1381,7 @@
                                                                    placeholder="{{__('admin.app_download_title')}}">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
@@ -1270,7 +1395,7 @@
                                                 </div>
 
                                                 <!-- App Download Description (Multilingual) -->
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="app_download_description_ar">{{__('admin.app_download_description')}} ({{__('admin.arabic')}})</label>
                                                         <div class="controls">
@@ -1278,7 +1403,7 @@
                                                                       placeholder="{{__('admin.app_download_description')}}">{{$data['app_download_description_ar'] ?? 'تبحث عن تأجير سيارة أثناء التنقل؟ تطبيق DistinQt Car Hire يجعل الحجز سريع وسهل، احجز وأدر تأجير السيارة المثالية من هاتفك الذكي. حجز سلس بضغطة قليلة، ابق مسيطراً من خلال تتبع حجوزاتك وتفاصيل الاستلام.'}}</textarea>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
@@ -1313,13 +1438,13 @@
                                                     <h4 class="mb-3">{{__('admin.section_transparency')}}</h4>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.title')}} ({{__('admin.ar')}})</label>
                                                         <input type="text" name="section_transparency_title_ar" class="form-control" 
                                                                value="{{$data['section_transparency']['title_ar'] ?? ''}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.title')}} ({{__('admin.en')}})</label>
@@ -1328,13 +1453,13 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.subtitle')}} ({{__('admin.ar')}})</label>
                                                         <input type="text" name="section_transparency_subtitle_ar" class="form-control" 
                                                                value="{{$data['section_transparency']['subtitle_ar'] ?? ''}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.subtitle')}} ({{__('admin.en')}})</label>
@@ -1343,12 +1468,12 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.description')}} ({{__('admin.ar')}})</label>
                                                         <textarea name="section_transparency_description_ar" class="form-control" rows="4">{{$data['section_transparency']['description_ar'] ?? ''}}</textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.description')}} ({{__('admin.en')}})</label>
@@ -1391,13 +1516,13 @@
                                                     <h4 class="mb-3">{{__('admin.section_damage_liability')}}</h4>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.title')}} ({{__('admin.ar')}})</label>
                                                         <input type="text" name="section_damage_liability_title_ar" class="form-control" 
                                                                value="{{$data['section_damage_liability']['title_ar'] ?? ''}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.title')}} ({{__('admin.en')}})</label>
@@ -1406,13 +1531,13 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.subtitle')}} ({{__('admin.ar')}})</label>
                                                         <input type="text" name="section_damage_liability_subtitle_ar" class="form-control" 
                                                                value="{{$data['section_damage_liability']['subtitle_ar'] ?? ''}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.subtitle')}} ({{__('admin.en')}})</label>
@@ -1421,12 +1546,12 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.description')}} ({{__('admin.ar')}})</label>
                                                         <textarea name="section_damage_liability_description_ar" class="form-control" rows="4">{{$data['section_damage_liability']['description_ar'] ?? ''}}</textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.description')}} ({{__('admin.en')}})</label>
@@ -1469,13 +1594,13 @@
                                                     <h4 class="mb-3">{{__('admin.section_our_story')}}</h4>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.title')}} ({{__('admin.ar')}})</label>
                                                         <input type="text" name="section_our_story_title_ar" class="form-control" 
                                                                value="{{$data['section_our_story']['title_ar'] ?? ''}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.title')}} ({{__('admin.en')}})</label>
@@ -1484,13 +1609,13 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.subtitle')}} ({{__('admin.ar')}})</label>
                                                         <input type="text" name="section_our_story_subtitle_ar" class="form-control" 
                                                                value="{{$data['section_our_story']['subtitle_ar'] ?? ''}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.subtitle')}} ({{__('admin.en')}})</label>
@@ -1499,12 +1624,12 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="col-md-6 col-12">
+                                                {{-- <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.description')}} ({{__('admin.ar')}})</label>
                                                         <textarea name="section_our_story_description_ar" class="form-control" rows="4">{{$data['section_our_story']['description_ar'] ?? ''}}</textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label>{{__('admin.description')}} ({{__('admin.en')}})</label>
@@ -1914,6 +2039,64 @@
                     $('#contact_address_search').val(results[0].formatted_address);
                     $('#contact_address_lat').val(position.lat());
                     $('#contact_address_lng').val(position.lng());
+                }
+            });
+        });
+
+        // Our Location Map
+        var ourLocationMap, ourLocationMarker;
+        var ourLocationLatlng = new google.maps.LatLng({{ $data['our_location_lat'] ?? '24.7135517' }}, {{ $data['our_location_lng'] ?? '46.6752957' }});
+        var ourLocationGeocoder = new google.maps.Geocoder();
+        var ourLocationMapOptions = {
+            zoom: 14,
+            center: ourLocationLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        ourLocationMap = new google.maps.Map(document.getElementById("our_location_map"), ourLocationMapOptions);
+        ourLocationMarker = new google.maps.Marker({
+            map: ourLocationMap,
+            position: ourLocationLatlng,
+            draggable: true
+        });
+
+        // Our Location Search Box
+        var ourLocationInput = document.getElementById('our_location_search');
+        var ourLocationSearchBox = new google.maps.places.SearchBox(ourLocationInput);
+        ourLocationMap.controls[google.maps.ControlPosition.TOP_LEFT].push(ourLocationInput);
+        
+        ourLocationMap.addListener('bounds_changed', function() {
+            ourLocationSearchBox.setBounds(ourLocationMap.getBounds());
+        });
+        
+        ourLocationSearchBox.addListener('places_changed', function() {
+            var places = ourLocationSearchBox.getPlaces();
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                ourLocationMarker.setPosition(place.geometry.location);
+                $('#our_location_lat').val(place.geometry.location.lat());
+                $('#our_location_lng').val(place.geometry.location.lng());
+                if(place.geometry.viewport) {
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            ourLocationMap.fitBounds(bounds);
+        });
+
+        // Our Location Marker Drag Event
+        google.maps.event.addListener(ourLocationMarker, 'dragend', function () {
+            var position = ourLocationMarker.getPosition();
+            ourLocationGeocoder.geocode({ location: position }, function (results, status) {
+                if (status === 'OK' && results[0]) {
+                    $('#our_location_search').val(results[0].formatted_address);
+                    $('#our_location_lat').val(position.lat());
+                    $('#our_location_lng').val(position.lng());
                 }
             });
         });

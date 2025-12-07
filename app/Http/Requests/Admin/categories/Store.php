@@ -14,7 +14,7 @@ class store extends FormRequest
     public function rules()
     {
         return [
-            'name.*'                  => 'required|max:191',
+            'name' => 'required|array',
             'parent_id'                => 'nullable|exists:categories,id',
             'image'                    => ['nullable','image'],
         ];

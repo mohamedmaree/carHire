@@ -22,7 +22,7 @@ class Store extends FormRequest
     public function rules(): array
     {
         return [
-            'name.*' => 'required|string|max:255',
+            'name' => 'required|array',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_active' => 'boolean',
             'sort_order' => 'integer|min:0'

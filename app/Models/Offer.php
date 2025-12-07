@@ -76,7 +76,10 @@ class Offer extends BaseModel
     // Accessors
     public function getFormattedDiscountAttribute()
     {
-        return $this->discount_amount . '%';
+        if ($this->coupon && $this->coupon->type == 'ratio') {
+            return $this->discount_amount . '%';
+        }
+        return '$' . number_format($this->discount_amount, 2);
     }
 
     public function getImageAttribute()

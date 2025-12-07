@@ -15,14 +15,10 @@ class Store extends FormRequest
     {
         return [
             'name' => 'required|array',
-            'name.*' => 'required|string|max:255',
             'address' => 'required|array',
-            'address.*' => 'required|string|max:500',
             'caption' => 'nullable|array',
-            'caption.*' => 'nullable|string|max:255',
             'toll_delivery_fees' => 'nullable|numeric|min:0|max:99999999.99',
             'description' => 'nullable|array',
-            'description.*' => 'nullable|string|max:1000',
             'lat' => 'nullable|numeric|between:-90,90',
             'lng' => 'nullable|numeric|between:-180,180',
             'type' => 'required|in:airport,location',

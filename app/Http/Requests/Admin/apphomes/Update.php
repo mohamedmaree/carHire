@@ -14,8 +14,8 @@ class Update extends FormRequest
     public function rules()
     {
         return [
-            'title.*'                  => 'required',
-            'description.*'            => 'nullable',
+            'title' => 'required|array',
+            'description' => 'nullable|array',
             'type'                     => 'required',
             'sort'                     => 'nullable',
             'add_dates'                => 'nullable',

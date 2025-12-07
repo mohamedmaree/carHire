@@ -11,7 +11,7 @@ class store extends FormRequest {
 
     public function rules() {
         return [
-            'name.*'   => 'required|max:191',
+            'name' => 'required|array',
             'region_id' => 'required|exists:regions,id',
             'country_id' => 'required|exists:countries,id',
         ];

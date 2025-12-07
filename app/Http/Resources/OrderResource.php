@@ -202,6 +202,9 @@ class OrderResource extends JsonResource
             
             // Amounts
             'subtotal_amount' => $this->subtotal_amount,
+            'gst' => $this->gst,
+            'refundable_deposit' => $this->refundable_deposit,
+            'surcharges_fee' => $this->surcharges_fee,
             'fees' => $this->fees,
             'formatted_fees' => $this->formatted_fees,
             'total_amount' => $this->total_amount,

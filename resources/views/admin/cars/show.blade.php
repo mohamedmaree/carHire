@@ -68,7 +68,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label>{{ __('admin.name') }}</label>
+                                                                            <label>{{ __('admin.name_title_car') }}</label>
                                                                             <div class="controls">
                                                                                 <p class="form-control-static">{{ $car->name }}</p>
                                                                             </div>

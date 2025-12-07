@@ -25,9 +25,9 @@ class Create extends FormRequest
     {
         return [
             'key' => 'required',
-            'meta_title.*' => 'required',
-            'meta_description.*' => 'required',
-            'meta_keywords.*' => 'required',
+            'meta_title' => 'required|array',
+            'meta_description' => 'required|array',
+            'meta_keywords' => 'required|array',
         ];
     }
 

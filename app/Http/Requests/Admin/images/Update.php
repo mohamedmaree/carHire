@@ -25,7 +25,7 @@ class Update extends FormRequest
     {
         return [
             'image'                => ['nullable','image'],
-            'name.*'               => 'required',
+            'name' => 'required|array',
             'start_date'           => 'required',
             'end_date'             => 'required',
             'sort'                 => 'nullable',

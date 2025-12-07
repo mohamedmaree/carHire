@@ -24,7 +24,7 @@ class Create extends FormRequest
     public function rules()
     {
         return [
-            'name.*'        => 'required|max:191',
+            'name' => 'required|array',
             'permissions'   => 'required|array',
             'permissions.*' => 'required|exists:permissions,id',
         ];

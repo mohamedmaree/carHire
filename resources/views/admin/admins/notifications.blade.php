@@ -130,8 +130,8 @@
         $('.delete_all_button').on('click', function (e) {
             e.preventDefault()
             Swal.fire({
-                title: "{{__('هل تريد الاستمرار ؟')}}",
-                text: "{{__('هل انت متأكد انك تريد استكمال عملية حذف المحدد')}}",
+                title: "{{__('admin.delete_confirmation_title')}}",
+                text: "{{__('admin.delete_selected_confirmation_text')}}",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

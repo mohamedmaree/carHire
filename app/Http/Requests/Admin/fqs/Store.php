@@ -15,8 +15,8 @@ class store extends FormRequest
     {
     
         return [
-            'question.*'                => 'required',
-            'answer.*'                  => 'required',
-        ];;
+            'question' => 'required|array',
+            'answer' => 'required|array',
+        ];
     }
 }

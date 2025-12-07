@@ -46,7 +46,7 @@ class RoleController extends Controller
         $permissions = Permission::whereIn('id', $request->permissions)->get();
         $role->syncPermissions($permissions);
         Report::addToLog('  اضافه صلاحية');
-        return redirect(route('admin.roles.index'))->with('success', 'تم الاضافه بنجاح');
+        return redirect(route('admin.roles.index'))->with('success', __('admin.added_successfully'));
     }
 
     /***************************  get all roles  **************************/
@@ -62,7 +62,7 @@ class RoleController extends Controller
     public function update(Create $request, $id)
     {
         if (!$request->permissions) {
-            return back()->with('danger', 'يجب اختيار صلاحيه واحده علي الاقل ');
+            return back()->with('danger', __('admin.at_least_one_permission_required'));
         }
         $role = Role::findOrFail($id);
         $permissions = Permission::whereIn('id', $request->permissions)->get();
@@ -70,7 +70,7 @@ class RoleController extends Controller
         $role = $role->update($request->validated());
         Report::addToLog('  تعديل صلاحية');
 
-        return redirect(route('admin.roles.index'))->with('success', 'تم التعديل بنجاح');
+        return redirect(route('admin.roles.index'))->with('success', __('admin.updated_successfully'));
     }
 
     public function destroy($id)

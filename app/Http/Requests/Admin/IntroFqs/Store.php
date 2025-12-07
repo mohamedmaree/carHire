@@ -24,8 +24,8 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'title.*'              => 'required' ,
-            'description.*'        => 'required' ,
+            'title' => 'required|array',
+            'description' => 'required|array',
             'intro_fqs_category_id' => 'required|exists:intro_fqs_categories,id' ,
         ];
     }

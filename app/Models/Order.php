@@ -33,6 +33,7 @@ class Order extends BaseModel
         
         // Car and Options
         'car_id', 'price_package_id', 'rental_days', 'total_amount', 'subtotal_amount', 'fees',
+        'gst', 'refundable_deposit', 'surcharges_fee',
         
         // Coupon Information
         'coupon_code', 'coupon_discount_amount', 'coupon_discount_percentage',
@@ -70,6 +71,9 @@ class Order extends BaseModel
         'total_amount' => 'decimal:2',
         'subtotal_amount' => 'decimal:2',
         'fees' => 'decimal:2',
+        'gst' => 'decimal:2',
+        'refundable_deposit' => 'decimal:2',
+        'surcharges_fee' => 'decimal:2',
         'coupon_discount_amount' => 'decimal:2',
         'coupon_discount_percentage' => 'decimal:2',
         'customer_age' => 'integer',

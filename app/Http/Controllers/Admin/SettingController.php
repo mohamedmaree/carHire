@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Services\SettingService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cache;
 use App\Models\Country;
 
 class SettingController extends Controller
@@ -19,9 +18,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        $data = Cache::rememberForever('settings', function () {
-            return SettingService::appInformations(SiteSetting::pluck('value', 'key'));
-        });
+        $data = SettingService::appInformations(SiteSetting::pluck('value', 'key'));
         $countries = Country::orderBy('id', 'ASC')->get();
         return view('admin.settings.index', compact('data', 'countries'));
     }
@@ -30,14 +27,13 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $request_array = $request->all();
-        Cache::forget('settings');
         foreach ($request_array as $key => $val) {
-            if (in_array($key, [ 'logo', 'side_logo', 'fav_icon', 'default_user', 'intro_loader', 'intro_logo', 'about_image_2', 'about_image_1', 'login_background', 'profile_cover', 'brochure_file', 'home_banner_1', 'home_banner_2', 'section_transparency_file', 'section_damage_liability_file', 'section_our_story_file', 'about_section_1_image', 'about_section_2_image' ])) {
+            if (in_array($key, [ 'logo', 'side_logo', 'fav_icon', 'default_user', 'intro_loader', 'intro_logo', 'about_image_2', 'about_image_1', 'login_background', 'profile_cover', 'brochure_file', 'home_banner_1', 'home_banner_2', 'section_transparency_file', 'section_damage_liability_file', 'section_our_story_file', 'about_section_1_image', 'about_section_2_image', 'terms_file', 'privacy_file' ])) {
                 // Check if it's a video file
                 $isVideo = in_array($val->getClientMimeType(), ['video/mp4', 'video/mpeg', 'video/quicktime', 'video/x-msvideo', 'video/webm']);
                 
-                if ($key == 'brochure_file') {
-                    // Handle brochure file upload to images/settings folder
+                if ($key == 'brochure_file' || $key == 'terms_file' || $key == 'privacy_file') {
+                    // Handle brochure, terms, and privacy file uploads to images/settings folder
                     $thumbsPath = 'storage/images/settings/';
                     $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
                     SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
@@ -88,19 +84,14 @@ class SettingController extends Controller
             SiteSetting::where('key', 'is_production')->update([ 'value' => 0 ]);
         }
 
-        Cache::rememberForever('settings', function () {
-            return SettingService::appInformations(SiteSetting::pluck('value', 'key'));
-        });
-
         Report::addToLog('تعديل الاعدادت');
 
-        return back()->with('success', 'تم الحفظ');
+        return back()->with('success', __('admin.saved_successfully'));
     }
 
     public function updateSocials(Request $request)
     {
         $request_array = $request->all();
-        Cache::forget('settings');
         if ($request->socials) {
             $arr = [];
             foreach ($request->socials as $social) {
@@ -121,13 +112,9 @@ class SettingController extends Controller
             SiteSetting::updateOrCreate([ 'key' => 'socials' ], [ 'value' => null]);
         }
 
-        Cache::rememberForever('settings', function () {
-            return SettingService::appInformations(SiteSetting::pluck('value', 'key'));
-        });
-
         Report::addToLog('تعديل الاعدادت');
 
-        return back()->with('success', 'تم الحفظ');
+        return back()->with('success', __('admin.saved_successfully'));
     }
 
 
@@ -135,20 +122,20 @@ class SettingController extends Controller
     {
 
         $this->userRepo->messageAll($request->all(), $type);
-        return back()->with('success', 'تم الارسال');
+        return back()->with('success', __('admin.sent_successfully'));
     }
 
     public function messageOne(Request $request, $type)
     {
 
         $this->userRepo->messageOne($request->all(), $type);
-        return back()->with('success', 'تم الارسال');
+        return back()->with('success', __('admin.sent_successfully'));
     }
 
     public function sendEmail(Request $request)
     {
 
         $this->settingRepo->sendEmail($request->all());
-        return back()->with('success', 'تم الارسال');
+        return back()->with('success', __('admin.sent_successfully'));
     }
 }

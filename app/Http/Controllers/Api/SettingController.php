@@ -58,13 +58,23 @@ class SettingController extends Controller {
   }
 
   public function terms() {
-    $terms = SiteSetting::where(['key' => 'terms_' . lang()])->first()->value;
-    return $this->successData( $terms);
+    $termsText = SiteSetting::where(['key' => 'terms_' . lang()])->first()->value ?? '';
+    $termsFile = SiteSetting::where(['key' => 'terms_file'])->first()->value ?? null;
+    $data = [
+      'text' => $termsText,
+      'file' => $termsFile ? '/storage/images/settings/' . $termsFile : null
+    ];
+    return $this->successData($data);
   }
 
   public function privacy() {
-    $privacy = SiteSetting::where(['key' => 'privacy_' . lang()])->first()->value;
-    return $this->successData( $privacy);
+    $privacyText = SiteSetting::where(['key' => 'privacy_' . lang()])->first()->value ?? '';
+    $privacyFile = SiteSetting::where(['key' => 'privacy_file'])->first()->value ?? null;
+    $data = [
+      'text' => $privacyText,
+      'file' => $privacyFile ? '/storage/images/settings/' . $privacyFile : null
+    ];
+    return $this->successData($data);
   }
 
   public function intros() {

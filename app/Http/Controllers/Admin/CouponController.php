@@ -67,7 +67,7 @@ class CouponController extends Controller
     {
         $coupon = Coupon::findOrFail($id)->delete();
         Report::addToLog('  حذف كوبون خصم') ;
-        return response()->json(['id' =>$id]);
+        return response()->json(['id' => $id]);
     }
 
     public function destroyAll(Request $request)

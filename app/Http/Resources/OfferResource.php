@@ -21,6 +21,7 @@ class OfferResource extends JsonResource
             'image' => $this->image,
             'discount_amount' => $this->discount_amount,
             'formatted_discount' => $this->formatted_discount,
+            'discount_type' => $this->coupon ? $this->coupon->type : null, // 'ratio' or 'number' (fixed)
             'coupon_id' => (int) $this->coupon_id,
             'coupon' => $this->whenLoaded('coupon', function () {
                 return [

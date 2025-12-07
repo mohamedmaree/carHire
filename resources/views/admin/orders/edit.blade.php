@@ -233,6 +233,7 @@
                                                 <div class="row">
                                                     <div class="col-3">
                                                         @lang('admin.flight_information')
+                                                        <small class="text-muted d-block">(@lang('admin.optional'))</small>
                                                     </div>
                                                     <div class="col-9">
                                                         <div class="card">
@@ -243,7 +244,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_arrival_date')</label>
+                                                                                    <label>@lang('admin.flight_arrival_date') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="date" name="flight_arrival_date" class="form-control" value="{{old('flight_arrival_date', $order->flight_arrival_date ? $order->flight_arrival_date->format('Y-m-d') : '')}}">
                                                                                     </div>
@@ -252,7 +253,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_arrival_time')</label>
+                                                                                    <label>@lang('admin.flight_arrival_time') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="time" name="flight_arrival_time" class="form-control" value="{{old('flight_arrival_time', $order->flight_arrival_time)}}">
                                                                                     </div>
@@ -261,7 +262,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_number_arrival')</label>
+                                                                                    <label>@lang('admin.flight_number_arrival') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="text" name="flight_number_arrival" class="form-control" value="{{old('flight_number_arrival', $order->flight_number_arrival)}}" placeholder="@lang('admin.flight_number_arrival')">
                                                                                     </div>
@@ -270,7 +271,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_airline_arrival')</label>
+                                                                                    <label>@lang('admin.flight_airline_arrival') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="text" name="flight_airline_arrival" class="form-control" value="{{old('flight_airline_arrival', $order->flight_airline_arrival)}}" placeholder="@lang('admin.flight_airline_arrival')">
                                                                                     </div>
@@ -279,7 +280,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_departure_date')</label>
+                                                                                    <label>@lang('admin.flight_departure_date') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="date" name="flight_departure_date" class="form-control" value="{{old('flight_departure_date', $order->flight_departure_date ? $order->flight_departure_date->format('Y-m-d') : '')}}">
                                                                                     </div>
@@ -288,7 +289,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_departure_time')</label>
+                                                                                    <label>@lang('admin.flight_departure_time') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="time" name="flight_departure_time" class="form-control" value="{{old('flight_departure_time', $order->flight_departure_time)}}">
                                                                                     </div>
@@ -297,7 +298,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_number_departure')</label>
+                                                                                    <label>@lang('admin.flight_number_departure') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="text" name="flight_number_departure" class="form-control" value="{{old('flight_number_departure', $order->flight_number_departure)}}" placeholder="@lang('admin.flight_number_departure')">
                                                                                     </div>
@@ -306,7 +307,7 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
-                                                                                    <label>@lang('admin.flight_airline_departure')</label>
+                                                                                    <label>@lang('admin.flight_airline_departure') <span class="text-muted">(@lang('admin.optional'))</span></label>
                                                                                     <div class="controls">
                                                                                         <input type="text" name="flight_airline_departure" class="form-control" value="{{old('flight_airline_departure', $order->flight_airline_departure)}}" placeholder="@lang('admin.flight_airline_departure')">
                                                                                     </div>

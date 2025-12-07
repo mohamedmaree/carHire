@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\ISocial;
 use App\Http\Requests\Admin\Socials\Store;
-use Illuminate\Support\Facades\Cache;
 
 class SocialController extends Controller
 {
@@ -43,7 +42,6 @@ class SocialController extends Controller
     public function store(Store $request)
     {
         Social::create($request->validated());
-        Cache::forget('socials');
         Report::addToLog('  اضافه وسيلة تواصل') ;
         return response()->json(['url' => route('admin.socials.index')]);
     }
@@ -57,7 +55,6 @@ class SocialController extends Controller
     public function update(Store $request, $id)
     {
         Social::findOrFail($id)->update($request->validated());
-        Cache::forget('socials');
         Report::addToLog('  تعديل وسيلة تواصل') ;
         return response()->json(['url' => route('admin.socials.index')]);
     }
@@ -70,9 +67,8 @@ class SocialController extends Controller
     public function destroy($id)
     {
         Social::findOrFail($id)->delete();
-        Cache::forget('socials');
         Report::addToLog('  حذف وسيلة تواصل') ;
-        return response()->json(['id' =>$id]);
+        return response()->json(['id' => $id]);
     }
 
     public function destroyAll(Request $request)
@@ -83,7 +79,6 @@ class SocialController extends Controller
             $ids[] = $id->id;
         }
         if (Social::whereIntegerInRaw('id' , $ids)->get()->each->delete()) {
-            Cache::forget('socials');
             Report::addToLog('  حذف العديد من وسائل التواصل') ;
             return response()->json('success');
         } else {

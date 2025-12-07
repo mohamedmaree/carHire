@@ -15,7 +15,9 @@ use App\Models\Country;
 use App\Models\City;
 use App\Models\User;
 use App\Models\PublicHoliday;
+use App\Models\SiteSetting;
 use App\Jobs\SendBookingConfirmationEmailJob;
+use App\Traits\Report;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -89,15 +91,79 @@ class OrderController extends Controller
         // Calculate rental days
         $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
         
-        // Calculate amounts
+        // Calculate base subtotal (car price * days)
         $car = Car::find($data['car_id']);
         $pricePackage = PricePackage::find($data['price_package_id']);
         
         if ($pricePackage) {
-            $data['subtotal_amount'] = $pricePackage->price * $data['rental_days'];
+            $carSubtotal = $pricePackage->price * $data['rental_days'];
         } else {
-            $data['subtotal_amount'] = 0;
+            $carSubtotal = 0;
         }
+        
+        // Calculate options total (daily options * days + flat fee options)
+        $optionsTotal = 0;
+        if (!empty($data['options'])) {
+            foreach ($data['options'] as $optionId => $optionData) {
+                if ($optionData['quantity'] > 0) {
+                    $option = Option::find($optionId);
+                    
+                    // Skip if this is a parent option and any of its children are selected
+                    if ($option && $option->is_parent) {
+                        $hasChildSelected = false;
+                        foreach ($data['options'] as $otherOptionId => $otherOptionData) {
+                            if ($otherOptionData['quantity'] > 0) {
+                                $otherOption = Option::find($otherOptionId);
+                                if ($otherOption && $otherOption->parent_id == $option->id) {
+                                    $hasChildSelected = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if ($hasChildSelected) {
+                            continue;
+                        }
+                    }
+                    
+                    // Skip if this is a child option and its parent is also selected
+                    if ($option && $option->is_child && isset($data['options'][$option->parent_id])) {
+                        $parentData = $data['options'][$option->parent_id];
+                        if ($parentData['quantity'] > 0) {
+                            continue;
+                        }
+                    }
+                    
+                    if ($option) {
+                        $price = $option->price;
+                        $totalPrice = $price * $optionData['quantity'];
+                        
+                        if ($option->price_type == 'per_day') {
+                            $totalPrice *= $data['rental_days'];
+                        }
+                        
+                        $optionsTotal += $totalPrice;
+                    }
+                }
+            }
+        }
+        
+        // Calculate subtotal (car + options)
+        $data['subtotal_amount'] = $carSubtotal + $optionsTotal;
+        
+        // Get settings for GST, Refundable Deposit, and Surcharges Fee
+        $settings = SiteSetting::pluck('value', 'key');
+        $gstPercentage = floatval($settings['gst_percentage'] ?? 10); // Default 10%
+        $refundableDeposit = floatval($settings['refundable_deposit'] ?? 500); // Default $500
+        $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5); // Default 1.5%
+        
+        // Calculate GST (percentage of subtotal)
+        $data['gst'] = ($data['subtotal_amount'] * $gstPercentage) / 100;
+        
+        // Set Refundable Deposit
+        $data['refundable_deposit'] = $refundableDeposit;
+        
+        // Calculate Surcharges Fee (percentage of subtotal)
+        $data['surcharges_fee'] = ($data['subtotal_amount'] * $surchargesFeePercentage) / 100;
         
         // Reset coupon discount fields first
         $data['coupon_discount_amount'] = null;
@@ -124,16 +190,18 @@ class OrderController extends Controller
             }
         }
         
-        // Calculate total amount
-        $data['total_amount'] = $data['subtotal_amount'] - ($data['coupon_discount_amount'] ?? 0);
-        
         // Handle fees - ensure it's null if empty or 0
         if (empty($data['fees']) || $data['fees'] == 0) {
             $data['fees'] = null;
-        } else {
-            // Add fees to total amount
-            $data['total_amount'] += $data['fees'];
         }
+        
+        // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
+        $data['total_amount'] = $data['subtotal_amount'] 
+            + $data['gst'] 
+            + $data['refundable_deposit'] 
+            + $data['surcharges_fee'] 
+            - ($data['coupon_discount_amount'] ?? 0) 
+            + ($data['fees'] ?? 0);
         
         // Handle airport locations
         if ($data['pickup_location_id']) {
@@ -180,51 +248,47 @@ class OrderController extends Controller
                     $option = Option::find($optionId);
                     
                     // Skip if this is a parent option and any of its children are selected
-                    if ($option->is_parent) {
+                    if ($option && $option->is_parent) {
                         $hasChildSelected = false;
                         foreach ($data['options'] as $otherOptionId => $otherOptionData) {
                             if ($otherOptionData['quantity'] > 0) {
                                 $otherOption = Option::find($otherOptionId);
-                                if ($otherOption->parent_id == $option->id) {
+                                if ($otherOption && $otherOption->parent_id == $option->id) {
                                     $hasChildSelected = true;
                                     break;
                                 }
                             }
                         }
-                        
                         if ($hasChildSelected) {
-                            continue; // Skip parent if child is selected
+                            continue;
                         }
                     }
                     
                     // Skip if this is a child option and its parent is also selected
-                    if ($option->is_child && isset($data['options'][$option->parent_id])) {
+                    if ($option && $option->is_child && isset($data['options'][$option->parent_id])) {
                         $parentData = $data['options'][$option->parent_id];
                         if ($parentData['quantity'] > 0) {
-                            continue; // Skip child if parent is selected
+                            continue;
                         }
                     }
                     
-                    $price = $option->price;
-                    $totalPrice = $price * $optionData['quantity'];
-                    
-                    if ($option->price_type == 'per_day') {
-                        $totalPrice *= $data['rental_days'];
+                    if ($option) {
+                        $price = $option->price;
+                        $totalPrice = $price * $optionData['quantity'];
+                        
+                        if ($option->price_type == 'per_day') {
+                            $totalPrice *= $data['rental_days'];
+                        }
+                        
+                        $order->options()->attach($optionId, [
+                            'quantity' => $optionData['quantity'],
+                            'price' => $price,
+                            'total_price' => $totalPrice
+                        ]);
                     }
-                    
-                    $order->options()->attach($optionId, [
-                        'quantity' => $optionData['quantity'],
-                        'price' => $price,
-                        'total_price' => $totalPrice
-                    ]);
-                    
-                    $data['total_amount'] += $totalPrice;
                 }
             }
         }
-        
-        // Update total amount with options
-        $order->update(['total_amount' => $data['total_amount']]);
         
         // Dispatch booking confirmation email job to queue
         SendBookingConfirmationEmailJob::dispatch($order->id);
@@ -276,15 +340,79 @@ class OrderController extends Controller
         // Calculate rental days
         $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
         
-        // Calculate amounts
+        // Calculate base subtotal (car price * days)
         $car = Car::find($data['car_id']);
         $pricePackage = PricePackage::find($data['price_package_id']);
         
         if ($pricePackage) {
-            $data['subtotal_amount'] = $pricePackage->price * $data['rental_days'];
+            $carSubtotal = $pricePackage->price * $data['rental_days'];
         } else {
-            $data['subtotal_amount'] = 0;
+            $carSubtotal = 0;
         }
+        
+        // Calculate options total (daily options * days + flat fee options)
+        $optionsTotal = 0;
+        if (!empty($data['options'])) {
+            foreach ($data['options'] as $optionId => $optionData) {
+                if ($optionData['quantity'] > 0) {
+                    $option = Option::find($optionId);
+                    
+                    // Skip if this is a parent option and any of its children are selected
+                    if ($option && $option->is_parent) {
+                        $hasChildSelected = false;
+                        foreach ($data['options'] as $otherOptionId => $otherOptionData) {
+                            if ($otherOptionData['quantity'] > 0) {
+                                $otherOption = Option::find($otherOptionId);
+                                if ($otherOption && $otherOption->parent_id == $option->id) {
+                                    $hasChildSelected = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if ($hasChildSelected) {
+                            continue;
+                        }
+                    }
+                    
+                    // Skip if this is a child option and its parent is also selected
+                    if ($option && $option->is_child && isset($data['options'][$option->parent_id])) {
+                        $parentData = $data['options'][$option->parent_id];
+                        if ($parentData['quantity'] > 0) {
+                            continue;
+                        }
+                    }
+                    
+                    if ($option) {
+                        $price = $option->price;
+                        $totalPrice = $price * $optionData['quantity'];
+                        
+                        if ($option->price_type == 'per_day') {
+                            $totalPrice *= $data['rental_days'];
+                        }
+                        
+                        $optionsTotal += $totalPrice;
+                    }
+                }
+            }
+        }
+        
+        // Calculate subtotal (car + options)
+        $data['subtotal_amount'] = $carSubtotal + $optionsTotal;
+        
+        // Get settings for GST, Refundable Deposit, and Surcharges Fee
+        $settings = SiteSetting::pluck('value', 'key');
+        $gstPercentage = floatval($settings['gst_percentage'] ?? 10); // Default 10%
+        $refundableDeposit = floatval($settings['refundable_deposit'] ?? 500); // Default $500
+        $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5); // Default 1.5%
+        
+        // Calculate GST (percentage of subtotal)
+        $data['gst'] = ($data['subtotal_amount'] * $gstPercentage) / 100;
+        
+        // Set Refundable Deposit
+        $data['refundable_deposit'] = $refundableDeposit;
+        
+        // Calculate Surcharges Fee (percentage of subtotal)
+        $data['surcharges_fee'] = ($data['subtotal_amount'] * $surchargesFeePercentage) / 100;
         
         // Reset coupon discount fields first
         $data['coupon_discount_amount'] = null;
@@ -316,58 +444,13 @@ class OrderController extends Controller
             $data['fees'] = null;
         }
         
-        // Calculate options total FIRST (before calculating final total)
-        $optionsTotal = 0;
-        if (!empty($data['options'])) {
-            foreach ($data['options'] as $optionId => $optionData) {
-                if ($optionData['quantity'] > 0) {
-                    $option = Option::find($optionId);
-                    
-                    // Skip if this is a parent option and any of its children are selected
-                    if ($option && $option->is_parent) {
-                        $hasChildSelected = false;
-                        foreach ($data['options'] as $otherOptionId => $otherOptionData) {
-                            if ($otherOptionData['quantity'] > 0) {
-                                $otherOption = Option::find($otherOptionId);
-                                if ($otherOption && $otherOption->parent_id == $option->id) {
-                                    $hasChildSelected = true;
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        if ($hasChildSelected) {
-                            continue; // Skip parent if child is selected
-                        }
-                    }
-                    
-                    // Skip if this is a child option and its parent is also selected
-                    if ($option && $option->is_child && isset($data['options'][$option->parent_id])) {
-                        $parentData = $data['options'][$option->parent_id];
-                        if ($parentData['quantity'] > 0) {
-                            continue; // Skip child if parent is selected
-                        }
-                    }
-                    
-                    if ($option) {
-                        $price = $option->price;
-                        $totalPrice = $price * $optionData['quantity'];
-                        
-                        if ($option->price_type == 'per_day') {
-                            $totalPrice *= $data['rental_days'];
-                        }
-                        
-                        $optionsTotal += $totalPrice;
-                    }
-                }
-            }
-        }
-        
-        // Calculate total amount from scratch: subtotal - coupon discount + fees + options
+        // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
         $data['total_amount'] = $data['subtotal_amount'] 
+            + $data['gst'] 
+            + $data['refundable_deposit'] 
+            + $data['surcharges_fee'] 
             - ($data['coupon_discount_amount'] ?? 0) 
-            + ($data['fees'] ?? 0) 
-            + $optionsTotal;
+            + ($data['fees'] ?? 0);
         
         // Handle airport locations
         if ($data['pickup_location_id']) {
@@ -475,12 +558,14 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('order'));
     }
 
-    public function destroy($id)
+    public function destroy($order)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
+        $orderModel = Order::findOrFail($order);
+        $orderModel->delete();
         
-        return redirect()->route('admin.orders.index')->with('success', __('admin.deleted_successfully'));
+        Report::addToLog('حذف طلب');
+        
+        return response()->json(['id' => $order]);
     }
 
     public function destroyAll(Request $request)

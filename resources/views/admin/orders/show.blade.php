@@ -226,6 +226,24 @@
                                                     <td><strong>@lang('admin.subtotal_amount'):</strong></td>
                                                     <td>{{$order->formatted_subtotal_amount}}</td>
                                                 </tr>
+                                                @if($order->gst)
+                                                <tr>
+                                                    <td><strong>@lang('admin.gst'):</strong></td>
+                                                    <td>${{number_format($order->gst, 2)}}</td>
+                                                </tr>
+                                                @endif
+                                                @if($order->refundable_deposit)
+                                                <tr>
+                                                    <td><strong>@lang('admin.refundable_deposit'):</strong></td>
+                                                    <td>${{number_format($order->refundable_deposit, 2)}}</td>
+                                                </tr>
+                                                @endif
+                                                @if($order->surcharges_fee)
+                                                <tr>
+                                                    <td><strong>@lang('admin.surcharges_fee'):</strong></td>
+                                                    <td>${{number_format($order->surcharges_fee, 2)}}</td>
+                                                </tr>
+                                                @endif
                                                 @if($order->fees)
                                                 <tr>
                                                     <td><strong>@lang('admin.fees'):</strong></td>

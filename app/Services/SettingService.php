@@ -186,6 +186,8 @@ class SettingService
                 'description' => $app_info['our_location_description_' . lang()] ?? '',
                 'description_ar' => $app_info['our_location_description_ar'] ?? '',
                 'description_en' => $app_info['our_location_description_en'] ?? '',
+                'lat' => $app_info['our_location_lat'] ?? '24.7135517',
+                'lng' => $app_info['our_location_lng'] ?? '46.6752957',
             ],
         ];
         foreach (languages() as $lang) {
@@ -194,6 +196,16 @@ class SettingService
             $data['terms_' . $lang] = $app_info['terms_' . $lang] ?? '';
             $data['privacy_' . $lang] = $app_info['privacy_' . $lang] ?? '';
         }
+        
+        // Terms and Privacy File URLs
+        $data['terms_file'] = !empty($app_info['terms_file']) ? '/storage/images/settings/' . $app_info['terms_file'] : null;
+        $data['privacy_file'] = !empty($app_info['privacy_file']) ? '/storage/images/settings/' . $app_info['privacy_file'] : null;
+        
+        // Order Pricing Settings
+        $data['gst_percentage'] = $app_info['gst_percentage'] ?? '10';
+        $data['refundable_deposit'] = $app_info['refundable_deposit'] ?? '500';
+        $data['surcharges_fee_percentage'] = $app_info['surcharges_fee_percentage'] ?? '1.5';
+        
         return $data;
     }
 

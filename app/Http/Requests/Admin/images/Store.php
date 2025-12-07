@@ -15,7 +15,7 @@ class store extends FormRequest
     {
         return [
             'image'                => ['required','image'],
-            'name.*'                 => 'required',
+            'name' => 'required|array',
             'start_date'           => 'required',
             'end_date'             => 'required',
             'link'                 => 'nullable',

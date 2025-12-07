@@ -24,8 +24,8 @@ class Update extends FormRequest
     public function rules()
     {
         return [
-            'name.*'                => 'required|max:191',
-            'currency.*'             => 'required|max:191',
+            'name' => 'required|array',
+            'currency' => 'required|array',
             'key'                    => 'required|unique:countries,key,'.$this->country,
             'currency_code'          => 'required',//|unique:countries,currency_code,'.$this->country,
             'flag'                   => 'nullable',

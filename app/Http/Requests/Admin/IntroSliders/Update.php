@@ -25,8 +25,8 @@ class Update extends FormRequest
     {
         return [
             'image'          => 'nullable|image' , 
-            'title.*'       => 'required' , 
-            'description.*' => 'required' , 
+            'title' => 'required|array',
+            'description' => 'required|array',
         ];
     }
 }

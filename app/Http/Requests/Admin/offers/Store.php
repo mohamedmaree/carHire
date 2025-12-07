@@ -22,8 +22,8 @@ class Store extends FormRequest
     public function rules(): array
     {
         return [
-            'title.*' => 'required|string|max:255',
-            'description.*' => 'required|string',
+            'title' => 'required|array',
+            'description' => 'required|array',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'discount_amount' => 'required|numeric|min:0|max:100',
             'coupon_id' => 'nullable|exists:coupons,id',

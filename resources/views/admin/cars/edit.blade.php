@@ -106,9 +106,9 @@
                                                                                         <div role="tabpanel" class="tab-pane fade @if($loop->first) show active @endif" id="first_{{$lang}}" aria-labelledby="first_{{$lang}}" aria-expanded="true">
                                                                                             <div class="col-md-12 col-12">
                                                                                                 <div class="form-group">
-                                                                                                    <label for="first-name-column">{{__('admin.name')}} {{ $lang }}</label>
+                                                                                                    <label for="first-name-column">{{__('admin.name_title_car')}} {{ $lang }}</label>
                                                                                                     <div class="controls">
-                                                                                                        <input type="text" name="name[{{$lang}}]" class="form-control" placeholder="{{__('admin.write') . __('admin.name')}} {{ $lang }}" value="{{ $car->getTranslation('name', $lang) }}" required data-validation-required-message="{{__('admin.this_field_is_required')}}">
+                                                                                                        <input type="text" name="name[{{$lang}}]" class="form-control" placeholder="{{__('admin.write') . __('admin.name_title_car')}} {{ $lang }}" value="{{ $car->getTranslation('name', $lang) }}" required data-validation-required-message="{{__('admin.this_field_is_required')}}">
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
