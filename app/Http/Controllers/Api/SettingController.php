@@ -62,7 +62,7 @@ class SettingController extends Controller {
     $termsFile = SiteSetting::where(['key' => 'terms_file'])->first()->value ?? null;
     $data = [
       'text' => $termsText,
-      'file' => $termsFile ? '/storage/images/settings/' . $termsFile : null
+      'file' => $termsFile ? asset('/storage/images/settings/' . $termsFile) : null
     ];
     return $this->successData($data);
   }
@@ -72,7 +72,7 @@ class SettingController extends Controller {
     $privacyFile = SiteSetting::where(['key' => 'privacy_file'])->first()->value ?? null;
     $data = [
       'text' => $privacyText,
-      'file' => $privacyFile ? '/storage/images/settings/' . $privacyFile : null
+      'file' => $privacyFile ? asset('/storage/images/settings/' . $privacyFile) : null
     ];
     return $this->successData($data);
   }

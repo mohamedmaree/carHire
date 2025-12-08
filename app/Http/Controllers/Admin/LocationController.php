@@ -40,7 +40,14 @@ class LocationController extends Controller
 
     public function store(Store $request)
     {
-        Location::create($request->validated());
+        $data = $request->validated();
+        
+        // Convert empty arrays/strings to null for holiday fields
+        if (!isset($data['holiday_days'])) {
+            $data['holiday_days'] = null;
+        }
+        
+        Location::create($data);
         Report::addToLog('إضافة موقع جديد');
         return response()->json(['url' => route('admin.locations.index')]);
     }
@@ -53,7 +60,13 @@ class LocationController extends Controller
 
     public function update(Update $request, $id)
     {
-        $location = Location::findOrFail($id)->update($request->validated());
+        $data = $request->validated();
+        // Convert empty arrays/strings to null for holiday fields
+        if (!isset($data['holiday_days'])) {
+            $data['holiday_days'] = null;
+        }
+        
+        Location::findOrFail($id)->update($data);
         Report::addToLog('تعديل موقع');
         return response()->json(['url' => route('admin.locations.index')]);
     }

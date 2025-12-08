@@ -4,6 +4,21 @@ namespace App\Services;
 
 class SettingService
 {
+    /**
+     * Convert relative path to full URL
+     */
+    private static function getFullUrl($path)
+    {
+        if (empty($path)) {
+            return $path;
+        }
+        // If already a full URL, return as is
+        if (filter_var($path, FILTER_VALIDATE_URL)) {
+            return $path;
+        }
+        // Convert relative path to full URL
+        return asset($path);
+    }
 
     public static function appInformations($app_info)
     {
@@ -20,15 +35,15 @@ class SettingService
             'whatsapp_country_code' => $app_info['whatsapp_country_code'],
             'whatsapp'              => $app_info['whatsapp'],
 
-            'logo'             => ('/storage/images/settings/' . $app_info['logo']),
-            'side_logo'        => ('/storage/images/settings/' . $app_info['side_logo']),
-            'fav_icon'         => ('/storage/images/settings/' . $app_info['fav_icon']),
-            'no_data_icon'     => $app_info['no_data_icon'],
-            'default_user'     => ('/storage/images/users/' . $app_info['default_user']),
-            'profile_cover'    => ('/storage/images/settings/' . $app_info['profile_cover']),
-            'login_background' => ('/storage/images/settings/' . $app_info['login_background']),
-            'intro_logo'       => ('/storage/images/settings/' . $app_info['intro_logo']),
-            'intro_loader'     => ('/storage/images/settings/' . $app_info['intro_loader']),
+            'logo'             => self::getFullUrl('/storage/images/settings/' . $app_info['logo']),
+            'side_logo'        => self::getFullUrl('/storage/images/settings/' . $app_info['side_logo']),
+            'fav_icon'         => self::getFullUrl('/storage/images/settings/' . $app_info['fav_icon']),
+            'no_data_icon'     => self::getFullUrl($app_info['no_data_icon']),
+            'default_user'     => self::getFullUrl('/storage/images/users/' . $app_info['default_user']),
+            'profile_cover'    => self::getFullUrl('/storage/images/settings/' . $app_info['profile_cover']),
+            'login_background' => self::getFullUrl('/storage/images/settings/' . $app_info['login_background']),
+            'intro_logo'       => self::getFullUrl('/storage/images/settings/' . $app_info['intro_logo']),
+            'intro_loader'     => self::getFullUrl('/storage/images/settings/' . $app_info['intro_loader']),
             'intro_name'       => $app_info['intro_name_' . lang()],
             'intro_name_ar'    => $app_info['intro_name_ar'],
             'intro_name_en'    => $app_info['intro_name_en'],
@@ -36,10 +51,10 @@ class SettingService
             'intro_about_ar'   => $app_info['intro_about_ar'],
             'intro_about_en'   => $app_info['intro_about_en'],
 
-            'about_image_2'          => ('/storage/images/settings/' . $app_info['about_image_2']),
-            'about_image_1'          => ('/storage/images/settings/' . $app_info['about_image_1']),
-            'home_banner_1'          => !empty($app_info['home_banner_1']) ? '/storage/images/settings/' . $app_info['home_banner_1'] : '',
-            'home_banner_2'          => !empty($app_info['home_banner_2']) ? '/storage/images/settings/' . $app_info['home_banner_2'] : '',
+            'about_image_2'          => self::getFullUrl('/storage/images/settings/' . $app_info['about_image_2']),
+            'about_image_1'          => self::getFullUrl('/storage/images/settings/' . $app_info['about_image_1']),
+            'home_banner_1'          => !empty($app_info['home_banner_1']) ? self::getFullUrl('/storage/images/settings/' . $app_info['home_banner_1']) : '',
+            'home_banner_2'          => !empty($app_info['home_banner_2']) ? self::getFullUrl('/storage/images/settings/' . $app_info['home_banner_2']) : '',
             'services_text_ar'       => $app_info['services_text_ar'],
             'services_text_en'       => $app_info['services_text_en'],
             'services_text'          => $app_info['services_text_' . lang()],
@@ -93,7 +108,7 @@ class SettingService
             'contact_address'    => $app_info['contact_address_' . lang()] ?? '',
             'contact_address_lat' => $app_info['contact_address_lat'] ?? '24.7135517',
             'contact_address_lng' => $app_info['contact_address_lng'] ?? '46.6752957',
-            'brochure_file'      => isset($app_info['brochure_file']) ? ('/storage/images/settings/' . $app_info['brochure_file']??'') : '',
+            'brochure_file'      => isset($app_info['brochure_file']) && !empty($app_info['brochure_file']) ? self::getFullUrl('/storage/images/settings/' . $app_info['brochure_file']) : '',
             
             // Facts By The Numbers
             'facts' => [
@@ -113,8 +128,8 @@ class SettingService
             
             // Home Banner Images
             'home_banners' => array_values(array_filter([
-                !empty($app_info['home_banner_1']) ? '/storage/images/settings/' . $app_info['home_banner_1'] : null,
-                !empty($app_info['home_banner_2']) ? '/storage/images/settings/' . $app_info['home_banner_2'] : null,
+                !empty($app_info['home_banner_1']) ? self::getFullUrl('/storage/images/settings/' . $app_info['home_banner_1']) : null,
+                !empty($app_info['home_banner_2']) ? self::getFullUrl('/storage/images/settings/' . $app_info['home_banner_2']) : null,
             ])),
             
             // Home Sections
@@ -128,7 +143,7 @@ class SettingService
                 'description' => $app_info['section_transparency_description_' . lang()] ?? '',
                 'description_ar' => $app_info['section_transparency_description_ar'] ?? '',
                 'description_en' => $app_info['section_transparency_description_en'] ?? '',
-                'file' => !empty($app_info['section_transparency_file']) ? '/storage/images/settings/' . $app_info['section_transparency_file'] : null,
+                'file' => !empty($app_info['section_transparency_file']) ? self::getFullUrl('/storage/images/settings/' . $app_info['section_transparency_file']) : null,
             ],
             
             'section_damage_liability' => [
@@ -141,7 +156,7 @@ class SettingService
                 'description' => $app_info['section_damage_liability_description_' . lang()] ?? '',
                 'description_ar' => $app_info['section_damage_liability_description_ar'] ?? '',
                 'description_en' => $app_info['section_damage_liability_description_en'] ?? '',
-                'file' => !empty($app_info['section_damage_liability_file']) ? '/storage/images/settings/' . $app_info['section_damage_liability_file'] : null,
+                'file' => !empty($app_info['section_damage_liability_file']) ? self::getFullUrl('/storage/images/settings/' . $app_info['section_damage_liability_file']) : null,
             ],
             
             'section_our_story' => [
@@ -154,7 +169,7 @@ class SettingService
                 'description' => $app_info['section_our_story_description_' . lang()] ?? '',
                 'description_ar' => $app_info['section_our_story_description_ar'] ?? '',
                 'description_en' => $app_info['section_our_story_description_en'] ?? '',
-                'file' => !empty($app_info['section_our_story_file']) ? '/storage/images/settings/' . $app_info['section_our_story_file'] : null,
+                'file' => !empty($app_info['section_our_story_file']) ? self::getFullUrl('/storage/images/settings/' . $app_info['section_our_story_file']) : null,
             ],
             
             // About Sections
@@ -165,7 +180,7 @@ class SettingService
                 'description' => $app_info['about_' . lang()] ?? '',
                 'description_ar' => $app_info['about_ar'] ?? '',
                 'description_en' => $app_info['about_en'] ?? '',
-                'image' => !empty($app_info['about_section_1_image']) ? '/storage/images/settings/' . $app_info['about_section_1_image'] : null,
+                'image' => !empty($app_info['about_section_1_image']) ? self::getFullUrl('/storage/images/settings/' . $app_info['about_section_1_image']) : null,
             ],
             
             'about_section_2' => [
@@ -175,7 +190,7 @@ class SettingService
                 'description' => $app_info['about_2_' . lang()] ?? '',
                 'description_ar' => $app_info['about_2_ar'] ?? '',
                 'description_en' => $app_info['about_2_en'] ?? '',
-                'image' => !empty($app_info['about_section_2_image']) ? '/storage/images/settings/' . $app_info['about_section_2_image'] : null,
+                'image' => !empty($app_info['about_section_2_image']) ? self::getFullUrl('/storage/images/settings/' . $app_info['about_section_2_image']) : null,
             ],
             
             // Our Location
@@ -198,8 +213,8 @@ class SettingService
         }
         
         // Terms and Privacy File URLs
-        $data['terms_file'] = !empty($app_info['terms_file']) ? '/storage/images/settings/' . $app_info['terms_file'] : null;
-        $data['privacy_file'] = !empty($app_info['privacy_file']) ? '/storage/images/settings/' . $app_info['privacy_file'] : null;
+        $data['terms_file'] = !empty($app_info['terms_file']) ? self::getFullUrl('/storage/images/settings/' . $app_info['terms_file']) : null;
+        $data['privacy_file'] = !empty($app_info['privacy_file']) ? self::getFullUrl('/storage/images/settings/' . $app_info['privacy_file']) : null;
         
         // Order Pricing Settings
         $data['gst_percentage'] = $app_info['gst_percentage'] ?? '10';
