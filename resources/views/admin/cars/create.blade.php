@@ -112,6 +112,14 @@
                                                                                             </div>
                                                                                             <div class="col-md-12 col-12">
                                                                                                 <div class="form-group">
+                                                                                                    <label for="first-name-column">{{__('admin.title')}} {{ $lang }}</label>
+                                                                                                    <div class="controls">
+                                                                                                        <input type="text" name="title[{{$lang}}]" class="form-control" placeholder="{{__('admin.write') . __('admin.title')}} {{ $lang }}" required data-validation-required-message="{{__('admin.this_field_is_required')}}">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-12 col-12">
+                                                                                                <div class="form-group">
                                                                                                     <label for="first-name-column">{{__('admin.description')}} {{ $lang }}</label>
                                                                                                     <div class="controls">
                                                                                                         <textarea class="form-control" name="description[{{$lang}}]" cols="30" rows="5" placeholder="{{__('admin.write') . __('admin.description')}} {{ $lang }}"></textarea>

@@ -14,6 +14,7 @@ class Car extends BaseModel
 
     protected $fillable = [
         'name',
+        'title',
         'description', 
         'image',
         'seats',
@@ -29,7 +30,7 @@ class Car extends BaseModel
         'features'
     ];
 
-    public $translatable = ['name', 'description', 'features'];
+    public $translatable = ['name', 'title', 'description', 'features'];
 
     protected $casts = [
         'is_active' => 'boolean',

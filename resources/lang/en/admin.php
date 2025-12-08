@@ -1533,4 +1533,26 @@ return [
     'refundable_deposit_hint' => 'Fixed amount in dollars (e.g., 500)',
     'surcharges_fee_percentage' => 'Surcharges Fee Percentage (%)',
     'surcharges_fee_percentage_hint' => 'Percentage of subtotal (e.g., 1.5 for 1.5%)',
+    
+    // Customer Opinions
+    'customer_opinion' => 'Customer Opinion',
+    'customer_opinions' => 'Customer Opinions',
+    'opinion_text' => 'Opinion Text',
+    'num_stars' => 'Number of Stars',
+    'star' => 'Star',
+    'stars' => 'Stars',
+    'add_customer_opinion' => 'Add Customer Opinion',
+    'update_customer_opinion' => 'Update Customer Opinion',
+    'delete_customer_opinion' => 'Delete Customer Opinion',
+    'delete_many_customer_opinions' => 'Delete Many Customer Opinions',
+    'customer-opinions' => [
+        'index'    => 'Customer Opinions',
+        'create'   => 'Add Customer Opinion',
+        'edit'     => 'Edit Customer Opinion',
+        'update'   => 'Update Customer Opinion',
+        'read'     => 'View Customer Opinion',
+        'read-all' => 'View All Customer Opinions',
+        'delete'   => 'Delete Customer Opinion',
+        'show'   => 'View Customer Opinion',
+    ],
 ];

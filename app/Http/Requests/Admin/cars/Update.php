@@ -15,6 +15,7 @@ class Update extends FormRequest
     {
         return [
             'name' => 'required',
+            'title' => 'required',
             'description' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'seats' => 'required|integer|min:1|max:50',

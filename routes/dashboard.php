@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\{AdminReportsController,
     LocationController,
     BlogController,
     OrderController,
+    CustomerOpinionController,
     #new_namespace_here
 };
 
@@ -137,6 +138,9 @@ Route::group([ 'prefix' => 'admin', 'as' => 'admin.', ], function () {
         /*------------ intros ----------*/
         Route::post('delete-all-intros', [ IntroController::class, 'destroyAll' ])->name('intros.deleteAll');
         Route::resource('intros', IntroController::class);
+        /*------------ customer-opinions ----------*/
+        Route::post('delete-all-customer-opinions', [ CustomerOpinionController::class, 'destroyAll' ])->name('customer-opinions.deleteAll');
+        Route::resource('customer-opinions', CustomerOpinionController::class);
         /*------------ statistics ----------*/
         Route::get('statistics', [ StatisticsController::class, 'index' ])->name('statistics.index');
         /*------------ countries ----------*/

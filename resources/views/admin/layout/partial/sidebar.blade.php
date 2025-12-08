@@ -175,6 +175,15 @@
                         </li>
                     @endcan
 
+                    @can('read-all-customer-opinion')
+                        <li  class="nav-item  @if(Route::currentRouteName() == 'admin.customer-opinions.index') active @endif " >
+                            <a href="{{route('admin.customer-opinions.index')}}">
+                                <i class="feather icon-circle"></i>
+                                @lang('admin.customer_opinions')
+                            </a>
+                        </li>
+                    @endcan
+
                     {{-- @can('read-app-home')
                         <li  class="nav-item  @if(Route::currentRouteName() == 'admin.apphomes.index') active @endif " >
                             <a href="{{route('admin.apphomes.index')}}">

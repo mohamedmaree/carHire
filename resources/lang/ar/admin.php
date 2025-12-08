@@ -1547,4 +1547,26 @@ return [
     'refundable_deposit_hint' => 'مبلغ ثابت بالدولار (مثال: 500)',
     'surcharges_fee_percentage' => 'نسبة الرسوم الإضافية (%)',
     'surcharges_fee_percentage_hint' => 'نسبة من المجموع الفرعي (مثال: 1.5 لـ 1.5%)',
+    
+    // Customer Opinions
+    'customer_opinion' => 'رأي العميل',
+    'customer_opinions' => 'آراء العملاء',
+    'opinion_text' => 'نص الرأي',
+    'num_stars' => 'عدد النجوم',
+    'star' => 'نجمة',
+    'stars' => 'نجوم',
+    'add_customer_opinion' => 'إضافة رأي عميل',
+    'update_customer_opinion' => 'تحديث رأي عميل',
+    'delete_customer_opinion' => 'حذف رأي عميل',
+    'delete_many_customer_opinions' => 'حذف العديد من آراء العملاء',
+    'customer-opinions' => [
+        'index'    => 'آراء العملاء',
+        'create'   => 'اضافة رأي عميل',
+        'edit'     => 'تعديل رأي عميل',
+        'update'   => 'تعديل رأي عميل',
+        'read'     => 'عرض رأي عميل',
+        'read-all' => 'عرض جميع آراء العملاء',
+        'delete'   => 'حذف رأي عميل',
+        'show'   => 'عرض رأي عميل',
+    ],
 ];

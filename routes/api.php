@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OfferController;
 use App\Http\Controllers\Api\PublicHolidayController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\CustomerOpinionController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -111,6 +112,11 @@ Route::group([
             Route::get('public-holidays'                ,[PublicHolidayController::class, 'index']);
             Route::get('public-holidays/{id}'            ,[PublicHolidayController::class, 'show']);
         /***************************** PublicHolidayController End *****************************/
+
+        /***************************** CustomerOpinionController start *****************************/
+            Route::get('customer-opinions'                ,[CustomerOpinionController::class, 'index']);
+            Route::get('customer-opinions/{id}'            ,[CustomerOpinionController::class, 'show']);
+        /***************************** CustomerOpinionController End *****************************/
     });
 
     

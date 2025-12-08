@@ -76,6 +76,14 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.title') }}</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">{{ $car->title ?? '-' }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.brand') }}</label>
                                                                             <div class="controls">
                                                                                 <p class="form-control-static">{{ $car->brand ?? '-' }}</p>
