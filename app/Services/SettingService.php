@@ -17,7 +17,7 @@ class SettingService
             return $path;
         }
         // Convert relative path to full URL
-        return asset($path);
+        return url($path);
     }
 
     public static function appInformations($app_info)
