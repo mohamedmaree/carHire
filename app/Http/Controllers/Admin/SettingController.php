@@ -34,7 +34,7 @@ class SettingController extends Controller
                 
                 if ($key == 'brochure_file' || $key == 'terms_file' || $key == 'privacy_file') {
                     // Handle brochure, terms, and privacy file uploads to images/settings folder
-                    $thumbsPath = 'storage/images/settings/';
+                    $thumbsPath = 'images/settings/';
                     $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
                     SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
                     $val->storeAs($thumbsPath, $name);
@@ -49,7 +49,7 @@ class SettingController extends Controller
                         $name = 'no_data.png';
                     } else {
                         $name = time() . rand(1000000, 9999999) . '.' . $val->getClientOriginalExtension();
-                        $thumbsPath = 'storage/images/settings/';
+                        $thumbsPath = 'images/settings/';
                         SiteSetting::updateOrCreate([ 'key' => $key ], [ 'value' => $name ]);
                     }
                     $val->storeAs($thumbsPath, $name);
