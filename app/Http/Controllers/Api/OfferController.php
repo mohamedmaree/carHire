@@ -53,7 +53,7 @@ class OfferController extends Controller
             ->first();
             
         if (!$offer) {
-            return $this->failMsg('No popup offer available');
+            return $this->successData([]);
         }
             
         return $this->successData(new OfferResource($offer));
