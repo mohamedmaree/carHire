@@ -218,7 +218,6 @@ class SettingService
         
         // Order Pricing Settings
         $data['gst_percentage'] = $app_info['gst_percentage'] ?? '10';
-        $data['refundable_deposit'] = $app_info['refundable_deposit'] ?? '500';
         $data['surcharges_fee_percentage'] = $app_info['surcharges_fee_percentage'] ?? '1.5';
         
         return $data;

@@ -243,6 +243,20 @@
 
                                                                             <div class="col-md-6 col-12">
                                                                                 <div class="form-group">
+                                                                                    <label for="first-name-column">{{ __('admin.refundable_deposit') }}</label>
+                                                                                    <div class="controls">
+                                                                                        <input type="number" name="refundable_deposit"
+                                                                                               class="form-control"
+                                                                                               placeholder="{{ __('admin.refundable_deposit') }}"
+                                                                                               value="{{ $car->refundable_deposit }}"
+                                                                                               step="0.01" min="0">
+                                                                                        <small class="text-muted">{{__('admin.refundable_deposit_hint')}}</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-6 col-12">
+                                                                                <div class="form-group">
                                                                                     <label for="first-name-column">{{ __('admin.status') }}</label>
                                                                                     <div class="controls">
                                                                                         <select name="is_active"

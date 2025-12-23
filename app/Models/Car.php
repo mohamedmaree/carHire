@@ -25,6 +25,7 @@ class Car extends BaseModel
         'year',
         'fuel_type',
         'engine_size',
+        'refundable_deposit',
         'is_active',
         'sort_order',
         'features'
@@ -38,6 +39,7 @@ class Car extends BaseModel
         'bags' => 'integer',
         'year' => 'integer',
         'engine_size' => 'decimal:1',
+        'refundable_deposit' => 'decimal:2',
         'sort_order' => 'integer',
         'features' => 'array'
     ];

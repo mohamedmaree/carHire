@@ -503,23 +503,6 @@
 
                                                         <div class="col-md-4 col-12">
                                                             <div class="form-group">
-                                                                <label for="refundable_deposit">{{__('admin.refundable_deposit')}}</label>
-                                                                <div class="controls">
-                                                                    <input type="number" 
-                                                                           name="refundable_deposit" 
-                                                                           id="refundable_deposit" 
-                                                                           class="form-control" 
-                                                                           step="0.01"
-                                                                           min="0"
-                                                                           value="{{$data['refundable_deposit'] ?? '500'}}" 
-                                                                           placeholder="{{__('admin.refundable_deposit')}}">
-                                                                    <small class="text-muted">{{__('admin.refundable_deposit_hint')}}</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-4 col-12">
-                                                            <div class="form-group">
                                                                 <label for="surcharges_fee_percentage">{{__('admin.surcharges_fee_percentage')}}</label>
                                                                 <div class="controls">
                                                                     <input type="number" 

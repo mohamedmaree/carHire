@@ -148,6 +148,14 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
+                                                                            <label>{{ __('admin.refundable_deposit') }}</label>
+                                                                            <div class="controls">
+                                                                                <p class="form-control-static">${{ number_format($car->refundable_deposit ?? 0, 2) }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
                                                                             <label>{{ __('admin.status') }}</label>
                                                                             <div class="controls">
                                                                                 @if ($car->is_active)

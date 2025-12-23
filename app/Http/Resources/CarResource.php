@@ -37,6 +37,7 @@ class CarResource extends JsonResource
             'year' => $this->year,
             'fuel_type' => $this->fuel_type,
             'engine_size' => $this->engine_size,
+            'refundable_deposit' => $this->refundable_deposit,
             'is_active' => $this->is_active,
             'sort_order' => $this->sort_order,
             'formatted_price' => $this->formatted_price,

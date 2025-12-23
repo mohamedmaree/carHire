@@ -150,16 +150,18 @@ class OrderController extends Controller
         // Calculate subtotal (car + options)
         $data['subtotal_amount'] = $carSubtotal + $optionsTotal;
         
-        // Get settings for GST, Refundable Deposit, and Surcharges Fee
+        // Get settings for GST and Surcharges Fee
         $settings = SiteSetting::pluck('value', 'key');
         $gstPercentage = floatval($settings['gst_percentage'] ?? 10); // Default 10%
-        $refundableDeposit = floatval($settings['refundable_deposit'] ?? 500); // Default $500
         $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5); // Default 1.5%
+        
+        // Get Refundable Deposit from car (default to 500 if not set)
+        $refundableDeposit = $car && $car->refundable_deposit ? floatval($car->refundable_deposit) : 500;
         
         // Calculate GST (percentage of subtotal)
         $data['gst'] = ($data['subtotal_amount'] * $gstPercentage) / 100;
         
-        // Set Refundable Deposit
+        // Set Refundable Deposit from car
         $data['refundable_deposit'] = $refundableDeposit;
         
         // Calculate Surcharges Fee (percentage of subtotal)
@@ -399,16 +401,18 @@ class OrderController extends Controller
         // Calculate subtotal (car + options)
         $data['subtotal_amount'] = $carSubtotal + $optionsTotal;
         
-        // Get settings for GST, Refundable Deposit, and Surcharges Fee
+        // Get settings for GST and Surcharges Fee
         $settings = SiteSetting::pluck('value', 'key');
         $gstPercentage = floatval($settings['gst_percentage'] ?? 10); // Default 10%
-        $refundableDeposit = floatval($settings['refundable_deposit'] ?? 500); // Default $500
         $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5); // Default 1.5%
+        
+        // Get Refundable Deposit from car (default to 500 if not set)
+        $refundableDeposit = $car && $car->refundable_deposit ? floatval($car->refundable_deposit) : 500;
         
         // Calculate GST (percentage of subtotal)
         $data['gst'] = ($data['subtotal_amount'] * $gstPercentage) / 100;
         
-        // Set Refundable Deposit
+        // Set Refundable Deposit from car
         $data['refundable_deposit'] = $refundableDeposit;
         
         // Calculate Surcharges Fee (percentage of subtotal)

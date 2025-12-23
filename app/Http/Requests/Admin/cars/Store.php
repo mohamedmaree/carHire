@@ -26,6 +26,7 @@ class Store extends FormRequest
             'year' => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
             'fuel_type' => 'nullable|string|max:191',
             'engine_size' => 'nullable',
+            'refundable_deposit' => 'nullable|numeric|min:0',
             'is_active' => 'boolean',
             'sort_order' => 'integer|min:0',
             'price_packages' => 'nullable|array',
