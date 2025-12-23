@@ -11,11 +11,11 @@ return [
     |
     */
 
-    'api_key' => env('EWAY_API_KEY', '60CF3Ce97nRS1Z1Wp5m9kMmzHHEh8Rkuj31QCtVxjPWGYA9FymyqsK0Enm1P6mHJf0THbR'),
+    'api_key' => env('EWAY_API_KEY','A1001AewIlusxj/ZagqK5b7i5iiOmklSWi8h5M+8h8Nuc74vx+cT0k7qMQi+0l8xUI9Lha'),// 60CF3Ce97nRS1Z1Wp5m9kMmzHHEh8Rkuj31QCtVxjPWGYA9FymyqsK0Enm1P6mHJf0THbR
     
-    'api_password' => env('EWAY_API_PASSWORD', 'API-P4ss'),
+    'api_password' => env('EWAY_API_PASSWORD', 'NboqkJZW'),// API-P4ss
     
-    'api_endpoint' => env('EWAY_API_ENDPOINT', 'Sandbox'), // 'Sandbox' or 'Production'
+    'api_endpoint' => env('EWAY_API_ENDPOINT', 'Production'), // 'Sandbox' or 'Production'
     
     /*
     |--------------------------------------------------------------------------
