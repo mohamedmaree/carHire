@@ -30,7 +30,7 @@ class Update extends FormRequest
             // Date and Time Information
             'pickup_date' => 'required|date',
             'pickup_time' => 'required',
-            'return_date' => 'required|date|after:pickup_date',
+            'return_date' => 'required|date|after_or_equal:pickup_date',
             'return_time' => 'required',
             
             // Flight Information (for airport locations)

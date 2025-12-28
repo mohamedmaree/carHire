@@ -30,7 +30,7 @@ class Store extends FormRequest
             // Date and Time Information
             'pickup_date' => 'required|date|after_or_equal:today',
             'pickup_time' => 'required|date_format:H:i',
-            'return_date' => 'required|date|after:pickup_date',
+            'return_date' => 'required|date|after_or_equal:pickup_date',
             'return_time' => 'required|date_format:H:i',
             
             // Flight Information (for airport locations)

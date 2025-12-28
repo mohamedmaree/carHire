@@ -32,7 +32,7 @@ class StoreOrderRequest extends FormRequest
             // Date and Time Information
             'pickup_date' => 'required|date|after_or_equal:today',
             'pickup_time' => 'required|date_format:H:i',
-            'return_date' => 'required|date|after:pickup_date',
+            'return_date' => 'required|date|after_or_equal:pickup_date',
             'return_time' => 'required|date_format:H:i',
             
             // Flight Information (for airport locations)
@@ -97,7 +97,7 @@ class StoreOrderRequest extends FormRequest
             'pickup_location_id.exists' => 'The selected pickup location is invalid.',
             'return_location_id.exists' => 'The selected return location is invalid.',
             'pickup_date.after_or_equal' => 'Pickup date must be today or later.',
-            'return_date.after' => 'Return date must be after pickup date.',
+            'return_date.after_or_equal' => 'Return date must be on or after pickup date.',
             'pickup_time.date_format' => 'Pickup time must be in HH:MM format.',
             'return_time.date_format' => 'Return time must be in HH:MM format.',
             'flight_arrival_time.date_format' => 'Flight arrival time must be in HH:MM format.',
