@@ -65,7 +65,6 @@ class EwayPaymentService
 
             // Submit data to eWAY to get a Shared Page URL
             $response = $this->client->createTransaction(ApiMethod::RESPONSIVE_SHARED, $transaction);
-
             // Check for any errors
             if (!$response->getErrors()) {
                 // Update order with access code

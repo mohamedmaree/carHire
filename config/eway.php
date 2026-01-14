@@ -11,9 +11,11 @@ return [
     |
     */
 
-    'api_key' => env('EWAY_API_KEY','A1001AewIlusxj/ZagqK5b7i5iiOmklSWi8h5M+8h8Nuc74vx+cT0k7qMQi+0l8xUI9Lha'),// 60CF3Ce97nRS1Z1Wp5m9kMmzHHEh8Rkuj31QCtVxjPWGYA9FymyqsK0Enm1P6mHJf0THbR
+    'api_key' => env('EWAY_API_KEY','60CF3AcGPEpUR+lRy0y4bA4vIM1Dz4nnrpiHbZqM/spF6/cWJ7K6S8g6vqDqu8lyaW9CIY'),
+    // test: 60CF3Ce97nRS1Z1Wp5m9kMmzHHEh8Rkuj31QCtVxjPWGYA9FymyqsK0Enm1P6mHJf0THbR live: 60CF3AcGPEpUR+lRy0y4bA4vIM1Dz4nnrpiHbZqM/spF6/cWJ7K6S8g6vqDqu8lyaW9CIY
     
-    'api_password' => env('EWAY_API_PASSWORD', 'NboqkJZW'),// API-P4ss
+    'api_password' => env('EWAY_API_PASSWORD', '4FuLgHiD0ViUX8H'),
+    // test: API-P4ss live: 4FuLgHiD0ViUX8H
     
     'api_endpoint' => env('EWAY_API_ENDPOINT', 'Production'), // 'Sandbox' or 'Production'
     
