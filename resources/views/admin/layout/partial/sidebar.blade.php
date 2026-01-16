@@ -37,10 +37,10 @@
                             </a>
                         </li>
                     @endcan
-                    @can('read-all-intro-messages')
-                        <li class="nav-item @if(Route::currentRouteName() == 'admin.intromessages.index') active @endif">
-                            <a href="{{route('admin.intromessages.index')}}">
-                                <i class="feather icon-circle"></i>@lang('admin.Customer_messages')
+                    @can('read-all-complaint')
+                        <li class="nav-item @if(Route::currentRouteName() == 'admin.complaints.index') active @endif">
+                            <a href="{{route('admin.complaints.index')}}">
+                                <i class="feather icon-circle"></i>@lang('admin.complaints.index')
                             </a>
                         </li>
                     @endcan
