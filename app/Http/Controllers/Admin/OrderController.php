@@ -192,9 +192,31 @@ class OrderController extends Controller
             }
         }
         
-        // Handle fees - ensure it's null if empty or 0
-        if (empty($data['fees']) || $data['fees'] == 0) {
-            $data['fees'] = null;
+        // Handle airport locations and add toll delivery fees
+        $tollDeliveryFees = 0;
+        if ($data['pickup_location_id']) {
+            $pickupLocation = Location::find($data['pickup_location_id']);
+            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
+            if ($pickupLocation && $pickupLocation->toll_delivery_fees) {
+                $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
+            }
+        }
+        if ($data['return_location_id']) {
+            $returnLocation = Location::find($data['return_location_id']);
+            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
+            // if ($returnLocation && $returnLocation->toll_delivery_fees) {
+            //     $tollDeliveryFees += $returnLocation->toll_delivery_fees;
+            // }
+        }
+        
+        // Set fees to calculated toll delivery fees (or use provided fees if manually set)
+        if (!isset($data['fees']) || $data['fees'] === null) {
+            $data['fees'] = $tollDeliveryFees > 0 ? $tollDeliveryFees : null;
+        } else {
+            // If fees were manually set, keep them but ensure null if 0
+            if (empty($data['fees']) || $data['fees'] == 0) {
+                $data['fees'] = null;
+            }
         }
         
         // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
@@ -204,17 +226,6 @@ class OrderController extends Controller
             + $data['surcharges_fee'] 
             - ($data['coupon_discount_amount'] ?? 0) 
             + ($data['fees'] ?? 0);
-        
-        // Handle airport locations
-        if ($data['pickup_location_id']) {
-            $pickupLocation = Location::find($data['pickup_location_id']);
-            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
-        }
-        
-        if ($data['return_location_id']) {
-            $returnLocation = Location::find($data['return_location_id']);
-            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
-        }
         
         // Handle user creation/update
         $user = User::where('email', $data['email'])
@@ -443,9 +454,31 @@ class OrderController extends Controller
             }
         }
         
-        // Handle fees - ensure it's null if empty or 0
-        if (empty($data['fees']) || $data['fees'] == 0) {
-            $data['fees'] = null;
+        // Handle airport locations and add toll delivery fees
+        $tollDeliveryFees = 0;
+        if ($data['pickup_location_id']) {
+            $pickupLocation = Location::find($data['pickup_location_id']);
+            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
+            if ($pickupLocation && $pickupLocation->toll_delivery_fees) {
+                $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
+            }
+        }
+        if ($data['return_location_id']) {
+            $returnLocation = Location::find($data['return_location_id']);
+            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
+            // if ($returnLocation && $returnLocation->toll_delivery_fees) {
+            //     $tollDeliveryFees += $returnLocation->toll_delivery_fees;
+            // }
+        }
+        
+        // Set fees to calculated toll delivery fees (or use provided fees if manually set)
+        if (!isset($data['fees']) || $data['fees'] === null) {
+            $data['fees'] = $tollDeliveryFees > 0 ? $tollDeliveryFees : null;
+        } else {
+            // If fees were manually set, keep them but ensure null if 0
+            if (empty($data['fees']) || $data['fees'] == 0) {
+                $data['fees'] = null;
+            }
         }
         
         // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
@@ -455,17 +488,6 @@ class OrderController extends Controller
             + $data['surcharges_fee'] 
             - ($data['coupon_discount_amount'] ?? 0) 
             + ($data['fees'] ?? 0);
-        
-        // Handle airport locations
-        if ($data['pickup_location_id']) {
-            $pickupLocation = Location::find($data['pickup_location_id']);
-            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
-        }
-        
-        if ($data['return_location_id']) {
-            $returnLocation = Location::find($data['return_location_id']);
-            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
-        }
         
         // Handle user creation/update
         $user = User::where('email', $data['email'])
