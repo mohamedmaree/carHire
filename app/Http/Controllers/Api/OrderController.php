@@ -193,13 +193,13 @@ class OrderController extends Controller
                 $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
             }
         }
-        if (isset($data['return_location_id'])) {
-            $returnLocation = Location::find($data['return_location_id']);
-            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
-            if ($returnLocation && $returnLocation->toll_delivery_fees) {
-                $tollDeliveryFees += $returnLocation->toll_delivery_fees;
-            }
-        }
+        // if (isset($data['return_location_id'])) {
+        //     $returnLocation = Location::find($data['return_location_id']);
+        //     $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
+        //     if ($returnLocation && $returnLocation->toll_delivery_fees) {
+        //         $tollDeliveryFees += $returnLocation->toll_delivery_fees;
+        //     }
+        // }
         $data['fees'] = $tollDeliveryFees;
         
         // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
