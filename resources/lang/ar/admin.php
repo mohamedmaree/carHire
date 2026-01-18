@@ -1355,6 +1355,8 @@ return [
     'payment_reference' => 'مرجع الدفع',
     'subtotal_amount' => 'المبلغ الفرعي',
     'total_amount' => 'المبلغ الإجمالي',
+    'car_price_per_day' => 'سعر السيارة في اليوم',
+    'car_rental_total' => 'إجمالي إيجار السيارة',
     'coupon_discount_amount' => 'مبلغ خصم الكوبون',
     'coupon_discount_percentage' => 'نسبة خصم الكوبون',
     'pending' => 'معلق',

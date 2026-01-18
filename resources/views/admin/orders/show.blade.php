@@ -216,56 +216,99 @@
                                         </div>
                                         <div class="card-body">
                                             <table class="table table-borderless">
+                                                @php
+                                                    // Calculate car price per day and total
+                                                    $carPricePerDay = $order->pricePackage ? $order->pricePackage->price : 0;
+                                                    $carTotalForDays = $carPricePerDay * $order->rental_days;
+                                                    $optionsTotal = $order->options->sum('pivot.total_price');
+                                                    $calculatedSubtotal = $carTotalForDays + $optionsTotal;
+                                                @endphp
+                                                
                                                 @if($order->pricePackage)
                                                 <tr>
                                                     <td><strong>@lang('admin.price_packages'):</strong></td>
                                                     <td>{{$order->pricePackage->name}}</td>
                                                 </tr>
                                                 @endif
+                                                
+                                                <!-- 1. Price of car for one day -->
                                                 <tr>
-                                                    <td><strong>@lang('admin.subtotal_amount'):</strong></td>
-                                                    <td>{{$order->formatted_subtotal_amount}}</td>
+                                                    <td><strong>@lang('admin.car_price_per_day'):</strong></td>
+                                                    <td>${{number_format($carPricePerDay, 2)}}</td>
                                                 </tr>
+                                                
+                                                <!-- 2. Number of days -->
+                                                <tr>
+                                                    <td><strong>@lang('admin.rental_days'):</strong></td>
+                                                    <td>{{$order->rental_days}} @lang('admin.days')</td>
+                                                </tr>
+                                                
+                                                <!-- 3. Total of car rent for these days -->
+                                                <tr>
+                                                    <td><strong>@lang('admin.car_rental_total'):</strong></td>
+                                                    <td>${{number_format($carTotalForDays, 2)}}</td>
+                                                </tr>
+                                                
+                                                <!-- 4. Total of options selected -->
+                                                @if($order->options->isNotEmpty())
+                                                <tr>
+                                                    <td><strong>@lang('admin.options_total'):</strong></td>
+                                                    <td>${{number_format($optionsTotal, 2)}}</td>
+                                                </tr>
+                                                @endif
+                                                
+                                                
+                                                <!-- 6. Subtotal -->
+                                                <tr class="border-top">
+                                                    <td><strong>@lang('admin.subtotal_amount'):</strong></td>
+                                                    <td><strong>${{number_format($calculatedSubtotal, 2)}}</strong></td>
+                                                </tr>
+                                                                                                <!-- 5. Coupon code and discount -->
+                                                @if($order->coupon_code)
+                                                    <tr>
+                                                        <td><strong>@lang('admin.coupon_code'):</strong></td>
+                                                        <td>{{$order->coupon_code}}</td>
+                                                    </tr>
+                                                    @if($order->coupon_discount_amount)
+                                                    <tr>
+                                                        <td><strong>@lang('admin.coupon_discount_amount'):</strong></td>
+                                                        <td class="text-danger">-${{number_format($order->coupon_discount_amount, 2)}}</td>
+                                                    </tr>
+                                                    @endif
+                                                @endif
+                                                <!-- 7. GST -->
                                                 @if($order->gst)
                                                 <tr>
                                                     <td><strong>@lang('admin.gst'):</strong></td>
                                                     <td>${{number_format($order->gst, 2)}}</td>
                                                 </tr>
                                                 @endif
+                                                
+                                                <!-- 8. Refundable Deposit -->
                                                 @if($order->refundable_deposit)
                                                 <tr>
                                                     <td><strong>@lang('admin.refundable_deposit'):</strong></td>
                                                     <td>${{number_format($order->refundable_deposit, 2)}}</td>
                                                 </tr>
                                                 @endif
+                                                
+                                                <!-- 9. Surcharges Fee -->
                                                 @if($order->surcharges_fee)
                                                 <tr>
                                                     <td><strong>@lang('admin.surcharges_fee'):</strong></td>
                                                     <td>${{number_format($order->surcharges_fee, 2)}}</td>
                                                 </tr>
                                                 @endif
+                                                
+                                                <!-- 10. Fees -->
                                                 @if($order->fees)
                                                 <tr>
                                                     <td><strong>@lang('admin.fees'):</strong></td>
-                                                    <td>{{$order->formatted_fees}}</td>
+                                                    <td>${{number_format($order->fees, 2)}}</td>
                                                 </tr>
                                                 @endif
-                                                @if($order->options->isNotEmpty())
-                                                <tr>
-                                                    <td><strong>@lang('admin.options_total'):</strong></td>
-                                                    <td>{{$order->formatted_options_total}}</td>
-                                                </tr>
-                                                @endif
-                                                @if($order->coupon_code)
-                                                <tr>
-                                                    <td><strong>@lang('admin.coupon_code'):</strong></td>
-                                                    <td>{{$order->coupon_code}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>@lang('admin.coupon_discount_amount'):</strong></td>
-                                                    <td class="text-danger">-{{$order->formatted_coupon_discount}}</td>
-                                                </tr>
-                                                @endif
+                                                
+                                                <!-- 11. Final Total -->
                                                 <tr class="border-top">
                                                     <td><strong>@lang('admin.total_amount'):</strong></td>
                                                     <td><strong class="text-success h5">{{$order->formatted_total_amount}}</strong></td>

@@ -1327,6 +1327,8 @@ return [
     'payment_reference' => 'Payment Reference',
     'subtotal_amount' => 'Subtotal Amount',
     'total_amount' => 'Total Amount',
+    'car_price_per_day' => 'Car Price Per Day',
+    'car_rental_total' => 'Car Rental Total',
     'coupon_discount_amount' => 'Coupon Discount Amount',
     'coupon_discount_percentage' => 'Coupon Discount Percentage',
     'pending' => 'Pending',
