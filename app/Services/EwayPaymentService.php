@@ -45,15 +45,16 @@ class EwayPaymentService
                 'CancelUrl' => route('api.payment.cancel', ['order' => $order->id]),
                 'TransactionType' => TransactionType::PURCHASE,
                 'Payment' => [
-                    'TotalAmount' => (int) ($order->total_amount * 100), // Convert to cents
+                    // total_amount already includes: subtotal + GST + refundable_deposit + surcharges_fee - coupon_discount + fees
+                    'TotalAmount' => (int) ($order->total_amount * 100), // Convert to cents (discount already applied)
                 ],
                 'Items' => [
                     [
                         'SKU' => 'CAR_RENTAL_' . $order->id,
                         'Description' => 'Car Rental - ' . $order->car->name,
                         'Quantity' => 1,
-                        'UnitCost' => (int) ($order->total_amount * 100),
-                        'Total' => (int) ($order->total_amount * 100),
+                        'UnitCost' => (int) ($order->total_amount * 100), // Discount already applied
+                        'Total' => (int) ($order->total_amount * 100), // Discount already applied
                     ]
                 ],
                 'Options' => [

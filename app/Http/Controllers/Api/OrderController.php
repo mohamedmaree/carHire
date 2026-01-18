@@ -172,15 +172,20 @@ class OrderController extends Controller
                 ->first();
                 
             if ($coupon) {
-                if ($coupon->type == 'percentage') {
+                if ($coupon->type == 'ratio') {
+                    // Percentage discount: calculate based on subtotal
                     $data['coupon_discount_percentage'] = $coupon->discount;
                     $data['coupon_discount_amount'] = ($data['subtotal_amount'] * $coupon->discount) / 100;
+                    // Apply max_discount cap if set
                     if ($coupon->max_discount && $data['coupon_discount_amount'] > $coupon->max_discount) {
                         $data['coupon_discount_amount'] = $coupon->max_discount;
                     }
                 } else {
+                    // Fixed amount discount (type == 'number')
                     $data['coupon_discount_amount'] = $coupon->discount;
                 }
+                // Save coupon code to order
+                $data['coupon_code'] = $coupon->coupon_num;
             }
         }
         
