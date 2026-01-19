@@ -239,11 +239,11 @@
                         </li>
                     @endcan
 
-                    <li  class="nav-item  @if(Route::currentRouteName() == 'admin.statistics.index') active @endif " >
+                    {{-- <li  class="nav-item  @if(Route::currentRouteName() == 'admin.statistics.index') active @endif " >
                         <a href="{{route('admin.statistics.index')}}">
                             <i class="feather icon-circle"></i>@lang('admin.Statistics')
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
 
