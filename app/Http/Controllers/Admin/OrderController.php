@@ -88,8 +88,54 @@ class OrderController extends Controller
             ], 422);
         }
         
-        // Calculate rental days
-        $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
+        // Calculate rental days considering full datetime (date + time)
+        // Combine date and time for accurate calculation
+        $pickupDateTime = \Carbon\Carbon::parse($data['pickup_date'] . ' ' . ($data['pickup_time'] ?? '00:00'));
+        $returnDateTime = \Carbon\Carbon::parse($data['return_date'] . ' ' . ($data['return_time'] ?? '00:00'));
+        
+        // Calculate total hours difference
+        $totalHours = $pickupDateTime->diffInHours($returnDateTime);
+        
+        // Calculate days based on hours: if duration exceeds 24 hours, count as additional day(s)
+        // Example: 25 hours = 2 days, 49 hours = 3 days
+        // Minimum 1 day even if less than 24 hours
+        $daysFromHours = max(1, ceil($totalHours / 24));
+        
+        // Calculate base days (calendar date difference)
+        $baseDays = $pickupDate->diffInDays($returnDate) + 1;
+        
+        // Use the maximum of both calculations to ensure accurate billing
+        // This handles cases where time exceeds 24h or spans multiple calendar days
+        $data['rental_days'] = max($baseDays, $daysFromHours);
+        
+        // Handle airport locations and calculate toll delivery fees first
+        $tollDeliveryFees = 0;
+        if ($data['pickup_location_id']) {
+            $pickupLocation = Location::find($data['pickup_location_id']);
+            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
+            if ($pickupLocation && $pickupLocation->toll_delivery_fees) {
+                $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
+            }
+        }
+        if ($data['return_location_id']) {
+            $returnLocation = Location::find($data['return_location_id']);
+            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
+            // if ($returnLocation && $returnLocation->toll_delivery_fees) {
+            //     $tollDeliveryFees += $returnLocation->toll_delivery_fees;
+            // }
+        }
+        
+        // Set fees to calculated toll delivery fees (or use provided fees if manually set)
+        if (!isset($data['fees']) || $data['fees'] === null) {
+            $data['fees'] = $tollDeliveryFees > 0 ? $tollDeliveryFees : null;
+        } else {
+            // If fees were manually set, keep them but ensure null if 0
+            if (empty($data['fees']) || $data['fees'] == 0) {
+                $data['fees'] = null;
+            }
+            // Use manually set fees for calculation
+            $tollDeliveryFees = $data['fees'] ?? 0;
+        }
         
         // Calculate base subtotal (car price * days)
         $car = Car::find($data['car_id']);
@@ -147,31 +193,44 @@ class OrderController extends Controller
             }
         }
         
-        // Calculate subtotal (car + options)
-        $data['subtotal_amount'] = $carSubtotal + $optionsTotal;
+        // Calculate subtotal (car + options + toll delivery fees)
+        $data['subtotal_amount'] = $carSubtotal + $optionsTotal + $tollDeliveryFees;
         
         // Get settings for GST and Surcharges Fee
         $settings = SiteSetting::pluck('value', 'key');
-        $gstPercentage = floatval($settings['gst_percentage'] ?? 10); // Default 10%
-        $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5); // Default 1.5%
+        $gstRate = floatval($settings['gst_percentage'] ?? 10); // GST rate as number (e.g., 10 for 10%)
+        
+        // Determine which surcharges fee percentage to use based on customer country
+        $defaultCountryId = intval($settings['default_country'] ?? 0);
+        $customerCountryId = isset($data['customer_country_id']) ? intval($data['customer_country_id']) : 0;
+        
+        // Use external surcharges fee if customer country is different from default country
+        if ($customerCountryId > 0 && $customerCountryId != $defaultCountryId) {
+            $surchargesFeePercentage = floatval($settings['external_surcharges_fee_percentage'] ?? 2.5);
+        } else {
+            $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5);
+        }
         
         // Get Refundable Deposit from car (default to 500 if not set)
         $refundableDeposit = $car && $car->refundable_deposit ? floatval($car->refundable_deposit) : 500;
         
-        // Calculate GST (percentage of subtotal)
-        $data['gst'] = ($data['subtotal_amount'] * $gstPercentage) / 100;
+        // Extract GST from subtotal (subtotal already includes GST)
+        // Formula: GST = subtotal / gst_rate
+        // Example: If subtotal is $110 and GST rate is 10, GST = $110 / 10 = $11
+        if ($gstRate > 0) {
+            $data['gst'] = $data['subtotal_amount'] / $gstRate;
+        } else {
+            $data['gst'] = 0;
+        }
         
         // Set Refundable Deposit from car
         $data['refundable_deposit'] = $refundableDeposit;
-        
-        // Calculate Surcharges Fee (percentage of subtotal)
-        $data['surcharges_fee'] = ($data['subtotal_amount'] * $surchargesFeePercentage) / 100;
         
         // Reset coupon discount fields first
         $data['coupon_discount_amount'] = null;
         $data['coupon_discount_percentage'] = null;
         
-        // Handle coupon discount
+        // Handle coupon discount (calculate before surcharges_fee)
         if (!empty($data['coupon_code'])) {
             $coupon = Coupon::where('coupon_num', $data['coupon_code'])
                 ->where('status', 'available') // Status should be 'available', not 'active'
@@ -200,40 +259,17 @@ class OrderController extends Controller
             }
         }
         
-        // Handle airport locations and add toll delivery fees
-        $tollDeliveryFees = 0;
-        if ($data['pickup_location_id']) {
-            $pickupLocation = Location::find($data['pickup_location_id']);
-            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
-            if ($pickupLocation && $pickupLocation->toll_delivery_fees) {
-                $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
-            }
-        }
-        if ($data['return_location_id']) {
-            $returnLocation = Location::find($data['return_location_id']);
-            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
-            // if ($returnLocation && $returnLocation->toll_delivery_fees) {
-            //     $tollDeliveryFees += $returnLocation->toll_delivery_fees;
-            // }
-        }
-        
-        // Set fees to calculated toll delivery fees (or use provided fees if manually set)
-        if (!isset($data['fees']) || $data['fees'] === null) {
-            $data['fees'] = $tollDeliveryFees > 0 ? $tollDeliveryFees : null;
-        } else {
-            // If fees were manually set, keep them but ensure null if 0
-            if (empty($data['fees']) || $data['fees'] == 0) {
-                $data['fees'] = null;
-            }
-        }
-        
-        // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
-        $data['total_amount'] = $data['subtotal_amount'] 
-            + $data['gst'] 
+        // Calculate base amount for surcharges fee: subtotal + refundable_deposit - coupon_discount
+        $baseAmountForSurcharges = $data['subtotal_amount'] 
             + $data['refundable_deposit'] 
-            + $data['surcharges_fee'] 
-            - ($data['coupon_discount_amount'] ?? 0) 
-            + ($data['fees'] ?? 0);
+            - ($data['coupon_discount_amount'] ?? 0);
+        
+        // Calculate Surcharges Fee (percentage of base amount: subtotal + refundable_deposit - coupon_discount)
+        $data['surcharges_fee'] = ($baseAmountForSurcharges * $surchargesFeePercentage) / 100;
+        
+        // Calculate total amount: subtotal + Refundable Deposit - coupon discount + Surcharges Fee
+        // Note: GST and fees (tollDeliveryFees) are already included in subtotal_amount
+        $data['total_amount'] = $baseAmountForSurcharges + $data['surcharges_fee'];
         
         // Handle user creation/update
         $user = User::where('email', $data['email'])
@@ -358,8 +394,25 @@ class OrderController extends Controller
             ], 422);
         }
         
-        // Calculate rental days
-        $data['rental_days'] = $pickupDate->diffInDays($returnDate) + 1;
+        // Calculate rental days considering full datetime (date + time)
+        // Combine date and time for accurate calculation
+        $pickupDateTime = \Carbon\Carbon::parse($data['pickup_date'] . ' ' . ($data['pickup_time'] ?? '00:00'));
+        $returnDateTime = \Carbon\Carbon::parse($data['return_date'] . ' ' . ($data['return_time'] ?? '00:00'));
+        
+        // Calculate total hours difference
+        $totalHours = $pickupDateTime->diffInHours($returnDateTime);
+        
+        // Calculate days based on hours: if duration exceeds 24 hours, count as additional day(s)
+        // Example: 25 hours = 2 days, 49 hours = 3 days
+        // Minimum 1 day even if less than 24 hours
+        $daysFromHours = max(1, ceil($totalHours / 24));
+        
+        // Calculate base days (calendar date difference)
+        $baseDays = $pickupDate->diffInDays($returnDate) + 1;
+        
+        // Use the maximum of both calculations to ensure accurate billing
+        // This handles cases where time exceeds 24h or spans multiple calendar days
+        $data['rental_days'] = max($baseDays, $daysFromHours);
         
         // Calculate base subtotal (car price * days)
         $car = Car::find($data['car_id']);
@@ -417,31 +470,44 @@ class OrderController extends Controller
             }
         }
         
-        // Calculate subtotal (car + options)
-        $data['subtotal_amount'] = $carSubtotal + $optionsTotal;
+        // Calculate subtotal (car + options + toll delivery fees)
+        $data['subtotal_amount'] = $carSubtotal + $optionsTotal + $tollDeliveryFees;
         
         // Get settings for GST and Surcharges Fee
         $settings = SiteSetting::pluck('value', 'key');
-        $gstPercentage = floatval($settings['gst_percentage'] ?? 10); // Default 10%
-        $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5); // Default 1.5%
+        $gstRate = floatval($settings['gst_percentage'] ?? 10); // GST rate as number (e.g., 10 for 10%)
+        
+        // Determine which surcharges fee percentage to use based on customer country
+        $defaultCountryId = intval($settings['default_country'] ?? 0);
+        $customerCountryId = isset($data['customer_country_id']) ? intval($data['customer_country_id']) : 0;
+        
+        // Use external surcharges fee if customer country is different from default country
+        if ($customerCountryId > 0 && $customerCountryId != $defaultCountryId) {
+            $surchargesFeePercentage = floatval($settings['external_surcharges_fee_percentage'] ?? 2.5);
+        } else {
+            $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5);
+        }
         
         // Get Refundable Deposit from car (default to 500 if not set)
         $refundableDeposit = $car && $car->refundable_deposit ? floatval($car->refundable_deposit) : 500;
         
-        // Calculate GST (percentage of subtotal)
-        $data['gst'] = ($data['subtotal_amount'] * $gstPercentage) / 100;
+        // Extract GST from subtotal (subtotal already includes GST)
+        // Formula: GST = subtotal / gst_rate
+        // Example: If subtotal is $110 and GST rate is 10, GST = $110 / 10 = $11
+        if ($gstRate > 0) {
+            $data['gst'] = $data['subtotal_amount'] / $gstRate;
+        } else {
+            $data['gst'] = 0;
+        }
         
         // Set Refundable Deposit from car
         $data['refundable_deposit'] = $refundableDeposit;
-        
-        // Calculate Surcharges Fee (percentage of subtotal)
-        $data['surcharges_fee'] = ($data['subtotal_amount'] * $surchargesFeePercentage) / 100;
         
         // Reset coupon discount fields first
         $data['coupon_discount_amount'] = null;
         $data['coupon_discount_percentage'] = null;
         
-        // Handle coupon discount
+        // Handle coupon discount (calculate before surcharges_fee)
         if (!empty($data['coupon_code'])) {
             $coupon = Coupon::where('coupon_num', $data['coupon_code'])
                 ->where('status', 'available') // Status should be 'available', not 'active'
@@ -470,40 +536,17 @@ class OrderController extends Controller
             }
         }
         
-        // Handle airport locations and add toll delivery fees
-        $tollDeliveryFees = 0;
-        if ($data['pickup_location_id']) {
-            $pickupLocation = Location::find($data['pickup_location_id']);
-            $data['is_airport_pickup'] = $pickupLocation && $pickupLocation->type == 'airport';
-            if ($pickupLocation && $pickupLocation->toll_delivery_fees) {
-                $tollDeliveryFees += $pickupLocation->toll_delivery_fees;
-            }
-        }
-        if ($data['return_location_id']) {
-            $returnLocation = Location::find($data['return_location_id']);
-            $data['is_airport_return'] = $returnLocation && $returnLocation->type == 'airport';
-            // if ($returnLocation && $returnLocation->toll_delivery_fees) {
-            //     $tollDeliveryFees += $returnLocation->toll_delivery_fees;
-            // }
-        }
-        
-        // Set fees to calculated toll delivery fees (or use provided fees if manually set)
-        if (!isset($data['fees']) || $data['fees'] === null) {
-            $data['fees'] = $tollDeliveryFees > 0 ? $tollDeliveryFees : null;
-        } else {
-            // If fees were manually set, keep them but ensure null if 0
-            if (empty($data['fees']) || $data['fees'] == 0) {
-                $data['fees'] = null;
-            }
-        }
-        
-        // Calculate total amount: subtotal + GST + Refundable Deposit + Surcharges Fee - coupon discount + fees
-        $data['total_amount'] = $data['subtotal_amount'] 
-            + $data['gst'] 
+        // Calculate base amount for surcharges fee: subtotal + refundable_deposit - coupon_discount
+        $baseAmountForSurcharges = $data['subtotal_amount'] 
             + $data['refundable_deposit'] 
-            + $data['surcharges_fee'] 
-            - ($data['coupon_discount_amount'] ?? 0) 
-            + ($data['fees'] ?? 0);
+            - ($data['coupon_discount_amount'] ?? 0);
+        
+        // Calculate Surcharges Fee (percentage of base amount: subtotal + refundable_deposit - coupon_discount)
+        $data['surcharges_fee'] = ($baseAmountForSurcharges * $surchargesFeePercentage) / 100;
+        
+        // Calculate total amount: subtotal + Refundable Deposit - coupon discount + Surcharges Fee
+        // Note: GST and fees (tollDeliveryFees) are already included in subtotal_amount
+        $data['total_amount'] = $baseAmountForSurcharges + $data['surcharges_fee'];
         
         // Handle user creation/update
         $user = User::where('email', $data['email'])

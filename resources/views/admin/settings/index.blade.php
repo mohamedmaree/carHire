@@ -485,7 +485,7 @@
                                                     <div class="row">
                                                         <div class="col-md-4 col-12">
                                                             <div class="form-group">
-                                                                <label for="gst_percentage">{{__('admin.gst_percentage')}}</label>
+                                                                <label for="gst_percentage">{{__('admin.gst_rate')}}</label>
                                                                 <div class="controls">
                                                                     <input type="number" 
                                                                            name="gst_percentage" 
@@ -493,10 +493,9 @@
                                                                            class="form-control" 
                                                                            step="0.01"
                                                                            min="0"
-                                                                           max="100"
                                                                            value="{{$data['gst_percentage'] ?? '10'}}" 
-                                                                           placeholder="{{__('admin.gst_percentage')}}">
-                                                                    <small class="text-muted">{{__('admin.gst_percentage_hint')}}</small>
+                                                                           placeholder="{{__('admin.gst_rate')}}">
+                                                                    <small class="text-muted">{{__('admin.gst_rate_hint')}}</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -515,6 +514,24 @@
                                                                            value="{{$data['surcharges_fee_percentage'] ?? '1.5'}}" 
                                                                            placeholder="{{__('admin.surcharges_fee_percentage')}}">
                                                                     <small class="text-muted">{{__('admin.surcharges_fee_percentage_hint')}}</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-4 col-12">
+                                                            <div class="form-group">
+                                                                <label for="external_surcharges_fee_percentage">{{__('admin.external_surcharges_fee_percentage')}}</label>
+                                                                <div class="controls">
+                                                                    <input type="number" 
+                                                                           name="external_surcharges_fee_percentage" 
+                                                                           id="external_surcharges_fee_percentage" 
+                                                                           class="form-control" 
+                                                                           step="0.01"
+                                                                           min="0"
+                                                                           max="100"
+                                                                           value="{{$data['external_surcharges_fee_percentage'] ?? '2.5'}}" 
+                                                                           placeholder="{{__('admin.external_surcharges_fee_percentage')}}">
+                                                                    <small class="text-muted">{{__('admin.external_surcharges_fee_percentage_hint')}}</small>
                                                                 </div>
                                                             </div>
                                                         </div>
