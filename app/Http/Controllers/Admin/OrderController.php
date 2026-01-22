@@ -96,17 +96,15 @@ class OrderController extends Controller
         // Calculate total hours difference
         $totalHours = $pickupDateTime->diffInHours($returnDateTime);
         
-        // Calculate days based on hours: if duration exceeds 24 hours, count as additional day(s)
-        // Example: 25 hours = 2 days, 49 hours = 3 days
-        // Minimum 1 day even if less than 24 hours
-        $daysFromHours = max(1, ceil($totalHours / 24));
-        
-        // Calculate base days (calendar date difference)
-        $baseDays = $pickupDate->diffInDays($returnDate) + 1;
-        
-        // Use the maximum of both calculations to ensure accurate billing
-        // This handles cases where time exceeds 24h or spans multiple calendar days
-        $data['rental_days'] = max($baseDays, $daysFromHours);
+        // Calculate days based on hours only:
+        // - If duration is <= 24 hours, count as 1 day
+        // - If duration exceeds 24 hours, count additional days (ceil of hours/24)
+        // Example: 22 hours = 1 day, 25 hours = 2 days, 49 hours = 3 days
+        if ($totalHours <= 24) {
+            $data['rental_days'] = 1;
+        } else {
+            $data['rental_days'] = ceil($totalHours / 24);
+        }
         
         // Handle airport locations and calculate toll delivery fees first
         $tollDeliveryFees = 0;
@@ -200,12 +198,12 @@ class OrderController extends Controller
         $settings = SiteSetting::pluck('value', 'key');
         $gstRate = floatval($settings['gst_percentage'] ?? 10); // GST rate as number (e.g., 10 for 10%)
         
-        // Determine which surcharges fee percentage to use based on customer country
+        // Determine which surcharges fee percentage to use based on country
         $defaultCountryId = intval($settings['default_country'] ?? 0);
-        $customerCountryId = isset($data['customer_country_id']) ? intval($data['customer_country_id']) : 0;
+        $countryId = isset($data['country_id']) ? intval($data['country_id']) : 0;
         
-        // Use external surcharges fee if customer country is different from default country
-        if ($customerCountryId > 0 && $customerCountryId != $defaultCountryId) {
+        // Use external surcharges fee if country is different from default country
+        if ($countryId > 0 && $countryId != $defaultCountryId) {
             $surchargesFeePercentage = floatval($settings['external_surcharges_fee_percentage'] ?? 2.5);
         } else {
             $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5);
@@ -402,17 +400,15 @@ class OrderController extends Controller
         // Calculate total hours difference
         $totalHours = $pickupDateTime->diffInHours($returnDateTime);
         
-        // Calculate days based on hours: if duration exceeds 24 hours, count as additional day(s)
-        // Example: 25 hours = 2 days, 49 hours = 3 days
-        // Minimum 1 day even if less than 24 hours
-        $daysFromHours = max(1, ceil($totalHours / 24));
-        
-        // Calculate base days (calendar date difference)
-        $baseDays = $pickupDate->diffInDays($returnDate) + 1;
-        
-        // Use the maximum of both calculations to ensure accurate billing
-        // This handles cases where time exceeds 24h or spans multiple calendar days
-        $data['rental_days'] = max($baseDays, $daysFromHours);
+        // Calculate days based on hours only:
+        // - If duration is <= 24 hours, count as 1 day
+        // - If duration exceeds 24 hours, count additional days (ceil of hours/24)
+        // Example: 22 hours = 1 day, 25 hours = 2 days, 49 hours = 3 days
+        if ($totalHours <= 24) {
+            $data['rental_days'] = 1;
+        } else {
+            $data['rental_days'] = ceil($totalHours / 24);
+        }
         
         // Calculate base subtotal (car price * days)
         $car = Car::find($data['car_id']);
@@ -477,12 +473,12 @@ class OrderController extends Controller
         $settings = SiteSetting::pluck('value', 'key');
         $gstRate = floatval($settings['gst_percentage'] ?? 10); // GST rate as number (e.g., 10 for 10%)
         
-        // Determine which surcharges fee percentage to use based on customer country
+        // Determine which surcharges fee percentage to use based on country
         $defaultCountryId = intval($settings['default_country'] ?? 0);
-        $customerCountryId = isset($data['customer_country_id']) ? intval($data['customer_country_id']) : 0;
+        $countryId = isset($data['country_id']) ? intval($data['country_id']) : 0;
         
-        // Use external surcharges fee if customer country is different from default country
-        if ($customerCountryId > 0 && $customerCountryId != $defaultCountryId) {
+        // Use external surcharges fee if country is different from default country
+        if ($countryId > 0 && $countryId != $defaultCountryId) {
             $surchargesFeePercentage = floatval($settings['external_surcharges_fee_percentage'] ?? 2.5);
         } else {
             $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5);

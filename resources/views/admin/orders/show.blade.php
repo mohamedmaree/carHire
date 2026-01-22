@@ -197,11 +197,21 @@
                                                 </tr>
                                                 <tr>
                                                     <td><strong>@lang('admin.pickup_date'):</strong></td>
-                                                    <td>{{$order->pickup_date ? $order->pickup_date->format('Y-m-d') : '-'}} {{$order->pickup_time}}</td>
+                                                    <td>
+                                                        {{$order->pickup_date ? $order->pickup_date->format('Y-m-d') : '-'}}
+                                                        @if($order->pickup_time)
+                                                            {{\Carbon\Carbon::parse($order->pickup_time)->format('H:i')}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>@lang('admin.return_date'):</strong></td>
-                                                    <td>{{$order->return_date ? $order->return_date->format('Y-m-d') : '-'}} {{$order->return_time}}</td>
+                                                    <td>
+                                                        {{$order->return_date ? $order->return_date->format('Y-m-d') : '-'}}
+                                                        @if($order->return_time)
+                                                            {{\Carbon\Carbon::parse($order->return_time)->format('H:i')}}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -217,11 +227,66 @@
                                         <div class="card-body">
                                             <table class="table table-borderless">
                                                 @php
+                                                    use App\Models\SiteSetting;
+                                                    use Carbon\Carbon;
+                                                    
+                                                    // Recalculate rental days considering full datetime (date + time)
+                                                    // This matches the logic in OrderController
+                                                    $pickupDate = $order->pickup_date ? Carbon::parse($order->pickup_date) : null;
+                                                    $returnDate = $order->return_date ? Carbon::parse($order->return_date) : null;
+                                                    
+                                                    $calculatedRentalDays = $order->rental_days; // Default to stored value
+                                                    
+                                                    if ($pickupDate && $returnDate) {
+                                                        // Combine date and time for accurate calculation
+                                                        $pickupTime = $order->pickup_time ?? '00:00';
+                                                        $returnTime = $order->return_time ?? '00:00';
+                                                        
+                                                        // Get date part only (Y-m-d format) to avoid double time specification
+                                                        $pickupDateStr = $pickupDate->format('Y-m-d');
+                                                        $returnDateStr = $returnDate->format('Y-m-d');
+                                                        
+                                                        $pickupDateTime = Carbon::parse($pickupDateStr . ' ' . $pickupTime);
+                                                        $returnDateTime = Carbon::parse($returnDateStr . ' ' . $returnTime);
+                                                        
+                                                        // Calculate total hours difference
+                                                        $totalHours = $pickupDateTime->diffInHours($returnDateTime);
+                                                        
+                                                        // Calculate days based on hours only:
+                                                        // - If duration is <= 24 hours, count as 1 day
+                                                        // - If duration exceeds 24 hours, count additional days (ceil of hours/24)
+                                                        // Example: 22 hours = 1 day, 25 hours = 2 days, 49 hours = 3 days
+                                                        if ($totalHours <= 24) {
+                                                            $calculatedRentalDays = 1;
+                                                        } else {
+                                                            $calculatedRentalDays = ceil($totalHours / 24);
+                                                        }
+                                                    }
+                                                    
                                                     // Calculate car price per day and total
                                                     $carPricePerDay = $order->pricePackage ? $order->pricePackage->price : 0;
-                                                    $carTotalForDays = $carPricePerDay * $order->rental_days;
+                                                    $carTotalForDays = $carPricePerDay * $calculatedRentalDays;
                                                     $optionsTotal = $order->options->sum('pivot.total_price');
-                                                    $calculatedSubtotal = $carTotalForDays + $optionsTotal;
+                                                    
+                                                    // Include fees in subtotal (matching controller logic)
+                                                    $tollDeliveryFees = $order->fees ?? 0;
+                                                    $calculatedSubtotal = $carTotalForDays + $optionsTotal + $tollDeliveryFees;
+                                                    
+                                                    // Get settings for surcharges fee calculation
+                                                    $settings = SiteSetting::pluck('value', 'key');
+                                                    $defaultCountryId = intval($settings['default_country'] ?? 0);
+                                                    $countryId = $order->country_id ? intval($order->country_id) : 0;
+                                                    
+                                                    // Determine which surcharges fee percentage to use based on country
+                                                    if ($countryId > 0 && $countryId != $defaultCountryId) {
+                                                        $surchargesFeePercentage = floatval($settings['external_surcharges_fee_percentage'] ?? 2.5);
+                                                    } else {
+                                                        $surchargesFeePercentage = floatval($settings['surcharges_fee_percentage'] ?? 1.5);
+                                                    }
+                                                    
+                                                    // Recalculate surcharges fee based on country
+                                                    $baseForSurcharges = $calculatedSubtotal + ($order->refundable_deposit ?? 0) - ($order->coupon_discount_amount ?? 0);
+                                                    $calculatedSurchargesFee = ($baseForSurcharges * $surchargesFeePercentage) / 100;
                                                 @endphp
                                                 
                                                 @if($order->pricePackage)
@@ -240,7 +305,7 @@
                                                 <!-- 2. Number of days -->
                                                 <tr>
                                                     <td><strong>@lang('admin.rental_days'):</strong></td>
-                                                    <td>{{$order->rental_days}} @lang('admin.days')</td>
+                                                    <td>{{$calculatedRentalDays}} @lang('admin.days')</td>
                                                 </tr>
                                                 
                                                 <!-- 3. Total of car rent for these days -->
@@ -257,7 +322,13 @@
                                                 </tr>
                                                 @endif
                                                 
-                                                
+                                                <!-- 10. Fees -->
+                                                @if($order->fees)
+                                                <tr>
+                                                    <td><strong>@lang('admin.fees'):</strong></td>
+                                                    <td>${{number_format($order->fees, 2)}}</td>
+                                                </tr>
+                                                @endif
                                                 <!-- 6. Subtotal -->
                                                 <tr class="border-top">
                                                     <td><strong>@lang('admin.subtotal_amount'):</strong></td>
@@ -269,12 +340,12 @@
                                                         <td><strong>@lang('admin.coupon_code'):</strong></td>
                                                         <td>{{$order->coupon_code}}</td>
                                                     </tr>
-                                                    @if($order->coupon_discount_amount)
+                                                    {{-- @if($order->coupon_discount_amount) --}}
                                                     <tr>
                                                         <td><strong>@lang('admin.coupon_discount_amount'):</strong></td>
                                                         <td class="text-danger">-${{number_format($order->coupon_discount_amount, 2)}}</td>
                                                     </tr>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 @endif
                                                 <!-- 7. GST -->
                                                 @if($order->gst)
@@ -293,18 +364,10 @@
                                                 @endif
                                                 
                                                 <!-- 9. Surcharges Fee -->
-                                                @if($order->surcharges_fee)
+                                                @if($calculatedSurchargesFee > 0)
                                                 <tr>
                                                     <td><strong>@lang('admin.surcharges_fee'):</strong></td>
-                                                    <td>${{number_format($order->surcharges_fee, 2)}}</td>
-                                                </tr>
-                                                @endif
-                                                
-                                                <!-- 10. Fees -->
-                                                @if($order->fees)
-                                                <tr>
-                                                    <td><strong>@lang('admin.fees'):</strong></td>
-                                                    <td>${{number_format($order->fees, 2)}}</td>
+                                                    <td>${{number_format($calculatedSurchargesFee, 2)}}</td>
                                                 </tr>
                                                 @endif
                                                 
@@ -333,7 +396,12 @@
                                                     <table class="table table-borderless table-sm">
                                                         <tr>
                                                             <td><strong>@lang('admin.flight_arrival_date'):</strong></td>
-                                                            <td>{{$order->flight_arrival_date->format('Y-m-d')}} {{$order->flight_arrival_time}}</td>
+                                                            <td>
+                                                                {{$order->flight_arrival_date->format('Y-m-d')}}
+                                                                @if($order->flight_arrival_time)
+                                                                    {{\Carbon\Carbon::parse($order->flight_arrival_time)->format('H:i')}}
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         @if($order->flight_number_arrival)
                                                         <tr>
@@ -356,7 +424,12 @@
                                                     <table class="table table-borderless table-sm">
                                                         <tr>
                                                             <td><strong>@lang('admin.flight_departure_date'):</strong></td>
-                                                            <td>{{$order->flight_departure_date->format('Y-m-d')}} {{$order->flight_departure_time}}</td>
+                                                            <td>
+                                                                {{$order->flight_departure_date->format('Y-m-d')}}
+                                                                @if($order->flight_departure_time)
+                                                                    {{\Carbon\Carbon::parse($order->flight_departure_time)->format('H:i')}}
+                                                                @endif
+                                                            </td>
                                                         </tr>
                                                         @if($order->flight_number_departure)
                                                         <tr>
